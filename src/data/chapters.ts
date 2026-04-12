@@ -1,0 +1,17 @@
+export const chapters = [
+  { id: 1, title: "Introduction", desc: "Bienvenue en France, ton nouveau terrain de jeu" },
+  { id: 2, title: "Avant le départ", desc: "Bagages, budget, ce qu'il faut prévoir" },
+  { id: 3, title: "L'arrivée en France", desc: "Aéroport, logement, kit de survie étudiant" },
+  { id: 4, title: "Démarches administratives", desc: "CAF, sécurité sociale, préfecture, ANEF, impôts" },
+  { id: 5, title: "Système universitaire", desc: "Diplômes, alternance, stage, job étudiant" },
+  { id: 6, title: "Vie quotidienne", desc: "Manger halal, Ramadan, transports, sport" },
+  { id: 7, title: "Gérer son argent", desc: "Fiche de paie, Livret A, transferts Maroc" },
+  { id: 8, title: "Santé & coups durs", desc: "Médecin, santé mentale, bourses, aides" },
+  { id: 9, title: "Tes droits & recours", desc: "Face au proprio, employeur, administration" },
+  { id: 10, title: "Après les études", desc: "APS, recherche d'emploi, changement de statut" },
+  { id: 11, title: "Le salarié averti", desc: "Contrat de travail, arrêt maladie, prud'hommes" },
+  { id: 12, title: "Vie personnelle", desc: "Choc culturel, relations, mariage" },
+  { id: 13, title: "Double culture", desc: "Compétences bilingues, réseautage franco-marocain" },
+  { id: 14, title: "Retours d'expérience", desc: "8 témoignages d'étudiants marocains" },
+  { id: 15, title: "Conclusion", desc: "La fin du guide, le début de ton aventure" },
+];
