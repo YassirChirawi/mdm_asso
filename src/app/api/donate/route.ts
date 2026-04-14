@@ -9,8 +9,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Montant invalide" }, { status: 400 });
     }
 
-    if (!process.env.STRIPE_SECRET_KEY) {
-      console.warn("⚠️ Clé secrète Stripe manquante. Redirection factice simulée.");
+    if (!process.env.STRIPE_SECRET_KEY || !stripe) {
+      console.warn("⚠️ Clé secrète Stripe manquante ou instance non initialisée. Redirection factice simulée.");
       return NextResponse.json({ url: "/dons?success=true" });
     }
 

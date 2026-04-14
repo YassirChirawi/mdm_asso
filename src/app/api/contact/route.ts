@@ -20,8 +20,8 @@ export async function POST(req: Request) {
       },
     });
 
-    if (!process.env.RESEND_API_KEY) {
-      console.warn("⚠️ Clé d'API Resend manquante (RESEND_API_KEY). Email simulé.");
+    if (!process.env.RESEND_API_KEY || !resend) {
+      console.warn("⚠️ Clé d'API Resend manquante (RESEND_API_KEY) ou instance non initialisée. Email simulé.");
       return NextResponse.json({ success: true, warning: "Sauvegardé en DB (Email simulé)" });
     }
 
