@@ -29,7 +29,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-heading text-6xl md:text-8xl lg:text-[6rem] font-black text-white tracking-tighter mb-8 leading-[0.95]"
+            className="font-heading text-4xl md:text-8xl lg:text-[6rem] font-black text-white tracking-tighter mb-8 leading-[0.95]"
           >
             L'accompagnement <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-white to-brand-red">
@@ -208,7 +208,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row items-end justify-between mb-20 gap-8">
             <div className="max-w-2xl">
               <div className="text-brand-green font-heading font-black tracking-[0.3em] uppercase text-sm mb-6 bg-brand-green/10 px-6 py-2 rounded-full inline-block">Le Savoir est une force</div>
-              <h2 className="font-heading text-5xl md:text-7xl font-black leading-none tracking-tighter">Ton installation, <br/>sans zone d'ombre.</h2>
+              <h2 className="font-heading text-4xl md:text-7xl font-black leading-none tracking-tighter">Ton installation, <br/>sans zone d'ombre.</h2>
             </div>
             <Link href="/guide" className="group flex items-center gap-4 bg-white/5 hover:bg-white/10 p-4 rounded-2xl border border-white/10 transition-all font-bold">
                Consulter l'index complet des chapitres
@@ -232,7 +232,7 @@ export default function Home() {
                 transition={{ delay: idx * 0.1 }}
                 className={`p-10 rounded-[3rem] ${feature.bg} border border-white/5 relative group hover:border-white/10 transition-colors`}
               >
-                <div className={`${feature.color} font-heading font-black text-8xl mb-8 opacity-20 group-hover:opacity-40 transition-opacity`}>{feature.num}</div>
+                <div className={`${feature.color} font-heading font-black text-6xl md:text-8xl mb-8 opacity-20 group-hover:opacity-40 transition-opacity`}>{feature.num}</div>
                 <h3 className="font-heading text-3xl font-black mb-6">{feature.title}</h3>
                 <p className="text-gray-400 text-lg leading-relaxed mb-6">
                   {feature.desc}

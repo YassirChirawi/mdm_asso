@@ -33,7 +33,7 @@ export default function GuideIndex() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-[2rem] bg-brand-dark text-white mb-8 shadow-2xl shadow-brand-green/20 -rotate-3">
             <GraduationCap className="w-10 h-10 text-brand-green" />
           </div>
-          <h1 className="font-heading text-5xl md:text-6xl font-black text-brand-dark mb-6 tracking-tighter">
+          <h1 className="font-heading text-4xl md:text-6xl font-black text-brand-dark mb-6 tracking-tighter">
             Le Guide Complet
           </h1>
           <p className="text-xl text-gray-500 font-medium leading-relaxed">
@@ -52,7 +52,7 @@ export default function GuideIndex() {
             <motion.div key={chapter.id} variants={itemVariants}>
               <Link 
                 href={`/guide/${chapter.id}`}
-                className="group relative bg-white rounded-[2.5rem] p-8 h-full shadow-sm hover:shadow-2xl hover:shadow-brand-green/5 transition-all duration-500 border border-gray-100 flex flex-col items-start overflow-hidden"
+                className="group relative bg-white rounded-[2.5rem] p-7 md:p-8 h-full shadow-sm hover:shadow-2xl hover:shadow-brand-green/5 transition-all duration-500 border border-gray-100 flex flex-col items-start overflow-hidden"
               >
                 {/* Accent Background */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-[4rem] group-hover:bg-brand-green/5 transition-colors -z-0"></div>

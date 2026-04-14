@@ -31,7 +31,7 @@ export default function About() {
             <Award className="w-5 h-5" />
             Notre Histoire
           </div>
-          <h1 className="font-heading text-5xl md:text-7xl font-black text-brand-dark mb-10 tracking-tighter leading-none">
+          <h1 className="font-heading text-4xl md:text-7xl font-black text-brand-dark mb-10 tracking-tighter leading-none">
             Main dans la main pour <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-red">
               votre réussite en France.
@@ -59,7 +59,7 @@ export default function About() {
             <motion.div 
               key={idx}
               variants={itemVariants}
-              className="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-xl shadow-gray-200/30 hover:shadow-2xl transition-all group"
+              className="bg-white rounded-[2.5rem] p-8 md:p-10 border border-gray-100 shadow-xl shadow-gray-200/30 hover:shadow-2xl transition-all group"
             >
               <div className={`w-16 h-16 ${item.bg} ${item.color} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}>
                 {item.icon}
@@ -71,7 +71,7 @@ export default function About() {
         </motion.div>
 
         {/* Leadership Section */}
-        <div className="bg-brand-dark rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden">
+        <div className="bg-brand-dark rounded-[3rem] md:rounded-[4rem] p-8 md:p-24 text-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-green/10 rounded-full blur-[100px]"></div>
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-red/10 rounded-full blur-[100px]"></div>
           
