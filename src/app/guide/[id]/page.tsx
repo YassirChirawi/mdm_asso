@@ -47,14 +47,40 @@ export default async function ChapterPage({ params }: { params: Promise<{ id: st
 
   const paragraphs = content.split("\n\n").filter(Boolean);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": chapter.title,
+    "description": chapter.desc,
+    "author": {
+      "@type": "Organization",
+      "name": "Association Marocains en France"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Association Marocains en France",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.marocainsenfrance.fr/logo.png"
+      }
+    },
+    "datePublished": "2025-07-01", // Approximate foundation date
+  };
+
   return (
-    <AnimatedContent 
-      chapterId={chapter.id.toString()}
-      title={chapter.title}
-      desc={chapter.desc}
-      paragraphs={paragraphs}
-      prevChapter={prevChapter}
-      nextChapter={nextChapter}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <AnimatedContent 
+        chapterId={chapter.id.toString()}
+        title={chapter.title}
+        desc={chapter.desc}
+        paragraphs={paragraphs}
+        prevChapter={prevChapter}
+        nextChapter={nextChapter}
+      />
+    </>
   );
 }
