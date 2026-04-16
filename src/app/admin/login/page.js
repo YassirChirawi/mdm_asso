@@ -1,65 +1,100 @@
 "use client";
-import React from 'react';
-import { Mail, Lock, ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Lock, ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const router = useRouter();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        try {
+            const result = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            });
+
+            if (result?.error) {
+                setError("Email ou mot de passe incorrect");
+            } else {
+                router.push("/admin");
+                router.refresh();
+            }
+        } catch (err) {
+            setError("Une erreur est survenue");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <div className="min-h-screen bg-primary flex items-center justify-center p-4">
+        <div className="min-h-screen bg-brand-dark flex items-center justify-center p-4">
             <div className="absolute inset-0 z-0 overflow-hidden">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -ml-48 -mb-48"></div>
+                <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-red/10 rounded-full blur-3xl -ml-48 -mb-48"></div>
             </div>
 
-            <div className="glass-card bg-white p-8 md:p-12 w-full max-w-md relative z-10 shadow-2xl">
+            <div className="bg-white p-8 md:p-12 w-full max-w-md relative z-10 shadow-2xl rounded-[2.5rem] border border-gray-100">
                 <div className="text-center mb-10">
-                    <div className="w-20 h-20 bg-primary rounded-2xl mx-auto mb-6 flex items-center justify-center text-secondary text-2xl font-bold shadow-lg">MDM</div>
-                    <h1 className="text-2xl font-bold text-gray-900">Espace Administration</h1>
-                    <p className="text-gray-500 mt-2">Connectez-vous pour gérer les messages</p>
+                    <div className="w-20 h-20 bg-brand-dark rounded-2xl mx-auto mb-6 flex items-center justify-center text-brand-green text-2xl font-black shadow-lg italic">MDM</div>
+                    <h1 className="text-2xl font-black text-brand-dark tracking-tighter uppercase">Administration</h1>
+                    <p className="text-gray-500 mt-2 font-medium">Connectez-vous pour gérer l'association</p>
                 </div>
 
-                <form className="space-y-6">
+                {error && (
+                    <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-2xl flex items-center gap-3 text-sm font-bold animate-pulse">
+                        <AlertCircle size={18} /> {error}
+                    </div>
+                )}
+
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Email</label>
+                        <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Email</label>
                         <div className="relative">
-                            <Mail className="absolute left-3 top-3.5 text-gray-400" size={18} />
+                            <Mail className="absolute left-4 top-4 text-gray-400" size={18} />
                             <input
                                 type="email" required
-                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary outline-none transition-all"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-100 focus:ring-2 focus:ring-brand-green outline-none transition-all bg-gray-50 font-medium"
                                 placeholder="admin@mdm.fr"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Mot de passe</label>
+                        <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Mot de passe</label>
                         <div className="relative">
-                            <Lock className="absolute left-3 top-3.5 text-gray-400" size={18} />
+                            <Lock className="absolute left-4 top-4 text-gray-400" size={18} />
                             <input
                                 type="password" required
-                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary outline-none transition-all"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-100 focus:ring-2 focus:ring-brand-green outline-none transition-all bg-gray-50 font-medium"
                                 placeholder="••••••••"
                             />
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                        <label className="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary" />
-                            <span className="text-sm text-gray-600">Rester connecté</span>
-                        </label>
-                        <a href="#" className="text-sm text-primary font-bold hover:underline">Oublié ?</a>
-                    </div>
-
                     <button
-                        type="button"
-                        onClick={() => window.location.href = '/admin'}
-                        className="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg hover:bg-primary-dark transition-all flex items-center justify-center gap-3 shadow-lg hover:shadow-primary/30"
+                        type="submit"
+                        disabled={loading}
+                        className="w-full bg-brand-dark text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all flex items-center justify-center gap-3 shadow-xl hover:shadow-brand-green/20 disabled:opacity-50 uppercase tracking-tighter"
                     >
-                        Connexion
+                        {loading ? <Loader2 className="animate-spin" /> : "Se Connecter"}
                     </button>
                 </form>
 
-                <a href="/" className="mt-8 flex items-center justify-center gap-2 text-gray-400 hover:text-primary transition-all text-sm">
+                <a href="/" className="mt-8 flex items-center justify-center gap-2 text-gray-400 hover:text-brand-dark transition-all text-sm font-bold uppercase tracking-widest">
                     <ArrowLeft size={16} /> Retour au site
                 </a>
             </div>
