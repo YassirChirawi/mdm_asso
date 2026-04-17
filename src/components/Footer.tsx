@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Mail, MapPin } from "lucide-react";
+import { Heart, Mail, MapPin, Key } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -73,7 +73,14 @@ export default function Footer() {
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Marocains en France – Main dans la main. Tous droits réservés.
           </p>
-          <div className="flex space-x-6">
+          <div className="flex space-x-6 items-center">
+            <Link
+              href="/admin/login"
+              className="text-gray-500 hover:text-brand-green transition-colors"
+              aria-label="Administration"
+            >
+              <Key className="w-5 h-5" />
+            </Link>
             <a 
               href="https://www.instagram.com/marocainsenfrance" 
               target="_blank" 
