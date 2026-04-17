@@ -2,10 +2,12 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { authConfig } from "./auth.config";
 
 const prisma = new PrismaClient();
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
@@ -38,24 +40,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  pages: {
-    signIn: "/admin/login",
-  },
-  callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isOnAdmin = nextUrl.pathname.startsWith("/admin");
-      const isOnLogin = nextUrl.pathname === "/admin/login";
-
-      if (isOnAdmin && !isOnLogin && !isLoggedIn) {
-        return Response.redirect(new URL("/admin/login", nextUrl));
-      }
-
-      if (isOnLogin && isLoggedIn) {
-        return Response.redirect(new URL("/admin", nextUrl));
-      }
-
-      return true;
-    },
-  },
 });
