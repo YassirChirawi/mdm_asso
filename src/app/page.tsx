@@ -79,18 +79,7 @@ export default function Home() {
       {/* Trust/Stats Section */}
       <section className="py-24 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div 
-               whileHover={{ y: -10 }}
-               className="bg-[#fafafa] rounded-[2.5rem] p-10 text-center border border-gray-100 shadow-sm transition-all hover:shadow-2xl hover:shadow-brand-green/5 group"
-            >
-              <div className="w-16 h-16 mx-auto bg-brand-green/10 rounded-2xl flex items-center justify-center mb-6 text-brand-green group-hover:bg-brand-green group-hover:text-white transition-all duration-500 shadow-inner">
-                <Users className="w-8 h-8" />
-              </div>
-              <h2 className="font-heading text-4xl font-black text-brand-dark mb-2 tracking-tighter">5,000+</h2>
-              <p className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Étudiants Accompagnés</p>
-            </motion.div>
-            
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <motion.div 
                whileHover={{ y: -10 }}
                className="bg-[#fafafa] rounded-[2.5rem] p-10 text-center border border-gray-100 shadow-sm transition-all hover:shadow-2xl hover:shadow-brand-red/5 group"
