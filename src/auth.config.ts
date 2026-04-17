@@ -1,6 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
+  trustHost: true,
   pages: {
     signIn: "/admin/login",
   },
@@ -11,15 +12,15 @@ export const authConfig = {
       const isOnLogin = nextUrl.pathname === "/admin/login";
 
       if (isOnAdmin && !isOnLogin && !isLoggedIn) {
-        return Response.redirect(new URL("/admin/login", nextUrl));
+        return Response.redirect(new URL("/admin/login", nextUrl.origin));
       }
 
       if (isOnLogin && isLoggedIn) {
-        return Response.redirect(new URL("/admin", nextUrl));
+        return Response.redirect(new URL("/admin", nextUrl.origin));
       }
 
       return true;
     },
   },
-  providers: [], // Add providers with an empty array for now
+  providers: [],
 } satisfies NextAuthConfig;
