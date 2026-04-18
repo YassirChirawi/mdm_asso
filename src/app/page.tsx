@@ -61,13 +61,15 @@ export default function Home() {
               <BookOpen className="w-6 h-6 mr-3 relative z-10" />
               <span className="relative z-10">Accéder au Guide Gratuit</span>
             </Link>
-            <Link
-              href="/dons"
+            <a
+              href="https://donate.stripe.com/5kQaEQ6t57LC7KZ2jPb3q00"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center px-10 py-5 text-lg font-black text-white bg-brand-red rounded-2xl hover:bg-red-700 transition-all hover:-translate-y-1 shadow-[0_20px_40px_rgba(193,39,45,0.3)] w-full sm:w-auto"
             >
               <Heart className="w-6 h-6 mr-3 group-hover:scale-125 transition-transform" />
               Soutenir l'Association
-            </Link>
+            </a>
           </motion.div>
         </div>
 

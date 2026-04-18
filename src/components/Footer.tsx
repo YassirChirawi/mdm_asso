@@ -22,13 +22,15 @@ export default function Footer() {
             <p className="text-gray-400 text-sm mb-6">
               L'association Loi 1901 dédiée à l'accompagnement, l'intégration et la réussite des étudiants marocains en France.
             </p>
-            <Link 
-              href="/dons" 
+            <a 
+              href="https://donate.stripe.com/5kQaEQ6t57LC7KZ2jPb3q00" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center text-sm font-semibold text-brand-green hover:text-white transition-colors"
             >
               <Heart className="w-4 h-4 mr-2" />
               Soutenir notre action
-            </Link>
+            </a>
           </div>
 
           <div>
@@ -37,7 +39,7 @@ export default function Footer() {
               <li><Link href="/" className="text-gray-400 hover:text-white text-sm transition-colors">Accueil</Link></li>
               <li><Link href="/about" className="text-gray-400 hover:text-white text-sm transition-colors">L'association</Link></li>
               <li><Link href="/guide" className="text-gray-400 hover:text-white text-sm transition-colors">Le Guide Étudiant</Link></li>
-              <li><Link href="/dons" className="text-gray-400 hover:text-white text-sm transition-colors">Faire un don</Link></li>
+              <li><a href="https://donate.stripe.com/5kQaEQ6t57LC7KZ2jPb3q00" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">Faire un don</a></li>
             </ul>
           </div>
 

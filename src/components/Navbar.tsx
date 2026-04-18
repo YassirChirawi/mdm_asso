@@ -67,14 +67,16 @@ export default function Navbar() {
                 <span className={`absolute -bottom-2 left-0 w-0 h-0.5 bg-brand-green transition-all duration-300 group-hover:w-full ${pathname === link.path ? 'w-full' : ''}`}></span>
               </Link>
             ))}
-            <Link
-              href="/dons"
+            <a
+              href="https://donate.stripe.com/5kQaEQ6t57LC7KZ2jPb3q00"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white transition-all duration-500 bg-brand-green rounded-2xl hover:bg-brand-red hover:shadow-[0_15px_30px_rgba(193,39,45,0.2)] overflow-hidden"
             >
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
               <Heart className="w-4 h-4 mr-2 relative z-10 fill-current" />
               <span className="relative z-10">Faire un don</span>
-            </Link>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -110,14 +112,16 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link
-                href="/dons"
+              <a
+                href="https://donate.stripe.com/5kQaEQ6t57LC7KZ2jPb3q00"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-center w-full px-8 py-5 text-lg font-black uppercase tracking-widest text-white bg-brand-green rounded-[2rem] mt-8 shadow-2xl shadow-brand-green/30"
               >
                 <Heart className="w-6 h-6 mr-3 fill-current" />
                 Soutenir
-              </Link>
+              </a>
             </div>
           </motion.div>
         )}
