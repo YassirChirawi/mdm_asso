@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Mail, Download, MessageSquare, Trash2, ArrowLeft, LogOut, Loader2, BarChart3, Users, BookOpen, AlertCircle, FileText, Upload, Plus, X } from 'lucide-react';
+import { Mail, Download, MessageSquare, Trash2, ArrowLeft, LogOut, Loader2, BarChart3, Users, BookOpen, AlertCircle, FileText, Upload, Plus, X, Heart } from 'lucide-react';
 import { signOut } from "next-auth/react";
 
 export default function AdminDashboard() {
-    const [activeTab, setActiveTab] = useState('stats'); // 'stats' or 'documents'
+    const [activeTab, setActiveTab] = useState('stats'); // 'stats' or 'documents' or 'donations'
     const [messages, setMessages] = useState([]);
+    const [donations, setDonations] = useState([]);
     const [chapterStats, setChapterStats] = useState([]);
-    const [stats, setStats] = useState({ downloads: 0, messages: 0, totalViews: 0, estimatedReaders: 0 });
+    const [stats, setStats] = useState({ downloads: 0, messages: 0, totalViews: 0, estimatedReaders: 0, totalDonations: 0 });
     const [documents, setDocuments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
@@ -23,26 +24,32 @@ export default function AdminDashboard() {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const [msgRes, downloadStatRes, chapterStatRes] = await Promise.all([
+            const [msgRes, downloadStatRes, chapterStatRes, donationsRes] = await Promise.all([
                 fetch('/api/admin/messages'),
                 fetch('/api/stats?file=guide-etudiant.pdf'),
-                fetch('/api/stats/chapter')
+                fetch('/api/stats/chapter'),
+                fetch('/api/admin/donations')
             ]);
 
             const msgData = await msgRes.json();
             const downloadStatData = await downloadStatRes.json();
             const chapterStatData = await chapterStatRes.json();
+            const donationsData = await donationsRes.json();
 
             const totalViews = chapterStatData.reduce((acc, curr) => acc + curr.views, 0);
             const estimatedReaders = Math.max(...(chapterStatData.map(s => s.views) || [0]), 0);
 
+            const totalDonations = donationsData.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+
             setMessages(msgData || []);
             setChapterStats(chapterStatData || []);
+            setDonations(donationsData || []);
             setStats({
                 messages: msgData.length || 0,
                 downloads: downloadStatData.count || 0,
                 totalViews,
-                estimatedReaders
+                estimatedReaders,
+                totalDonations
             });
         } catch (error) {
             console.error('Failed to fetch admin data', error);
@@ -140,6 +147,12 @@ export default function AdminDashboard() {
                                 DASHBOARD
                             </button>
                             <button 
+                                onClick={() => setActiveTab('donations')}
+                                className={`px-6 py-2 rounded-xl text-sm font-black tracking-tighter transition-all ${activeTab === 'donations' ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'}`}
+                            >
+                                DONS
+                            </button>
+                            <button 
                                 onClick={() => setActiveTab('documents')}
                                 className={`px-6 py-2 rounded-xl text-sm font-black tracking-tighter transition-all ${activeTab === 'documents' ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'}`}
                             >
@@ -157,12 +170,22 @@ export default function AdminDashboard() {
             </nav>
 
             <main className="max-w-7xl mx-auto p-6 md:p-12">
-                {activeTab === 'stats' ? (
+                {activeTab === 'stats' && (
                     <>
                         {/* Stats Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                             <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
                                 <div className="p-3 bg-brand-green/10 rounded-xl text-brand-green w-fit mb-4">
+                                    <Heart size={24} />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Total des Dons</p>
+                                    <p className="text-3xl font-black text-brand-dark">{(stats.totalDonations / 100).toFixed(2)}€</p>
+                                </div>
+                            </div>
+                            
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                                <div className="p-3 bg-blue-500/10 rounded-xl text-blue-500 w-fit mb-4">
                                     <Users size={24} />
                                 </div>
                                 <div>
@@ -170,24 +193,14 @@ export default function AdminDashboard() {
                                     <p className="text-3xl font-black text-brand-dark">{stats.estimatedReaders}</p>
                                 </div>
                             </div>
-                            
+
                             <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                                <div className="p-3 bg-blue-500/10 rounded-xl text-blue-500 w-fit mb-4">
+                                <div className="p-3 bg-blue-400/10 rounded-xl text-blue-400 w-fit mb-4">
                                     <BookOpen size={24} />
                                 </div>
                                 <div>
                                     <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Lectures Totales</p>
                                     <p className="text-3xl font-black text-brand-dark">{stats.totalViews}</p>
-                                </div>
-                            </div>
-
-                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                                <div className="p-3 bg-brand-red/10 rounded-xl text-brand-red w-fit mb-4">
-                                    <MessageSquare size={24} />
-                                </div>
-                                <div>
-                                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Messages Reçus</p>
-                                    <p className="text-3xl font-black text-brand-dark">{stats.messages}</p>
                                 </div>
                             </div>
 
@@ -202,7 +215,7 @@ export default function AdminDashboard() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                             {/* Chapter Performances */}
                             <div className="lg:col-span-1">
                                 <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden h-full">
@@ -288,7 +301,53 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     </>
-                ) : (
+                )}
+                
+                {activeTab === 'donations' && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="flex justify-between items-center mb-10">
+                            <div>
+                                <h2 className="text-3xl font-black text-brand-dark tracking-tighter uppercase">Dons effectués</h2>
+                                <p className="text-gray-500 font-medium">Historique des dons reçus via Stripe</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
+                            {donations.length === 0 ? (
+                                <div className="text-center py-20 text-gray-400">
+                                    <Heart size={48} className="mx-auto mb-4 opacity-20" />
+                                    <p className="font-bold tracking-widest uppercase text-xs">Aucun don enregistré</p>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    {donations.map((don) => (
+                                        <div key={don.id} className="flex justify-between items-center p-6 bg-gray-50 rounded-3xl hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100">
+                                            <div className="flex items-center gap-4">
+                                                <div className="p-4 bg-brand-green/10 text-brand-green rounded-2xl">
+                                                    <Heart size={24} />
+                                                </div>
+                                                <div>
+                                                    <p className="font-black text-brand-dark text-lg">{don.name}</p>
+                                                    <p className="text-gray-500 text-sm">{don.email}</p>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="font-black text-2xl text-brand-dark">
+                                                    {(don.amount / 100).toFixed(2)} {don.currency.toUpperCase()}
+                                                </p>
+                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                                    {new Date(don.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'documents' && (
                     /* Documents Section */
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <div className="flex justify-between items-center mb-10">
