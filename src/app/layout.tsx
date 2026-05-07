@@ -57,7 +57,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={`scroll-smooth ${inter.variable} ${outfit.variable}`}>
+    <html lang="fr" className={`scroll-smooth ${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

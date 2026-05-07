@@ -2,6 +2,7 @@ import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -27,8 +28,22 @@ export async function POST(req: Request) {
   switch (event.type) {
     case "checkout.session.completed":
       const session = event.data.object as Stripe.Checkout.Session;
+      
       console.log(`Donation successful! Amount: ${session.amount_total}`);
-      // Integrate with database here if necessary
+
+      try {
+        await prisma.donation.create({
+          data: {
+            stripeId: session.id,
+            amount: session.amount_total || 0,
+            currency: session.currency || "eur",
+            name: session.customer_details?.name || "Anonyme",
+            email: session.customer_details?.email || "N/A",
+          },
+        });
+      } catch (dbErr) {
+        console.error("Failed to save donation to database:", dbErr);
+      }
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);
@@ -36,3 +51,4 @@ export async function POST(req: Request) {
 
   return NextResponse.json({ received: true });
 }
+

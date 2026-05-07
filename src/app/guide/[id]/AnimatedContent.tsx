@@ -108,28 +108,140 @@ export default function AnimatedContent({ chapterId, title, desc, paragraphs, pr
       );
     }
 
-    // Lists
-    if (p.startsWith('- ') || p.startsWith('• ') || p.startsWith('➤ ') || p.startsWith('o ')) {
-       return (
-         <motion.li variants={itemVariants} key={i} className="ml-4 mb-4 list-none flex items-start gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-           <span className="bg-brand-green/10 text-brand-green rounded-full p-1 mt-0.5 shrink-0">
-             <CheckCircle2 className="w-4 h-4" />
-           </span>
-           <span className="text-gray-700 font-medium leading-relaxed">{p.substring(2)}</span>
-         </motion.li>
-       );
+    // Split the block into lines for finer processing
+    const lines = p.split('\n');
+    const elements: React.ReactNode[] = [];
+    let currentList: string[] = [];
+    let currentTable: string[][] = [];
+
+    const flushList = () => {
+      if (currentList.length > 0) {
+        elements.push(
+          <ul key={`list-${elements.length}`} className="my-8 space-y-3">
+            {currentList.map((item, idx) => {
+              const bulletMatch = item.trim().match(/^([-•➤o▪*]|\d+\.)\s+(.*)/);
+              const content = bulletMatch ? bulletMatch[2] : item.trim();
+              return (
+                <li key={idx} className="flex items-start gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
+                  <span className="bg-brand-green/10 text-brand-green rounded-full p-1 mt-0.5 shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </span>
+                  <span className="text-gray-700 font-medium leading-relaxed">{content}</span>
+                </li>
+              );
+            })}
+          </ul>
+        );
+        currentList = [];
+      }
+    };
+
+    const flushTable = () => {
+      if (currentTable.length > 0) {
+        elements.push(
+          <div key={`table-${elements.length}`} className="my-10 overflow-x-auto rounded-2xl border border-gray-100 shadow-xl bg-white">
+            <table className="w-full text-left border-collapse">
+              <tbody className="divide-y divide-gray-100">
+                {currentTable.map((row, idx) => (
+                  <tr key={idx} className={idx === 0 ? "bg-gray-50/50" : "hover:bg-gray-50/30 transition-colors"}>
+                    {row.map((col, colIdx) => (
+                      <td key={colIdx} className={`p-5 text-sm ${idx === 0 ? "font-black text-brand-dark uppercase tracking-tighter" : "text-gray-600 font-medium"}`}>
+                        {col}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+        currentTable = [];
+      }
+    };
+
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+      const line = lines[lineIndex];
+      const trimmedLine = line.trim();
+
+      if (!trimmedLine) continue;
+
+      // Detect list item
+      if (/^([-•➤o▪*]|\d+\.)\s+/.test(trimmedLine)) {
+        flushTable();
+        currentList.push(trimmedLine);
+        continue;
+      }
+
+      // Detect table row (multiple columns separated by 2+ spaces or tab)
+      const columns = trimmedLine.split(/\s{2,}|\t/).filter(Boolean);
+      if (columns.length >= 2) {
+        flushList();
+        currentTable.push(columns);
+        continue;
+      }
+
+      // If we are here, it's a normal line
+      flushList();
+      flushTable();
+
+      // Heuristics for Subtitles H2
+      if (trimmedLine.length < 150 && !trimmedLine.endsWith('.') && !trimmedLine.endsWith(':') && trimmedLine.search(/^[0-9]+(\.[0-9]+)*\s/) !== -1) {
+        elements.push(
+          <motion.h2 
+            variants={itemVariants} 
+            key={`h2-${lineIndex}`} 
+            id={`section-${lineIndex}`}
+            className="font-heading text-3xl md:text-4xl font-black text-brand-dark mt-20 mb-8 border-l-8 border-brand-green pl-6 py-2 bg-brand-green/5 rounded-r-xl scroll-mt-28"
+          >
+            {trimmedLine.replace(/^[0-9]+(\.[0-9]+)*\s/, '')}
+          </motion.h2>
+        );
+        continue;
+      }
+
+      // Callout boxes (Heuristics)
+      const calloutRegex = /^(Note|Conseil|Pro Tip|Attention|Spoiler)\s*:/i;
+      const match = trimmedLine.match(calloutRegex);
+      if (match) {
+        const type = match[1].toLowerCase();
+        const calloutConfigs: Record<string, { color: string; icon: any; title: string }> = {
+          attention: { color: "border-brand-red bg-brand-red/5", icon: <AlertTriangle className="w-6 h-6 text-brand-red" />, title: "Attention" },
+          note: { color: "border-blue-500 bg-blue-50", icon: <Info className="w-6 h-6 text-blue-500" />, title: "Note" },
+          conseil: { color: "border-brand-green bg-brand-green/5", icon: <Lightbulb className="w-6 h-6 text-brand-green" />, title: "Conseil" },
+          "pro tip": { color: "border-brand-green bg-brand-green/5", icon: <Lightbulb className="w-6 h-6 text-brand-green" />, title: "Conseil" },
+          spoiler: { color: "border-purple-500 bg-purple-50", icon: <CheckCircle2 className="w-6 h-6 text-purple-500" />, title: "Bon à savoir" }
+        };
+        const config = calloutConfigs[type] || calloutConfigs.note;
+        elements.push(
+          <motion.div variants={itemVariants} key={`callout-${lineIndex}`} className={`my-10 p-6 rounded-2xl border-l-4 shadow-sm flex gap-5 ${config.color}`}>
+            <div className="shrink-0 pt-1">{config.icon}</div>
+            <div>
+              <div className="font-heading font-black uppercase tracking-widest text-xs mb-2 opacity-80">{config.title}</div>
+              <p className="text-gray-800 leading-relaxed font-medium">{trimmedLine.substring(match[0].length).trim()}</p>
+            </div>
+          </motion.div>
+        );
+        continue;
+      }
+
+      // Standard paragraph line
+      elements.push(
+        <motion.p 
+          variants={itemVariants} 
+          key={`p-${lineIndex}`} 
+          className={`mb-6 leading-loose text-gray-600 text-lg md:text-xl font-normal ${isFirst && lineIndex === 0 ? "first-letter:text-7xl first-letter:font-black first-letter:text-brand-green first-letter:mr-3 first-letter:float-left first-letter:leading-[1]" : ""}`}
+        >
+          {trimmedLine}
+        </motion.p>
+      );
     }
 
-    // Standard paragraphs with Drop Cap for the first one
-    return (
-      <motion.p 
-        variants={itemVariants} 
-        key={i} 
-        className={`mb-8 leading-loose text-gray-600 text-lg md:text-xl font-normal ${isFirst ? "first-letter:text-7xl first-letter:font-black first-letter:text-brand-green first-letter:mr-3 first-letter:float-left first-letter:leading-[1]" : ""}`}
-      >
-        {p}
-      </motion.p>
-    );
+    flushList();
+    flushTable();
+
+    return <div key={i}>{elements}</div>;
+
+
   };
 
   return (

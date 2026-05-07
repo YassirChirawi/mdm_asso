@@ -1,20 +1,53 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Mail, Download, MessageSquare, Trash2, ArrowLeft, LogOut, Loader2, BarChart3, Users, BookOpen, AlertCircle, FileText, Upload, Plus, X, Heart } from 'lucide-react';
+import { Mail, Download, MessageSquare, Trash2, ArrowLeft, LogOut, Loader2, BarChart3, Users, BookOpen, AlertCircle, FileText, Upload, Plus, X, Heart, RefreshCcw } from 'lucide-react';
 import { signOut } from "next-auth/react";
+
+interface Message {
+    id: string;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    createdAt: string;
+}
+
+interface Donation {
+    id: string;
+    name: string;
+    email: string;
+    amount: number;
+    currency: string;
+    createdAt: string;
+}
+
+interface ChapterStat {
+    id: string;
+    chapterId: string;
+    views: number;
+}
+
+interface Document {
+    id: string;
+    name: string;
+    url: string;
+    type: string;
+    size: number;
+    createdAt: string;
+}
 
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState('stats'); // 'stats' or 'documents' or 'donations'
-    const [messages, setMessages] = useState([]);
-    const [donations, setDonations] = useState([]);
-    const [chapterStats, setChapterStats] = useState([]);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [donations, setDonations] = useState<Donation[]>([]);
+    const [chapterStats, setChapterStats] = useState<ChapterStat[]>([]);
     const [stats, setStats] = useState({ downloads: 0, messages: 0, totalViews: 0, estimatedReaders: 0, totalDonations: 0 });
-    const [documents, setDocuments] = useState([]);
+    const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const [showUploadModal, setShowUploadModal] = useState(false);
     const [newDoc, setNewDoc] = useState({ name: '', type: 'Statuts' });
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState<File | null>(null);
 
     useEffect(() => {
         fetchData();
@@ -31,21 +64,28 @@ export default function AdminDashboard() {
                 fetch('/api/admin/donations')
             ]);
 
-            const msgData = await msgRes.json();
-            const downloadStatData = await downloadStatRes.json();
-            const chapterStatData = await chapterStatRes.json();
-            const donationsData = await donationsRes.json();
+            const msgData = await msgRes.json().catch(() => []);
+            const downloadStatData = await downloadStatRes.json().catch(() => ({ count: 0 }));
+            const chapterStatData = await chapterStatRes.json().catch(() => []);
+            const donationsData = await donationsRes.json().catch(() => []);
 
-            const totalViews = chapterStatData.reduce((acc, curr) => acc + curr.views, 0);
-            const estimatedReaders = Math.max(...(chapterStatData.map(s => s.views) || [0]), 0);
+            // Assurer que les données sont des tableaux
+            const safeMessages = Array.isArray(msgData) ? msgData : [];
+            const safeChapterStats = Array.isArray(chapterStatData) ? chapterStatData : [];
+            const safeDonations = Array.isArray(donationsData) ? donationsData : [];
 
-            const totalDonations = donationsData.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+            const totalViews = safeChapterStats.reduce((acc, curr) => acc + (curr.views || 0), 0);
+            const estimatedReaders = safeChapterStats.length > 0 
+                ? Math.max(...safeChapterStats.map(s => (s as any).views || 0)) 
+                : 0;
 
-            setMessages(msgData || []);
-            setChapterStats(chapterStatData || []);
-            setDonations(donationsData || []);
+            const totalDonations = safeDonations.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+
+            setMessages(safeMessages as any);
+            setChapterStats(safeChapterStats as any);
+            setDonations(safeDonations as any);
             setStats({
-                messages: msgData.length || 0,
+                messages: safeMessages.length,
                 downloads: downloadStatData.count || 0,
                 totalViews,
                 estimatedReaders,
@@ -68,7 +108,7 @@ export default function AdminDashboard() {
         }
     };
 
-    const handleUpload = async (e) => {
+    const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!file) return;
         setUploading(true);
@@ -98,7 +138,7 @@ export default function AdminDashboard() {
         }
     };
 
-    const deleteDocument = async (id) => {
+    const deleteDocument = async (id: string) => {
         if (!confirm('Supprimer ce document ?')) return;
         try {
             await fetch(`/api/admin/documents?id=${id}`, { method: 'DELETE' });
@@ -108,7 +148,7 @@ export default function AdminDashboard() {
         }
     };
 
-    const deleteMessage = async (id) => {
+    const deleteMessage = async (id: string) => {
         if (!confirm('Supprimer ce message ?')) return;
         try {
             await fetch(`/api/admin/messages?id=${id}`, { method: 'DELETE' });
@@ -160,12 +200,21 @@ export default function AdminDashboard() {
                             </button>
                         </div>
                     </div>
-                    <button 
-                        onClick={() => signOut({ callbackUrl: '/' })}
-                        className="flex items-center gap-2 bg-white/10 hover:bg-brand-red text-white px-4 py-2 rounded-xl transition-all font-bold"
-                    >
-                        <LogOut size={18} /> Déconnexion
-                    </button>
+                    <div className="flex items-center gap-4">
+                        <button 
+                            onClick={fetchData}
+                            className="p-2 hover:bg-white/10 rounded-xl transition-all"
+                            title="Rafraîchir les données"
+                        >
+                            <RefreshCcw size={18} />
+                        </button>
+                        <button 
+                            onClick={() => signOut({ callbackUrl: '/' })}
+                            className="flex items-center gap-2 bg-white/10 hover:bg-brand-red text-white px-4 py-2 rounded-xl transition-all font-bold"
+                        >
+                            <LogOut size={18} /> Déconnexion
+                        </button>
+                    </div>
                 </div>
             </nav>
 
@@ -215,7 +264,7 @@ export default function AdminDashboard() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                             {/* Chapter Performances */}
                             <div className="lg:col-span-1">
                                 <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden h-full">
@@ -238,7 +287,7 @@ export default function AdminDashboard() {
                                                         <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
                                                             <div 
                                                                 className="bg-brand-green h-full rounded-full transition-all duration-1000"
-                                                                style={{ width: `${(chapter.views / stats.estimatedReaders) * 100}%` }}
+                                                                style={{ width: `${stats.estimatedReaders > 0 ? (chapter.views / stats.estimatedReaders) * 100 : 0}%` }}
                                                             ></div>
                                                         </div>
                                                     </div>
@@ -256,9 +305,6 @@ export default function AdminDashboard() {
                                         <h2 className="text-lg font-black text-brand-dark flex items-center gap-2 tracking-tighter uppercase">
                                             <Mail className="w-5 h-5 text-brand-red" /> Messages Récents
                                         </h2>
-                                        <button onClick={fetchData} className="bg-brand-green/10 text-brand-green px-4 py-1.5 rounded-full text-xs font-black tracking-widest hover:bg-brand-green hover:text-white transition-all">
-                                            RAFRAÎCHIR
-                                        </button>
                                     </div>
 
                                     <div className="divide-y divide-gray-100 max-h-[600px] overflow-y-auto">
@@ -308,7 +354,7 @@ export default function AdminDashboard() {
                         <div className="flex justify-between items-center mb-10">
                             <div>
                                 <h2 className="text-3xl font-black text-brand-dark tracking-tighter uppercase">Dons effectués</h2>
-                                <p className="text-gray-500 font-medium">Historique des dons reçus via Stripe</p>
+                                <p className="text-gray-500 font-medium">Historique des dons reçus</p>
                             </div>
                         </div>
 
@@ -399,7 +445,7 @@ export default function AdminDashboard() {
                                                 {doc.type}
                                             </span>
                                             <span className="text-[10px] font-bold text-gray-300">
-                                                {(doc.size / 1024 / 1024).toFixed(2)} MB
+                                                {(doc.size ? (doc.size / 1024 / 1024).toFixed(2) : '0')} MB
                                             </span>
                                         </div>
                                         <p className="text-[10px] font-black text-gray-300 uppercase tracking-tighter">
@@ -469,7 +515,7 @@ export default function AdminDashboard() {
                             <div className="relative border-2 border-dashed border-gray-200 rounded-3xl p-10 text-center hover:border-brand-green transition-all group">
                                 <input 
                                     type="file" required
-                                    onChange={(e) => setFile(e.target.files[0])}
+                                    onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
                                     className="absolute inset-0 opacity-0 cursor-pointer"
                                 />
                                 <Upload className="mx-auto mb-4 text-gray-300 group-hover:text-brand-green transition-all" size={40} />
