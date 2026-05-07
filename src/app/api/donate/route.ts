@@ -17,6 +17,18 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
+      custom_fields: [
+        {
+          key: 'prenom',
+          label: { type: 'custom', custom: 'Prénom' },
+          type: 'text',
+        },
+        {
+          key: 'nom',
+          label: { type: 'custom', custom: 'Nom' },
+          type: 'text',
+        },
+      ],
       line_items: [
         {
           price_data: {

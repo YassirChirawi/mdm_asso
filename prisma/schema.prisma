@@ -60,6 +60,8 @@ model Donation {
   amount    Int
   currency  String
   name      String
+  firstName String?
+  lastName  String?
   email     String
   createdAt DateTime @default(now())
 }
