@@ -24,6 +24,7 @@ export default function Navbar() {
     { name: "Accueil", path: "/" },
     { name: "À propos", path: "/about" },
     { name: "Le Guide", path: "/guide" },
+    { name: "Checklists", path: "/checklist" },
     { name: "Contact", path: "/contact" },
   ];
 
