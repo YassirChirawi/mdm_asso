@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Mail, Download, MessageSquare, Trash2, ArrowLeft, LogOut, Loader2, BarChart3, Users, BookOpen, AlertCircle, FileText, Upload, Plus, X, Heart, RefreshCcw } from 'lucide-react';
+import { Mail, Download, MessageSquare, Trash2, ArrowLeft, LogOut, Loader2, BarChart3, Users, BookOpen, AlertCircle, FileText, Upload, Plus, X, Heart, RefreshCcw, Sparkles, CheckCircle2, Clock } from 'lucide-react';
 import { signOut } from "next-auth/react";
 
 interface Message {
@@ -36,13 +36,38 @@ interface Document {
     createdAt: string;
 }
 
+interface Benevole {
+    id: string;
+    prenom: string;
+    nom: string;
+    email: string;
+    ville?: string;
+    disponibilite?: string;
+    roles?: string;
+    motivation: string;
+    createdAt: string;
+}
+
+interface Adhesion {
+    id: string;
+    prenom: string;
+    nom: string;
+    email: string;
+    ville?: string;
+    message?: string;
+    statut: string;
+    createdAt: string;
+}
+
 export default function AdminDashboard() {
-    const [activeTab, setActiveTab] = useState('stats'); // 'stats' or 'documents' or 'donations'
+    const [activeTab, setActiveTab] = useState('stats');
     const [messages, setMessages] = useState<Message[]>([]);
     const [donations, setDonations] = useState<Donation[]>([]);
     const [chapterStats, setChapterStats] = useState<ChapterStat[]>([]);
     const [stats, setStats] = useState({ downloads: 0, messages: 0, totalViews: 0, estimatedReaders: 0, totalDonations: 0 });
     const [documents, setDocuments] = useState<Document[]>([]);
+    const [benevoles, setBenevoles] = useState<Benevole[]>([]);
+    const [adhesions, setAdhesions] = useState<Adhesion[]>([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const [showUploadModal, setShowUploadModal] = useState(false);
@@ -52,6 +77,8 @@ export default function AdminDashboard() {
     useEffect(() => {
         fetchData();
         fetchDocuments();
+        fetchBenevoles();
+        fetchAdhesions();
     }, []);
 
     const fetchData = async () => {
@@ -106,6 +133,51 @@ export default function AdminDashboard() {
         } catch (error) {
             console.error('Failed to fetch documents', error);
         }
+    };
+
+    const fetchBenevoles = async () => {
+        try {
+            const res = await fetch('/api/admin/benevoles');
+            const data = await res.json();
+            if (Array.isArray(data)) setBenevoles(data);
+        } catch (error) {
+            console.error('Failed to fetch benevoles', error);
+        }
+    };
+
+    const fetchAdhesions = async () => {
+        try {
+            const res = await fetch('/api/admin/adhesions');
+            const data = await res.json();
+            if (Array.isArray(data)) setAdhesions(data);
+        } catch (error) {
+            console.error('Failed to fetch adhesions', error);
+        }
+    };
+
+    const updateAdhesionStatut = async (id: string, statut: string) => {
+        try {
+            const res = await fetch('/api/admin/adhesions', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, statut }),
+            });
+            if (res.ok) setAdhesions(prev => prev.map(a => a.id === id ? { ...a, statut } : a));
+        } catch (error) {
+            console.error('Failed to update adhesion', error);
+        }
+    };
+
+    const deleteBenevole = async (id: string) => {
+        if (!confirm('Supprimer cette candidature ?')) return;
+        await fetch(`/api/admin/benevoles?id=${id}`, { method: 'DELETE' });
+        setBenevoles(prev => prev.filter(b => b.id !== id));
+    };
+
+    const deleteAdhesion = async (id: string) => {
+        if (!confirm('Supprimer cette adhésion ?')) return;
+        await fetch(`/api/admin/adhesions?id=${id}`, { method: 'DELETE' });
+        setAdhesions(prev => prev.filter(a => a.id !== id));
     };
 
     const handleUpload = async (e: React.FormEvent) => {
@@ -180,24 +252,27 @@ export default function AdminDashboard() {
                             MDM <span className="text-brand-green">Admin</span>
                         </h1>
                         <div className="hidden md:flex items-center gap-2 ml-8 bg-white/5 p-1 rounded-2xl">
-                            <button 
-                                onClick={() => setActiveTab('stats')}
-                                className={`px-6 py-2 rounded-xl text-sm font-black tracking-tighter transition-all ${activeTab === 'stats' ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'}`}
-                            >
-                                DASHBOARD
-                            </button>
-                            <button 
-                                onClick={() => setActiveTab('donations')}
-                                className={`px-6 py-2 rounded-xl text-sm font-black tracking-tighter transition-all ${activeTab === 'donations' ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'}`}
-                            >
-                                DONS
-                            </button>
-                            <button 
-                                onClick={() => setActiveTab('documents')}
-                                className={`px-6 py-2 rounded-xl text-sm font-black tracking-tighter transition-all ${activeTab === 'documents' ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'}`}
-                            >
-                                DOCUMENTS LÉGAUX
-                            </button>
+                            {[
+                                { id: 'stats', label: 'DASHBOARD' },
+                                { id: 'benevoles', label: 'BÉNÉVOLES' },
+                                { id: 'adhesions', label: 'ADHÉRENTS' },
+                                { id: 'donations', label: 'DONS' },
+                                { id: 'documents', label: 'DOCUMENTS' },
+                            ].map(tab => (
+                                <button key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-5 py-2 rounded-xl text-sm font-black tracking-tighter transition-all ${
+                                        activeTab === tab.id ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'
+                                    }`}>
+                                    {tab.label}
+                                    {tab.id === 'benevoles' && benevoles.length > 0 && (
+                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{benevoles.length}</span>
+                                    )}
+                                    {tab.id === 'adhesions' && adhesions.length > 0 && (
+                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{adhesions.length}</span>
+                                    )}
+                                </button>
+                            ))}
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
@@ -389,6 +464,129 @@ export default function AdminDashboard() {
                                     ))}
                                 </div>
                             )}
+                        </div>
+                    </div>
+                )}
+
+                {/* ── BÉNÉVOLES ── */}
+                {activeTab === 'benevoles' && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="flex justify-between items-center mb-10">
+                            <div>
+                                <h2 className="text-3xl font-black text-brand-dark tracking-tighter uppercase flex items-center gap-3">
+                                    <Sparkles className="text-violet-500" size={28} /> Candidatures Bénévoles
+                                </h2>
+                                <p className="text-gray-500 font-medium">{benevoles.length} candidature{benevoles.length > 1 ? 's' : ''} reçue{benevoles.length > 1 ? 's' : ''}</p>
+                            </div>
+                        </div>
+                        <div className="space-y-5">
+                            {benevoles.length === 0 ? (
+                                <div className="bg-white rounded-3xl p-16 text-center text-gray-400 border border-gray-100">
+                                    <Sparkles size={48} className="mx-auto mb-4 opacity-20" />
+                                    <p className="font-bold uppercase tracking-widest text-xs">Aucune candidature reçue</p>
+                                </div>
+                            ) : benevoles.map(b => (
+                                <div key={b.id} className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-md transition-all group">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h3 className="font-black text-xl text-brand-dark">{b.prenom} {b.nom}</h3>
+                                            <div className="flex flex-wrap gap-3 mt-1 text-sm text-gray-500">
+                                                <a href={`mailto:${b.email}`} className="text-brand-green font-semibold hover:underline">{b.email}</a>
+                                                {b.ville && <span>📍 {b.ville}</span>}
+                                                {b.disponibilite && <span>🕐 {b.disponibilite}</span>}
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                                            <a href={`mailto:${b.email}`} className="p-2.5 bg-brand-green/10 text-brand-green rounded-xl hover:bg-brand-green hover:text-white transition-all">
+                                                <Mail size={16} />
+                                            </a>
+                                            <button onClick={() => deleteBenevole(b.id)} className="p-2.5 bg-gray-100 text-gray-400 rounded-xl hover:bg-brand-red hover:text-white transition-all">
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {b.roles && (
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            {b.roles.split(', ').map(r => (
+                                                <span key={r} className="px-3 py-1 bg-violet-50 text-violet-600 text-xs font-semibold rounded-full">{r}</span>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <p className="text-gray-600 text-sm bg-gray-50 rounded-xl p-4 leading-relaxed">{b.motivation}</p>
+                                    <p className="text-xs text-gray-300 mt-3">{new Date(b.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* ── ADHÉRENTS ── */}
+                {activeTab === 'adhesions' && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="flex justify-between items-center mb-10">
+                            <div>
+                                <h2 className="text-3xl font-black text-brand-dark tracking-tighter uppercase flex items-center gap-3">
+                                    <Heart className="text-brand-red" size={28} /> Demandes d'Adhésion
+                                </h2>
+                                <p className="text-gray-500 font-medium">
+                                    {adhesions.filter(a => a.statut === 'validé').length} validé(s) · {adhesions.filter(a => a.statut === 'en_attente').length} en attente
+                                </p>
+                            </div>
+                        </div>
+                        <div className="space-y-4">
+                            {adhesions.length === 0 ? (
+                                <div className="bg-white rounded-3xl p-16 text-center text-gray-400 border border-gray-100">
+                                    <Heart size={48} className="mx-auto mb-4 opacity-20" />
+                                    <p className="font-bold uppercase tracking-widest text-xs">Aucune demande d'adhésion</p>
+                                </div>
+                            ) : adhesions.map(a => (
+                                <div key={a.id} className={`bg-white rounded-2xl p-6 border shadow-sm transition-all group ${
+                                    a.statut === 'validé' ? 'border-brand-green/30' :
+                                    a.statut === 'refusé' ? 'border-red-200' : 'border-gray-100'
+                                }`}>
+                                    <div className="flex justify-between items-start">
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-3 mb-1">
+                                                <h3 className="font-black text-lg text-brand-dark">{a.prenom} {a.nom}</h3>
+                                                <span className={`px-2.5 py-0.5 text-[10px] font-black uppercase rounded-full ${
+                                                    a.statut === 'validé' ? 'bg-green-100 text-green-700' :
+                                                    a.statut === 'refusé' ? 'bg-red-100 text-red-600' :
+                                                    'bg-amber-100 text-amber-700'
+                                                }`}>
+                                                    {a.statut === 'en_attente' ? '⏳ En attente' : a.statut === 'validé' ? '✓ Validé' : '✗ Refusé'}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-wrap gap-3 text-sm text-gray-500">
+                                                <a href={`mailto:${a.email}`} className="text-brand-red font-semibold hover:underline">{a.email}</a>
+                                                {a.ville && <span>📍 {a.ville}</span>}
+                                                <span className="text-xs text-gray-300">{new Date(a.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                                            </div>
+                                            {a.message && <p className="text-xs text-gray-500 mt-2 bg-gray-50 rounded-lg p-3">{a.message}</p>}
+                                        </div>
+                                        <div className="flex gap-2 ml-4">
+                                            {a.statut !== 'validé' && (
+                                                <button onClick={() => updateAdhesionStatut(a.id, 'validé')}
+                                                    className="p-2.5 bg-green-50 text-green-600 rounded-xl hover:bg-green-100 transition-all" title="Valider">
+                                                    <CheckCircle2 size={16} />
+                                                </button>
+                                            )}
+                                            {a.statut !== 'en_attente' && (
+                                                <button onClick={() => updateAdhesionStatut(a.id, 'en_attente')}
+                                                    className="p-2.5 bg-amber-50 text-amber-600 rounded-xl hover:bg-amber-100 transition-all" title="Remettre en attente">
+                                                    <Clock size={16} />
+                                                </button>
+                                            )}
+                                            <a href={`mailto:${a.email}?subject=Votre adhésion MDM – Paiement 15€&body=Bonjour ${a.prenom},%0D%0A%0D%0ANous avons bien reçu votre demande d'adhésion. Voici le lien de paiement (15€) :%0D%0A[INSÉRER LIEN STRIPE]%0D%0A%0D%0ACordialement,%0D%0AL'équipe MDM`}
+                                                className="p-2.5 bg-brand-red/10 text-brand-red rounded-xl hover:bg-brand-red hover:text-white transition-all" title="Envoyer le lien de paiement">
+                                                <Mail size={16} />
+                                            </a>
+                                            <button onClick={() => deleteAdhesion(a.id)} className="p-2.5 bg-gray-100 text-gray-400 rounded-xl hover:bg-red-100 hover:text-red-500 transition-all opacity-0 group-hover:opacity-100">
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 )}

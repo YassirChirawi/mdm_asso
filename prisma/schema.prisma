@@ -66,3 +66,26 @@ model Donation {
   createdAt DateTime @default(now())
 }
 
+model Benevole {
+  id           String   @id @default(cuid())
+  prenom       String
+  nom          String
+  email        String
+  ville        String?
+  disponibilite String?
+  roles        String?
+  motivation   String
+  createdAt    DateTime @default(now())
+}
+
+model Adhesion {
+  id        String   @id @default(cuid())
+  prenom    String
+  nom       String
+  email     String
+  ville     String?
+  message   String?
+  statut    String   @default("en_attente")
+  createdAt DateTime @default(now())
+}
+

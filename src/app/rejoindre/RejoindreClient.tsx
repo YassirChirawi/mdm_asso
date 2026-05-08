@@ -202,53 +202,108 @@ const fadeUp = (delay = 0) => ({
 });
 
 /* ── data ── */
-const PLANS = [
-  {
-    id: "etudiant",
-    label: "Membre Étudiant",
-    price: "10",
-    period: "/ an",
-    color: "#1D9E75",
-    highlight: false,
-    perks: [
-      "Accès au guide complet en PDF",
-      "Invitations aux événements membres",
-      "Accès au réseau d'entraide privé",
-      "Badge membre sur le groupe WhatsApp",
-      "Newsletter mensuelle exclusive",
-    ],
-  },
-  {
-    id: "soutien",
-    label: "Membre Soutien",
-    price: "25",
-    period: "/ an",
-    color: "#C1272D",
-    highlight: true,
-    perks: [
-      "Tout ce qui est inclus dans Membre Étudiant",
-      "Mention dans nos publications annuelles",
-      "Accès prioritaire aux ateliers & webinaires",
-      "Accompagnement personnalisé (1 séance offerte)",
-      "Vote aux assemblées générales",
-    ],
-  },
-  {
-    id: "bienfaiteur",
-    label: "Membre Bienfaiteur",
-    price: "50",
-    period: "/ an",
-    color: "#2C2C2A",
-    highlight: false,
-    perks: [
-      "Tout ce qui est inclus dans Membre Soutien",
-      "Remerciement nominatif sur le site",
-      "Accès à tous les ateliers sans limite",
-      "Impact direct sur nos projets communautaires",
-      "Attestation fiscale (don déductible si éligible)",
-    ],
-  },
+const ADHESION_PERKS = [
+  { emoji: "🎓", text: "Réductions sur nos événements (soirées, ateliers, conférences)" },
+  { emoji: "🤝", text: "Accès prioritaire au réseau d'entraide privé" },
+  { emoji: "🏠", text: "Offres exclusives partenaires (logement, services, abonnements)" },
+  { emoji: "📧", text: "Newsletter mensuelle avec les bons plans réservés aux membres" },
+  { emoji: "🗣️", text: "Droit de vote aux assemblées générales" },
+  { emoji: "❤️", text: "Tu soutiens une association qui aide des centaines d'étudiants" },
 ];
+
+function AdhesionForm() {
+  const [form, setForm] = useState({ prenom: "", nom: "", email: "", ville: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.prenom || !form.nom || !form.email) {
+      setErrorMsg("Merci de remplir les champs obligatoires.");
+      return;
+    }
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/adhesion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Une erreur s'est produite. Réessaie ou écris-nous directement.");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+        className="text-center py-12 px-6">
+        <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          style={{ background: "#FEE2E2" }}>
+          <CheckCircle2 size={30} style={{ color: "#C1272D" }} />
+        </div>
+        <h3 className="text-xl font-black text-brand-dark mb-2" style={{ fontFamily: "var(--font-outfit)" }}>
+          Demande envoyée ! 🎉
+        </h3>
+        <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto">
+          Merci {form.prenom} ! On revient vers toi sous 48h avec le lien de paiement (15€).
+          Ton adhésion sera validée dès réception.
+        </p>
+      </motion.div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Prénom <span className="text-red-400">*</span></label>
+          <input name="prenom" type="text" value={form.prenom} onChange={handleChange} placeholder="Yassir"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 transition" />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Nom <span className="text-red-400">*</span></label>
+          <input name="nom" type="text" value={form.nom} onChange={handleChange} placeholder="Chirawi"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 transition" />
+        </div>
+      </div>
+      <div>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Email <span className="text-red-400">*</span></label>
+        <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="prenom@email.com"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 transition" />
+      </div>
+      <div>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Ville (optionnel)</label>
+        <input name="ville" type="text" value={form.ville} onChange={handleChange} placeholder="Paris, Lyon…"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 transition" />
+      </div>
+      <div>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Un mot (optionnel)</label>
+        <textarea name="message" value={form.message} onChange={handleChange} rows={3}
+          placeholder="Comment as-tu connu l'association ? Un mot de motivation…"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 transition resize-none" />
+      </div>
+      {errorMsg && <p className="text-sm text-red-500 bg-red-50 px-4 py-2.5 rounded-xl">{errorMsg}</p>}
+      <button type="submit" disabled={status === "loading"}
+        className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm hover:scale-[1.02] transition-all disabled:opacity-60"
+        style={{ background: "#C1272D", color: "white" }}>
+        {status === "loading"
+          ? <><Loader2 size={16} className="animate-spin" /> Envoi…</>
+          : <><Heart size={16} /> Adhérer pour 15€/an</>}
+      </button>
+      <p className="text-center text-xs text-gray-400">
+        Tu recevras un lien de paiement sécurisé par email sous 48h.
+      </p>
+    </form>
+  );
+}
 
 const BENEVOLE_ROLES = [
   {
@@ -372,69 +427,59 @@ export default function RejoindreClient() {
       {/* ── ADHÉSION ── */}
       <section id="adhesion" className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-6">
-          <motion.div {...fadeUp()} className="text-center mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-green bg-brand-green/10 px-4 py-1.5 rounded-full inline-block mb-4">
-              Frais d'adhésion
+          <motion.div {...fadeUp()} className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-4 py-1.5 rounded-full inline-block mb-4">
+              Adhésion annuelle
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-brand-dark mb-3" style={{ fontFamily: "var(--font-outfit)" }}>
-              Choisissez votre niveau d'engagement
+            <h2 className="text-3xl md:text-4xl font-black text-brand-dark mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
+              Tout est gratuit.
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-rose-400">
+                L'adhésion, c'est un coup de pouce.
+              </span>
             </h2>
-            <p className="text-gray-500 text-sm max-w-lg mx-auto">
-              Adhésion annuelle, résiliable à tout moment. Tous les montants vont directement au financement des projets associatifs.
+            <p className="text-gray-500 text-base max-w-2xl mx-auto leading-relaxed">
+              Le guide, les checklists, les conseils — tout est accessible sans adhérer. Mais si tu veux aller plus loin,
+              soutenir l'association et profiter d'avantages exclusifs, l'adhésion à <strong>15€/an</strong> est faite pour toi.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {PLANS.map((plan, i) => (
-              <motion.div key={plan.id} {...fadeUp(i * 0.08)}
-                className="relative rounded-2xl border overflow-hidden flex flex-col"
-                style={{
-                  borderColor: plan.highlight ? plan.color + "60" : "#f3f4f6",
-                  boxShadow: plan.highlight ? `0 8px 40px ${plan.color}20` : undefined,
-                  background: plan.highlight ? `linear-gradient(160deg, ${plan.color}08, white)` : "white",
-                }}>
-                {plan.highlight && (
-                  <div className="text-center text-xs font-bold uppercase tracking-widest py-2"
-                    style={{ background: plan.color, color: "white" }}>
-                    ⭐ Recommandé
-                  </div>
-                )}
-                <div className="p-7 flex-1 flex flex-col">
-                  <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: plan.color }}>{plan.label}</p>
-                  <div className="flex items-baseline gap-1 mb-6">
-                    <span className="text-4xl font-black" style={{ color: "#2C2C2A" }}>{plan.price}€</span>
-                    <span className="text-gray-400 text-sm">{plan.period}</span>
-                  </div>
-                  <ul className="space-y-2.5 flex-1 mb-8">
-                    {plan.perks.map((perk, j) => (
-                      <li key={j} className="flex items-start gap-2.5">
-                        <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5" style={{ color: plan.color }} />
-                        <span className="text-sm text-gray-600 leading-snug">{perk}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={`mailto:contact@marocainsenfrance.fr?subject=Adhésion ${plan.label}&body=Bonjour, je souhaite adhérer en tant que ${plan.label}.`}
-                    className="block text-center py-3 rounded-xl font-bold text-sm transition-all hover:scale-105"
-                    style={{
-                      background: plan.highlight ? plan.color : plan.color + "15",
-                      color: plan.highlight ? "white" : plan.color,
-                    }}>
-                    Adhérer — {plan.price}€/an
-                  </a>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Left — avantages */}
+            <motion.div {...fadeUp(0.05)}>
+              <div className="bg-[#fafafa] rounded-2xl border border-gray-100 p-7 mb-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-5">Ce que tu obtiens en adhérant</p>
+                <ul className="space-y-3">
+                  {ADHESION_PERKS.map((p, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="text-lg flex-shrink-0">{p.emoji}</span>
+                      <span className="text-sm text-gray-600 leading-snug">{p.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex items-center gap-4 p-5 rounded-2xl" style={{ background: "linear-gradient(135deg, #C1272D10, #C1272D05)" }}>
+                <div className="text-3xl font-black" style={{ color: "#C1272D" }}>15€</div>
+                <div>
+                  <p className="font-bold text-brand-dark text-sm">/an · Adhésion annuelle</p>
+                  <p className="text-xs text-gray-400">Résiliable à tout moment · Paiement sécurisé</p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
 
-          <motion.p {...fadeUp(0.2)} className="text-center text-xs text-gray-400 mt-6">
-            Le paiement s'effectue par virement ou via notre lien de don Stripe après confirmation par email. 
-            Attestation d'adhésion fournie dans les 48h. · <Link href="/contact" className="underline">Une question ?</Link>
-          </motion.p>
+            {/* Right — formulaire */}
+            <motion.div {...fadeUp(0.1)}>
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+                <p className="text-sm font-bold text-brand-dark mb-5" style={{ fontFamily: "var(--font-outfit)" }}>
+                  Remplis ce formulaire — on t'envoie le lien de paiement sous 48h.
+                </p>
+                <AdhesionForm />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ── BENEVOLE ── */}
+
       <section id="benevole" className="py-20 max-w-5xl mx-auto px-6">
         <motion.div {...fadeUp()} className="text-center mb-14">
           <span className="text-xs font-bold uppercase tracking-widest text-violet-600 bg-violet-50 px-4 py-1.5 rounded-full inline-block mb-4">
