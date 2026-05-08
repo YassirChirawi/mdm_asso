@@ -1,11 +1,197 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Heart, Users, Sparkles, CheckCircle2, ArrowRight,
   BookOpen, Megaphone, Globe, Trophy, Handshake, Star,
+  Send, Loader2,
 } from "lucide-react";
+
+const ROLE_OPTIONS = [
+  "Tuteur / Mentor",
+  "Communication & Réseaux sociaux",
+  "Correspondant Local",
+  "Partenariats",
+  "Animation Événements",
+  "Créatif / Tech",
+  "Autre",
+];
+
+function BenevoleForm() {
+  const [form, setForm] = useState({
+    prenom: "", nom: "", email: "", ville: "", disponibilite: "", motivation: "",
+  });
+  const [roles, setRoles] = useState<string[]>([]);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const toggleRole = (role: string) =>
+    setRoles((prev) => prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.prenom || !form.nom || !form.email || !form.motivation) {
+      setErrorMsg("Merci de remplir tous les champs obligatoires.");
+      return;
+    }
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/benevole", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, roles }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Une erreur s'est produite. Réessaie ou écris-nous directement.");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="text-center py-14 px-6"
+      >
+        <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
+          style={{ background: "#D1FAE5" }}>
+          <CheckCircle2 size={32} style={{ color: "#1D9E75" }} />
+        </div>
+        <h3 className="text-xl font-black text-brand-dark mb-2" style={{ fontFamily: "var(--font-outfit)" }}>
+          Candidature envoyée ! 🎉
+        </h3>
+        <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto">
+          Merci {form.prenom} ! On revient vers toi dans les prochains jours pour un petit échange.
+          Bienvenue dans la famille MDM !
+        </p>
+      </motion.div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      {/* Nom / Prénom */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5" htmlFor="prenom">
+            Prénom <span className="text-red-400">*</span>
+          </label>
+          <input id="prenom" name="prenom" type="text" value={form.prenom} onChange={handleChange}
+            placeholder="Yassir"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+            style={{ "--tw-ring-color": "#1D9E75" } as React.CSSProperties}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5" htmlFor="nom">
+            Nom <span className="text-red-400">*</span>
+          </label>
+          <input id="nom" name="nom" type="text" value={form.nom} onChange={handleChange}
+            placeholder="Chirawi"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+          />
+        </div>
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5" htmlFor="email">
+          Adresse email <span className="text-red-400">*</span>
+        </label>
+        <input id="email" name="email" type="email" value={form.email} onChange={handleChange}
+          placeholder="prenom@email.com"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+        />
+      </div>
+
+      {/* Ville / Disponibilité */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5" htmlFor="ville">
+            Ville / Région
+          </label>
+          <input id="ville" name="ville" type="text" value={form.ville} onChange={handleChange}
+            placeholder="Paris, Lyon, Bordeaux…"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5" htmlFor="disponibilite">
+            Disponibilité
+          </label>
+          <select id="disponibilite" name="disponibilite" value={form.disponibilite} onChange={handleChange}
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition bg-white">
+            <option value="">Choisir…</option>
+            <option>Quelques heures / mois</option>
+            <option>1 à 2 jours / mois</option>
+            <option>Week-ends uniquement</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Rôles */}
+      <div>
+        <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Rôle(s) souhaité(s)</p>
+        <div className="flex flex-wrap gap-2">
+          {ROLE_OPTIONS.map((role) => {
+            const selected = roles.includes(role);
+            return (
+              <button key={role} type="button" onClick={() => toggleRole(role)}
+                className="px-3 py-1.5 rounded-full text-xs font-semibold border transition-all"
+                style={{
+                  borderColor: selected ? "#1D9E75" : "#e5e7eb",
+                  background: selected ? "#1D9E7515" : "white",
+                  color: selected ? "#1D9E75" : "#6b7280",
+                }}>
+                {selected ? "✓ " : ""}{role}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Motivation */}
+      <div>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5" htmlFor="motivation">
+          Pourquoi veux-tu rejoindre ? <span className="text-red-400">*</span>
+        </label>
+        <textarea id="motivation" name="motivation" value={form.motivation} onChange={handleChange}
+          rows={4}
+          placeholder="En quelques lignes, dis-nous ce qui te motive et ce que tu apportes…"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition resize-none"
+        />
+      </div>
+
+      {/* Error */}
+      {errorMsg && (
+        <p className="text-sm text-red-500 bg-red-50 px-4 py-2.5 rounded-xl">{errorMsg}</p>
+      )}
+
+      {/* Submit */}
+      <button type="submit" disabled={status === "loading"}
+        className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+        style={{ background: "#1D9E75", color: "white" }}>
+        {status === "loading"
+          ? <><Loader2 size={16} className="animate-spin" /> Envoi en cours…</>
+          : <><Send size={16} /> Envoyer ma candidature</>}
+      </button>
+
+      <p className="text-center text-xs text-gray-400">
+        Tes données ne seront utilisées que dans le cadre de ta candidature bénévole.
+      </p>
+    </form>
+  );
+}
 
 /* ── helpers ── */
 const fadeUp = (delay = 0) => ({
@@ -279,7 +465,7 @@ export default function RejoindreClient() {
 
         {/* Étapes */}
         <motion.div {...fadeUp(0.1)}
-          className="rounded-2xl p-8"
+          className="rounded-2xl p-8 mb-14"
           style={{ background: "linear-gradient(135deg, #1D9E75 0%, #15745A 100%)" }}>
           <h3 className="text-white font-bold text-lg text-center mb-8" style={{ fontFamily: "var(--font-outfit)" }}>
             Comment ça se passe ?
@@ -295,21 +481,22 @@ export default function RejoindreClient() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <a
-              href="https://www.instagram.com/marocainsenfrance/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all hover:scale-105"
-              style={{ background: "white", color: "#1D9E75" }}>
-              <Sparkles size={15} /> Postuler comme bénévole
-            </a>
-            <p className="text-emerald-200 text-xs mt-3">
-              Via Instagram ou par email à{" "}
-              <a href="mailto:contact@marocainsenfrance.fr" className="underline font-semibold">
-                contact@marocainsenfrance.fr
-              </a>
-            </p>
+        </motion.div>
+
+        {/* ── FORMULAIRE BÉNÉVOLE ── */}
+        <motion.div {...fadeUp(0.1)} id="formulaire-benevole">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
+              style={{ background: "#EDE9FE", color: "#7C3AED" }}>
+              <Sparkles size={13} /> Candidature en ligne
+            </span>
+            <h3 className="text-2xl md:text-3xl font-black text-brand-dark" style={{ fontFamily: "var(--font-outfit)" }}>
+              Postule en 2 minutes
+            </h3>
+            <p className="text-gray-400 text-sm mt-2">Remplis ce formulaire et on revient vers toi rapidement.</p>
+          </div>
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 max-w-2xl mx-auto">
+            <BenevoleForm />
           </div>
         </motion.div>
       </section>
