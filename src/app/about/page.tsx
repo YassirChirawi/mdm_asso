@@ -1,6 +1,6 @@
 "use client";
 
-import { Target, Heart, Users, Award, ShieldCheck, Compass } from "lucide-react";
+import { Target, Heart, Users, Award, ShieldCheck, Compass, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function About() {
@@ -206,6 +206,41 @@ export default function About() {
             </motion.div>
           </div>
         </div>
+
+        {/* ── JOIN CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-32 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden"
+          style={{ background: "linear-gradient(140deg, #1D9E75 0%, #15745A 100%)" }}
+        >
+          <div className="absolute inset-0 opacity-[0.06]"
+            style={{ backgroundImage: "radial-gradient(circle, white 1.5px, transparent 1.5px)", backgroundSize: "28px 28px" }} />
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 bg-white/15 text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
+              <Users className="w-4 h-4" /> Rejoins le mouvement
+            </div>
+            <h2 className="font-heading text-3xl md:text-5xl font-black text-white mb-5">
+              Fais partie de l'aventure MDM.
+            </h2>
+            <p className="text-emerald-100 text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+              Adhère à l'association, deviens bénévole ou simplement rejoins notre réseau d'entraide.
+              Chaque engagement, grand ou petit, renforce la communauté.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="/rejoindre"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-xl"
+                style={{ background: "white", color: "#1D9E75" }}>
+                <Heart className="w-4 h-4" /> Adhérer — dès 10€/an
+              </a>
+              <a href="/rejoindre#benevole"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest border border-white/40 text-white hover:bg-white/10 transition-all">
+                <Sparkles className="w-4 h-4" /> Devenir bénévole
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
       </div>
     </div>

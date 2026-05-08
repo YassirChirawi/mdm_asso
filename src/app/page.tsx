@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, Users, HelpCircle, Heart, Sparkles, Globe, ShieldCheck, Trophy, Zap, ExternalLink } from "lucide-react";
+import { ArrowRight, BookOpen, Users, Heart, Sparkles, Globe, ShieldCheck, Trophy, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -238,6 +238,70 @@ export default function Home() {
 
         {/* Dynamic Background Element */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-brand-green/10 rounded-full blur-[100px] pointer-events-none"></div>
+      </section>
+
+      {/* ── COMMUNAUTÉ & BÉNÉVOLAT ── */}
+      <section className="py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left: text */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="inline-flex items-center gap-2 text-brand-green font-heading font-black text-xs tracking-[0.2em] uppercase mb-6 bg-brand-green/10 px-5 py-2 rounded-full">
+                <Users className="w-4 h-4" /> Réseau &amp; Communauté
+              </div>
+              <h2 className="font-heading text-4xl md:text-6xl font-black text-brand-dark leading-none tracking-tighter mb-6">
+                Ensemble,<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-dark">
+                  on va plus loin.
+                </span>
+              </h2>
+              <p className="text-gray-500 text-lg font-medium leading-relaxed mb-8">
+                L'association, c'est bien plus qu'un guide. C'est un réseau d'entraide humain,
+                porté par des bénévoles qui connaissent la même aventure que toi.
+                Rejoins-nous — ou deviens le pilier de la prochaine promotion.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/rejoindre"
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 font-black text-white rounded-2xl text-sm uppercase tracking-widest transition-all hover:-translate-y-1 shadow-lg shadow-brand-green/20"
+                  style={{ background: "#1D9E75" }}>
+                  <Heart className="w-4 h-4" />
+                  Adhérer à l'association
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link href="/rejoindre#benevole"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 font-black text-brand-dark border-2 border-gray-200 rounded-2xl text-sm uppercase tracking-widest hover:border-brand-green hover:text-brand-green transition-all">
+                  <Sparkles className="w-4 h-4" />
+                  Devenir bénévole
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right: cards */}
+            <div className="grid grid-cols-2 gap-5">
+              {[
+                { emoji: "🤝", title: "Réseau d'entraide", desc: "Des étudiants dans toute la France prêts à partager leurs bons plans.", color: "#1D9E75" },
+                { emoji: "📋", title: "Checklists & guides", desc: "54 démarches pour préparer ta rentrée, téléchargeables en PDF.", color: "#0284C7" },
+                { emoji: "🎓", title: "Mentorat", desc: "Des anciens étudiants t'accompagnent dans tes premières semaines.", color: "#7C3AED" },
+                { emoji: "⚽", title: "Vie associative", desc: "Sport, événements, sorties : l'intégration passe aussi par le fun.", color: "#C1272D" },
+              ].map((card, i) => (
+                <motion.div key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="bg-[#fafafa] rounded-[2rem] p-6 border border-gray-100 hover:shadow-lg transition-all group">
+                  <div className="text-2xl mb-3">{card.emoji}</div>
+                  <h3 className="font-heading font-black text-sm text-brand-dark mb-1">{card.title}</h3>
+                  <p className="text-gray-400 text-xs leading-relaxed">{card.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

@@ -25,6 +25,7 @@ export default function Navbar() {
     { name: "À propos", path: "/about" },
     { name: "Le Guide", path: "/guide" },
     { name: "Checklists", path: "/checklist" },
+    { name: "Rejoindre", path: "/rejoindre" },
     { name: "Contact", path: "/contact" },
   ];
 

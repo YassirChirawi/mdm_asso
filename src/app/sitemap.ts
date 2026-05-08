@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   // Base pages
-  const routes = ['', '/about', '/guide', '/checklist', '/contact', '/mentions-legales'].map(
+  const routes = ['', '/about', '/guide', '/checklist', '/rejoindre', '/contact', '/mentions-legales'].map(
     (route) => ({
       url: `${baseUrl}${route}`,
       lastModified,
