@@ -37,7 +37,7 @@ export default function GuideIndex() {
             Le Guide Complet
           </h1>
           <p className="text-xl text-gray-500 font-medium leading-relaxed">
-            15 modules exclusifs pour maîtriser chaque étape de ton parcours étudiant en France. 
+            16 modules exclusifs pour maîtriser chaque étape de ton parcours étudiant en France. 
             Gratuit, pratique et sans langue de bois.
           </p>
         </motion.div>

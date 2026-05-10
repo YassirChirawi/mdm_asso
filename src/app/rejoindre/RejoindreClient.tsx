@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import {
   Heart, Users, Sparkles, CheckCircle2, ArrowRight,
   BookOpen, Megaphone, Globe, Trophy, Handshake, Star,
-  Send, Loader2,
+  Send, Loader2, CreditCard,
 } from "lucide-react";
 
 const ROLE_OPTIONS = [
@@ -250,11 +250,21 @@ function AdhesionForm() {
           <CheckCircle2 size={30} style={{ color: "#C1272D" }} />
         </div>
         <h3 className="text-xl font-black text-brand-dark mb-2" style={{ fontFamily: "var(--font-outfit)" }}>
-          Demande envoyée ! 🎉
+          Demande enregistrée ! 🎉
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto">
-          Merci {form.prenom} ! On revient vers toi sous 48h avec le lien de paiement (15€).
-          Ton adhésion sera validée dès réception.
+        <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto mb-6">
+          Merci {form.prenom} ! Tu peux maintenant finaliser ton adhésion (15€/an) en cliquant sur le bouton ci-dessous.
+        </p>
+        <a 
+          href="https://buy.stripe.com/eVqdR22cP1ne9T7gaFb3q01"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+          style={{ background: "#C1272D", color: "white" }}>
+          <CreditCard size={18} /> Payer mon adhésion (15€)
+        </a>
+        <p className="text-[10px] text-gray-400 mt-4 italic">
+          Un email de confirmation avec ce lien t'a également été envoyé.
         </p>
       </motion.div>
     );
@@ -299,7 +309,7 @@ function AdhesionForm() {
           : <><Heart size={16} /> Adhérer pour 15€/an</>}
       </button>
       <p className="text-center text-xs text-gray-400">
-        Tu recevras un lien de paiement sécurisé par email sous 48h.
+        Tu seras redirigé vers le paiement sécurisé après cette étape.
       </p>
     </form>
   );

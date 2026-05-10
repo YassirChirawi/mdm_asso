@@ -14,4 +14,5 @@ export const chapters = [
   { id: 13, title: "Double culture", desc: "Compétences bilingues, réseautage franco-marocain" },
   { id: 14, title: "Retours d'expérience", desc: "8 témoignages d'étudiants marocains" },
   { id: 15, title: "Conclusion", desc: "La fin du guide, le début de ton aventure" },
+  { id: 16, title: "Annexes Pratiques", desc: "Modèles de lettres et mails indispensables" },
 ];

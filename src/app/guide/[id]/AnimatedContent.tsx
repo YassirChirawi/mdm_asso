@@ -3,7 +3,8 @@
 import { motion, Variants, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight, BookOpen, ChevronDown, ListTree, Info, AlertTriangle, Lightbulb, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
+import LetterModel from "@/components/LetterModel";
 
 interface Props {
   chapterId: string;
@@ -332,13 +333,49 @@ export default function AnimatedContent({ chapterId, title, desc, paragraphs, pr
             animate="show"
             className="font-sans"
           >
-            {paragraphs.length > 0 ? (
-              paragraphs.map((p, i) => renderParagraph(p, i, i === 0))
-            ) : (
-              <motion.div variants={itemVariants} className="bg-white rounded-[3rem] p-20 border border-gray-100 text-center shadow-2xl shadow-gray-200/40">
-                <Spinner />
-              </motion.div>
-            )}
+            {(() => {
+              if (paragraphs.length === 0) {
+                return (
+                  <motion.div variants={itemVariants} className="bg-white rounded-[3rem] p-20 border border-gray-100 text-center shadow-2xl shadow-gray-200/40">
+                    <Spinner />
+                  </motion.div>
+                );
+              }
+
+              const renderedElements: ReactNode[] = [];
+              const usedIndices = new Set<number>();
+
+              for (let i = 0; i < paragraphs.length; i++) {
+                if (usedIndices.has(i)) continue;
+
+                const p = paragraphs[i];
+                const nextP = paragraphs[i + 1];
+
+                // Detect if current paragraph is a title and next one is a letter
+                const isTitle = p.length < 150 && !p.endsWith('.') && !p.endsWith(':') && p.search(/^[0-9]+(\.[0-9]+)*\s/) !== -1;
+                const isLetter = nextP && (nextP.includes("Objet :") || nextP.includes("Madame, Monsieur,") || nextP.includes("Bonjour,"));
+
+                if (isTitle && isLetter) {
+                  renderedElements.push(
+                    <LetterModel 
+                      key={i} 
+                      title={p.replace(/^[0-9]+(\.[0-9]+)*\s/, '')} 
+                      content={nextP} 
+                    />
+                  );
+                  usedIndices.add(i);
+                  usedIndices.add(i + 1);
+                } else if (p.includes("Objet :") && p.split('\n').length > 3) {
+                   // Letter without title or title already consumed
+                   renderedElements.push(<LetterModel key={i} content={p} />);
+                   usedIndices.add(i);
+                } else {
+                  renderedElements.push(renderParagraph(p, i, i === 0));
+                  usedIndices.add(i);
+                }
+              }
+              return renderedElements;
+            })()}
           </motion.div>
         </article>
 

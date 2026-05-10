@@ -1,10 +1,63 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, Users, Heart, Sparkles, Globe, ShieldCheck, Trophy, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ArrowRight, BookOpen, Users, Heart, Sparkles, Globe, ShieldCheck, Trophy, ExternalLink, Quote } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const heroTestimonials = [
+  {
+    quote: "Si je ne fais pas les choses moi-même, personne ne le fera à ma place.",
+    author: "Yassmine",
+    context: "22 ans, Montpellier",
+  },
+  {
+    quote: "Khouya, khti, tu vas forcément devoir affronter des galères. C'est comme ça que tu sauras qui tu es.",
+    author: "Hamza",
+    context: "25 ans, Asnières-sur-Seine",
+  },
+  {
+    quote: "Les bons contacts peuvent vraiment faire la différence.",
+    author: "Mohamed",
+    context: "25 ans, Dunkerque",
+  },
+  {
+    quote: "Prends soin de ta tête et fais gaffe à qui tu fréquentes. Ça paye toujours.",
+    author: "Hassan",
+    context: "26 ans, Créteil",
+  },
+  {
+    quote: "Fais très attention à tes fréquentations. Un mauvais entourage peut te tirer vers le bas.",
+    author: "Said",
+    context: "25 ans, Paris",
+  },
+  {
+    quote: "Soyez confiants, même lorsque l'avenir semble incertain.",
+    author: "Youssef",
+    context: "25 ans, Nancy → Berlin → Paris",
+  },
+  {
+    quote: "N'oubliez jamais l'objectif premier qui vous a fait venir jusqu'ici.",
+    author: "Mohammed Amine",
+    context: "27 ans, CDI – Passeport talent",
+  },
+  {
+    quote: "Ne restez pas seuls. Se faire des amis, c'est le meilleur raccourci pour une intégration réussie.",
+    author: "Kimo",
+    context: "Créteil – 1ère année réussie",
+  },
+];
 
 export default function Home() {
+  const [quoteIndex, setQuoteIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setQuoteIndex((prev) => (prev + 1) % heroTestimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -70,6 +123,69 @@ export default function Home() {
               <Heart className="w-6 h-6 mr-3 group-hover:scale-125 transition-transform" />
               Soutenir l'Association
             </a>
+          </motion.div>
+
+          {/* Rotating Testimonials Ticker */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-16 max-w-2xl mx-auto"
+          >
+            <div className="relative min-h-[100px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={quoteIndex}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.45, ease: "easeInOut" }}
+                  className="bg-white/[0.06] backdrop-blur-xl rounded-2xl px-8 py-6 border border-white/10"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="shrink-0 mt-0.5">
+                      <div className="w-9 h-9 rounded-xl bg-brand-red/20 flex items-center justify-center">
+                        <Quote className="w-4 h-4 text-brand-red" />
+                      </div>
+                    </div>
+                    <div className="flex-1 text-left min-w-0">
+                      <p className="text-white/90 font-medium text-base md:text-lg leading-relaxed italic mb-3">
+                        &ldquo;{heroTestimonials[quoteIndex].quote}&rdquo;
+                      </p>
+                      <div className="flex items-center justify-between gap-3 flex-wrap">
+                        <div className="flex items-center gap-2">
+                          <span className="font-black text-brand-green text-sm">{heroTestimonials[quoteIndex].author}</span>
+                          <span className="text-white/30">·</span>
+                          <span className="text-white/40 text-xs font-medium">{heroTestimonials[quoteIndex].context}</span>
+                        </div>
+                        <Link
+                          href="/guide/14"
+                          className="shrink-0 text-[10px] font-bold uppercase tracking-wider text-brand-red hover:text-white bg-brand-red/10 hover:bg-brand-red/20 px-3 py-1.5 rounded-full transition-colors"
+                        >
+                          Lire son histoire →
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Progress dots */}
+            <div className="flex justify-center gap-1.5 mt-5">
+              {heroTestimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setQuoteIndex(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
+                    idx === quoteIndex
+                      ? "w-8 bg-brand-green shadow-[0_0_8px_rgba(29,158,117,0.5)]"
+                      : "w-1.5 bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Témoignage ${idx + 1}`}
+                />
+              ))}
+            </div>
           </motion.div>
         </div>
 
