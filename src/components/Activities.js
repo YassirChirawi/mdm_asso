@@ -50,7 +50,7 @@ export default function Activities() {
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-[3rem] blur-2xl transform translate-x-6 translate-y-6 -z-10 hidden lg:block"></div>
                             <img
                                 src="/images/solidarity.png"
-                                alt="Solidarity"
+                                alt="Solidarité entre étudiants marocains en France – Association MDM"
                                 className="rounded-[3rem] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.2)] relative z-10 w-full object-cover h-[700px] border border-white"
                             />
                             <div className="absolute -bottom-10 -left-10 bg-white/95 backdrop-blur-xl border border-gray-100 p-8 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] z-20 hidden md:block max-w-[20rem] hover:scale-105 transition-transform duration-500">

@@ -18,6 +18,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: `${chapter.title} | Guide Marocains en France`,
     description: chapter.desc,
+    alternates: {
+      canonical: `https://www.marocainsenfrance.fr/guide/${chapterId}`,
+    },
   };
 }
 

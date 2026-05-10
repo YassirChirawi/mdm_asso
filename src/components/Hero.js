@@ -116,7 +116,7 @@ export default function Hero() {
                         <div className="aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-gray-100 relative bg-gray-50">
                             <img
                                 src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2000&auto=format&fit=crop"
-                                alt="Étudiants"
+                                alt="Étudiants marocains en France – Réussir son expatriation et ses études"
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent flex items-end p-6 md:p-10">

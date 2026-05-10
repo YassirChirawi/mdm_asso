@@ -251,7 +251,7 @@ export default function Home() {
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-20 h-20 bg-white rounded-2xl p-2 shadow-2xl rotate-3 group-hover:rotate-0 transition-transform">
-                    <img src="/ballomania.png" alt="Ballomania Logo" className="w-full h-full object-contain" />
+                    <img src="/ballomania.png" alt="Ballomania FC – Le pôle sportif de l'association des étudiants marocains" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-heading text-3xl font-black">Ballomania FC</h3>
@@ -284,7 +284,7 @@ export default function Home() {
               <div className="relative">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-20 h-20 bg-[#fafafa] rounded-2xl p-4 border border-gray-100 group-hover:scale-105 transition-transform">
-                    <img src="/citiz.png" alt="Citiz Logo" className="w-full h-full object-contain" />
+                    <img src="/citiz.png" alt="Citiz Coliving – Partenaire logement pour les étudiants marocains en France" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-heading text-3xl font-black text-brand-dark">Coliving Citiz</h3>

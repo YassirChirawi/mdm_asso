@@ -9,31 +9,48 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   title: {
-    default: "Marocains en France – Main dans la main",
+    default: "Marocains en France – Guide & Accompagnement Étudiant n°1",
     template: "%s | Marocains en France"
   },
-  description: "La communauté et l'accompagnement n°1 des étudiants marocains en France. Logement, administration, vie sociale et réussite scolaire.",
-  keywords: ["étudiants marocains", "étude en France", "Marocains en France", "Visa France", "Logement étudiant France", "Association marocaine"],
+  description: "La plateforme de référence pour les étudiants marocains en France : guide administratif, aide au logement, Campus France, bourses et vie associative. Réussissez votre installation avec l'Association MDM.",
+  keywords: [
+    "étudiants marocains en France", 
+    "étudier en France depuis le Maroc", 
+    "Campus France Maroc", 
+    "Visa étudiant France Maroc", 
+    "Logement étudiant France", 
+    "Association Marocains en France",
+    "Démarches administratives France étudiant",
+    "Bourse étude France Maroc",
+    "Aide au logement CAF étudiant étranger",
+    "Renouvellement titre de séjour étudiant",
+    "Conseils expatriation France Maroc",
+    "Communauté MDM",
+    "Réussir ses études en France"
+  ],
   authors: [{ name: "Association MDM" }],
   creator: "Association MDM",
+  alternates: {
+    canonical: "https://www.marocainsenfrance.fr",
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",
     url: "https://www.marocainsenfrance.fr",
     siteName: "Marocains en France",
-    title: "Marocains en France – Accompagnement des étudiants",
-    description: "Guide complet et communauté pour réussir son expatriation étudiante en France.",
+    title: "Marocains en France – Le Guide Complet pour Étudiants",
+    description: "Tout ce qu'un étudiant marocain doit savoir pour s'installer en France : Visa, CAF, Logement, Jobs et Intégration.",
     images: [{
       url: "/logo.png",
-      width: 800,
-      height: 600,
-      alt: "MDM Association Logo"
+      width: 1200,
+      height: 630,
+      alt: "Association Marocains en France - Main dans la main"
     }]
   },
   twitter: {
     card: "summary_large_image",
     title: "Marocains en France",
-    description: "L'accompagnement n°1 des étudiants marocains en France.",
+    description: "Le guide n°1 pour les étudiants marocains s'installant en France.",
     images: ["/logo.png"],
   },
   metadataBase: new URL("https://www.marocainsenfrance.fr"),
