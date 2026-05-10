@@ -17,7 +17,7 @@ export default function MentionsLegales() {
           <li><strong>Nom de l'association :</strong> Marocains en France – Main dans la main</li>
           <li><strong>SIRET :</strong> 990831778</li>
           <li><strong>Date de création :</strong> Juillet 2025</li>
-          <li><strong>Fondateur :</strong> Yassir Chirawi</li>
+          <li><strong>Fondateur :</strong> Association MDM</li>
           <li><strong>Email :</strong> contact@marocainsenfrance.fr</li>
           <li><strong>Site internet :</strong> marocainsenfrance.fr</li>
         </ul>

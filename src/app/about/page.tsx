@@ -38,7 +38,7 @@ export default function About() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-500 leading-relaxed font-medium">
-            Fondée par Yassir Chirawi en juillet 2025, notre association est née d'un constat simple : 
+            Fondée en juillet 2025, notre association est née d'un constat simple : 
             aucun étudiant ne devrait affronter seul l'expatriation.
           </p>
         </motion.div>
@@ -99,11 +99,11 @@ export default function About() {
                 <div className="relative mb-6">
                   <div className="absolute inset-0 bg-gradient-to-tr from-brand-green to-brand-red rounded-[2.5rem] blur-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
                   <div className="w-32 h-32 bg-brand-dark rounded-[2.5rem] border-2 border-white/20 flex items-center justify-center text-4xl font-black text-white relative z-10">
-                    YC
+                    MDM
                   </div>
                 </div>
-                <h3 className="font-heading text-2xl font-black text-white mb-2">Yassir Chirawi</h3>
-                <p className="text-brand-green font-black uppercase tracking-[0.2em] text-xs px-4 py-1.5 bg-brand-green/10 rounded-full">Président Fondateur</p>
+                <h3 className="font-heading text-2xl font-black text-white mb-2">Le Fondateur</h3>
+                <p className="text-brand-green font-black uppercase tracking-[0.2em] text-xs px-4 py-1.5 bg-brand-green/10 rounded-full">Président</p>
               </motion.div>
 
               {/* Placeholder Member 1 */}

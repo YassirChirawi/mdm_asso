@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   description: "La communauté et l'accompagnement n°1 des étudiants marocains en France. Logement, administration, vie sociale et réussite scolaire.",
   keywords: ["étudiants marocains", "étude en France", "Marocains en France", "Visa France", "Logement étudiant France", "Association marocaine"],
-  authors: [{ name: "Yassir Chirawi" }],
+  authors: [{ name: "Association MDM" }],
   creator: "Association MDM",
   openGraph: {
     type: "website",
