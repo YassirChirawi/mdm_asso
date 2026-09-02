@@ -281,66 +281,71 @@ export default function AdminDashboard() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Sidebar / Header */}
-            <nav className="bg-brand-dark text-white p-6 shadow-xl sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto flex justify-between items-center">
-                    <div className="flex items-center gap-6">
-                        <a href="/" className="p-2 hover:bg-white/10 rounded-full transition-all">
+            <nav className="bg-brand-dark text-white px-4 sm:px-6 pt-5 pb-4 shadow-xl sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto flex justify-between items-center gap-4">
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <a href="/" className="p-2 hover:bg-white/10 rounded-full transition-all shrink-0">
                             <ArrowLeft />
                         </a>
-                        <h1 className="text-xl font-black italic tracking-tighter">
+                        <h1 className="text-lg sm:text-xl font-black italic tracking-tighter shrink-0">
                             MDM <span className="text-brand-green">Admin</span>
                         </h1>
-                        <div className="hidden md:flex items-center gap-2 ml-8 bg-white/5 p-1 rounded-2xl">
-                            {[
-                                { id: 'stats', label: 'DASHBOARD' },
-                                { id: 'infos', label: "DEMANDES D'INFOS" },
-                                { id: 'mentorat', label: 'MENTORAT' },
-                                { id: 'echanges', label: 'ÉCHANGES' },
-                                { id: 'benevoles', label: 'BÉNÉVOLES' },
-                                { id: 'adhesions', label: 'ADHÉRENTS' },
-                                { id: 'donations', label: 'DONS' },
-                                { id: 'documents', label: 'DOCUMENTS' },
-                            ].map(tab => (
-                                <button key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`px-5 py-2 rounded-xl text-sm font-black tracking-tighter transition-all ${
-                                        activeTab === tab.id ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'
-                                    }`}>
-                                    {tab.label}
-                                    {tab.id === 'benevoles' && benevoles.length > 0 && (
-                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{benevoles.length}</span>
-                                    )}
-                                    {tab.id === 'adhesions' && adhesions.length > 0 && (
-                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{adhesions.length}</span>
-                                    )}
-                                    {tab.id === 'infos' && messages.length > 0 && (
-                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{messages.length}</span>
-                                    )}
-                                    {tab.id === 'mentorat' && benevoles.filter(estMentor).length > 0 && (
-                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{benevoles.filter(estMentor).length}</span>
-                                    )}
-                                    {tab.id === 'echanges' && comments.filter(c => !c.approved).length > 0 && (
-                                        <span className="ml-2 bg-brand-red text-white text-[10px] px-1.5 py-0.5 rounded-full">{comments.filter(c => !c.approved).length}</span>
-                                    )}
-                                </button>
-                            ))}
-                        </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <button 
+                    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+                        <button
                             onClick={fetchData}
                             className="p-2 hover:bg-white/10 rounded-xl transition-all"
                             title="Rafraîchir les données"
                         >
                             <RefreshCcw size={18} />
                         </button>
-                        <button 
+                        <button
                             onClick={() => signOut({ callbackUrl: '/' })}
-                            className="flex items-center gap-2 bg-white/10 hover:bg-brand-red text-white px-4 py-2 rounded-xl transition-all font-bold"
+                            className="flex items-center gap-2 bg-white/10 hover:bg-brand-red text-white px-3 sm:px-4 py-2 rounded-xl transition-all font-bold"
                         >
-                            <LogOut size={18} /> Déconnexion
+                            <LogOut size={18} />
+                            <span className="hidden sm:inline">Déconnexion</span>
                         </button>
                     </div>
+                </div>
+
+                {/* Les onglets ont leur propre ligne et defilent : a huit, ils ne
+                    tenaient plus dans l'en-tete, et « hidden md:flex » les faisait
+                    disparaitre entierement sur mobile. */}
+                <div className="max-w-7xl mx-auto mt-4 flex items-center gap-2 bg-white/5 p-1 rounded-2xl overflow-x-auto">
+                    {[
+                        { id: 'stats', label: 'DASHBOARD' },
+                        { id: 'infos', label: "DEMANDES D'INFOS" },
+                        { id: 'mentorat', label: 'MENTORAT' },
+                        { id: 'echanges', label: 'ÉCHANGES' },
+                        { id: 'benevoles', label: 'BÉNÉVOLES' },
+                        { id: 'adhesions', label: 'ADHÉRENTS' },
+                        { id: 'donations', label: 'DONS' },
+                        { id: 'documents', label: 'DOCUMENTS' },
+                    ].map(tab => (
+                        <button key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-black tracking-tighter transition-all ${
+                                activeTab === tab.id ? 'bg-brand-green text-brand-dark' : 'hover:bg-white/10'
+                            }`}>
+                            {tab.label}
+                            {tab.id === 'benevoles' && benevoles.length > 0 && (
+                                <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{benevoles.length}</span>
+                            )}
+                            {tab.id === 'adhesions' && adhesions.length > 0 && (
+                                <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{adhesions.length}</span>
+                            )}
+                            {tab.id === 'infos' && messages.length > 0 && (
+                                <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{messages.length}</span>
+                            )}
+                            {tab.id === 'mentorat' && benevoles.filter(estMentor).length > 0 && (
+                                <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{benevoles.filter(estMentor).length}</span>
+                            )}
+                            {tab.id === 'echanges' && comments.filter(c => !c.approved).length > 0 && (
+                                <span className="ml-2 bg-brand-red text-white text-[10px] px-1.5 py-0.5 rounded-full">{comments.filter(c => !c.approved).length}</span>
+                            )}
+                        </button>
+                    ))}
                 </div>
             </nav>
 
