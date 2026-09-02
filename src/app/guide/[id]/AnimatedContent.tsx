@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
 import LetterModel from "@/components/LetterModel";
 import ChapterComments from "@/components/ChapterComments";
+import ChapterProgress from "@/components/ChapterProgress";
 import { Block, CalloutVariant, buildToc, readingTime, DERNIERE_VERIFICATION } from "@/data/blocks";
 
 interface Props {
@@ -338,6 +339,8 @@ export default function AnimatedContent({
               animation d'entrée en cascade laissait des écrans entiers vides. */}
           <div className="font-sans">{blocks.map(renderBlock)}</div>
         </article>
+
+        <ChapterProgress chapterId={chapterId} />
 
         <ChapterComments chapterId={chapterId} />
 

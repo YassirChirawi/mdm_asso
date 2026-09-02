@@ -772,7 +772,7 @@ export default function AdminDashboard() {
                                                     <Clock size={16} />
                                                 </button>
                                             )}
-                                            <a href={`mailto:${a.email}?subject=Votre adhésion MDM : paiement 15€&body=Bonjour ${a.prenom},%0D%0A%0D%0ANous avons bien reçu votre demande d'adhésion. Voici le lien de paiement (15€) :%0D%0A[INSÉRER LIEN STRIPE]%0D%0A%0D%0ACordialement,%0D%0AL'équipe MDM`}
+                                            <a href={`mailto:${a.email}?subject=Votre adhésion MDM : paiement 15€&body=Bonjour ${a.prenom},%0D%0A%0D%0ANous avons bien reçu votre demande d'adhésion. Voici le lien de paiement (15€) :%0D%0Ahttps://buy.stripe.com/eVqdR22cP1ne9T7gaFb3q01%0D%0A%0D%0ACordialement,%0D%0AL'équipe MDM`}
                                                 className="p-2.5 bg-brand-red/10 text-brand-red rounded-xl hover:bg-brand-red hover:text-white transition-all" title="Envoyer le lien de paiement">
                                                 <Mail size={16} />
                                             </a>

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, ArrowRight, GraduationCap, Clock } from "lucide-react";
+import { BookOpen, ArrowRight, GraduationCap, Clock, CheckCircle2, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
+import { useGuideProgress } from "@/lib/guideProgress";
 
 interface ChapterSummary {
   id: number;
@@ -13,6 +14,16 @@ interface ChapterSummary {
 
 export default function GuideIndexClient({ chapters }: { chapters: ChapterSummary[] }) {
   const totalMinutes = chapters.reduce((total, chapter) => total + chapter.minutes, 0);
+  const { progress, reset } = useGuideProgress();
+
+  const lus = chapters.filter((c) => progress[c.id.toString()]).length;
+  const pourcentage = chapters.length ? Math.round((lus / chapters.length) * 100) : 0;
+  // On reprend au premier chapitre non lu, pas au dernier ouvert : c'est ce que
+  // le lecteur cherche quand il revient sur l'index.
+  const aReprendre = chapters.find((c) => !progress[c.id.toString()]);
+  const minutesRestantes = chapters
+    .filter((c) => !progress[c.id.toString()])
+    .reduce((total, c) => total + c.minutes, 0);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,6 +61,59 @@ export default function GuideIndexClient({ chapters }: { chapters: ChapterSummar
           )}
         </motion.div>
 
+        {lus > 0 && (
+          <div className="max-w-3xl mx-auto mb-14 bg-white border border-gray-100 rounded-3xl shadow-sm p-6 md:p-8">
+            <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+              <span className="font-heading font-black text-brand-dark">
+                Ta progression : {lus} chapitre{lus > 1 ? "s" : ""} sur {chapters.length}
+              </span>
+              <span className="font-heading font-black text-brand-green">{pourcentage} %</span>
+            </div>
+            <div className="h-2.5 rounded-full bg-gray-100 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-brand-green transition-all duration-700"
+                style={{ width: `${pourcentage}%` }}
+              />
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              {aReprendre ? (
+                <>
+                  <Link
+                    href={`/guide/${aReprendre.id}`}
+                    className="inline-flex items-center gap-2 bg-brand-green text-white font-black text-xs uppercase tracking-widest px-6 py-3 rounded-2xl hover:bg-brand-dark transition-colors"
+                  >
+                    Reprendre au chapitre {aReprendre.id}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  {minutesRestantes > 0 && (
+                    <span className="text-sm text-gray-400 font-medium">
+                      Il te reste environ {minutesRestantes} min de lecture.
+                    </span>
+                  )}
+                </>
+              ) : (
+                <span className="inline-flex items-center gap-2 text-brand-green font-black text-sm">
+                  <CheckCircle2 className="w-5 h-5" />
+                  Guide terminé. Bravo.
+                </span>
+              )}
+              <button
+                onClick={reset}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-400 hover:text-brand-red transition-colors ml-auto"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                Réinitialiser
+              </button>
+            </div>
+
+            <p className="mt-4 text-xs text-gray-400 leading-relaxed">
+              Ta progression est enregistrée dans ce navigateur. Elle ne quitte pas ton
+              appareil et ne nécessite aucun compte.
+            </p>
+          </div>
+        )}
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -69,9 +133,15 @@ export default function GuideIndexClient({ chapters }: { chapters: ChapterSummar
                     <div className="font-heading text-4xl md:text-5xl font-black text-gray-100 group-hover:text-brand-green/10 transition-colors">
                       {chapter.id.toString().padStart(2, "0")}
                     </div>
-                    <div className="bg-gray-50 text-gray-400 p-3 rounded-2xl group-hover:bg-brand-green group-hover:text-white transition-all transform group-hover:rotate-12">
-                      <BookOpen className="w-5 h-5 md:w-6 md:h-6" />
-                    </div>
+                    {progress[chapter.id.toString()] ? (
+                      <div className="bg-brand-green/10 text-brand-green p-3 rounded-2xl" title="Chapitre lu">
+                        <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6" />
+                      </div>
+                    ) : (
+                      <div className="bg-gray-50 text-gray-400 p-3 rounded-2xl group-hover:bg-brand-green group-hover:text-white transition-all transform group-hover:rotate-12">
+                        <BookOpen className="w-5 h-5 md:w-6 md:h-6" />
+                      </div>
+                    )}
                   </div>
 
                   <h2 className="font-heading text-xl md:text-2xl font-black text-brand-dark mb-3 leading-tight group-hover:text-brand-green transition-colors break-words">
@@ -89,7 +159,7 @@ export default function GuideIndexClient({ chapters }: { chapters: ChapterSummar
                       </div>
                     )}
                     <div className="flex items-center text-xs md:text-sm font-black uppercase tracking-widest text-brand-dark group-hover:text-brand-green transition-all">
-                      Commencer la lecture
+                      {progress[chapter.id.toString()] ? "Relire ce chapitre" : "Commencer la lecture"}
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                     </div>
                   </div>
