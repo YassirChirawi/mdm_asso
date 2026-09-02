@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "guide:extract": "python scripts/extract_guide.py",
+    "guide:check": "python scripts/check_guide.py"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

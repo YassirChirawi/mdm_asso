@@ -11,6 +11,15 @@ export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
+  // Le menu mobile couvre tout l'écran : sans ce verrou, la page continuait
+  // de défiler derrière lui.
+  useEffect(() => {
+    if (!isOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [isOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -45,7 +54,7 @@ export default function Navbar() {
             <div className="relative w-14 h-14 md:w-16 md:h-16 overflow-hidden rounded-2xl bg-white shadow-lg flex items-center justify-center p-2 border border-gray-100 group-hover:rotate-6 transition-all duration-500">
               <img src="/logo.png" alt="MDM Association Logo" className="w-full h-full object-contain" />
             </div>
-            <div className="flex flex-col hidden sm:flex">
+            <div className="hidden sm:flex sm:flex-col">
               <span className={`font-heading text-[10px] uppercase font-black tracking-[0.3em] opacity-60 ${navTextColor}`}>Association</span>
               <span className={`font-heading text-lg font-black tracking-tighter ${navTextColor}`}>
                 Marocains en France
@@ -85,7 +94,9 @@ export default function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`md:hidden p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 transition-all ${navTextColor}`}
-            aria-label="Menu principal"
+            aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
@@ -99,7 +110,8 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden fixed inset-0 top-[112px] bg-white z-[90] px-4 py-12"
+            id="mobile-menu"
+            className="md:hidden fixed inset-0 top-24 bg-white z-[90] px-4 py-12 overflow-y-auto"
           >
             <div className="flex flex-col gap-8 text-center">
               {navLinks.map((link) => (

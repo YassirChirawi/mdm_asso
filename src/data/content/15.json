@@ -1,4 +1,33 @@
 {
-  "title": "15 CONCLUSION",
-  "content": "Nous voilà à la fin de ce guide. Si tu as lu jusqu'ici, tu as maintenant entre les mains bien plus qu'une simple collection de conseils : tu disposes d'une carte détaillée de l'aventure qui t'attend. Une carte dessinée avec les réussites et les galères de ceux qui ont marché sur ce chemin avant toi. Mais une carte, aussi précise soit-elle, ne remplacera jamais le voyageur. Le moment est venu pour toi de prendre la route.\n\nAu fil de ces pages, j'espère que tu as compris une chose essentielle : ce guide n'a jamais eu pour seul but de t'expliquer comment remplir un formulaire de la CAF ou obtenir un visa. Son véritable objectif a toujours été de te transmettre une conviction, celle que j'ai acquise durant mes six années en France : chaque obstacle est une opportunité de grandir. Les galères de logement de Hamza, l'indépendance soudaine découverte par Yassmine, ou la persévérance administrative de Youssef racontent tous la même histoire : tu es plus fort et plus débrouillard que tu ne le penses.\n\nCe guide a pour but de te donner les bons réflexes et de te mettre en garde sur ce qui t'attend. Son défi n'est pas de détailler chaque article de loi – cette information existe – mais de te présenter l'intégralité des démarches dans le bon ordre. Sa vraie richesse, c'est de mettre en lumière les cas particuliers que tu rencontreras selon ton parcours, car les démarches d'un alternant ne sont pas celles d'un boursier. Cependant, les parcours diffèrent et chacun a son propre rythme. Même avec une centaine de retours d'expérience, il y aura toujours un nouveau cas, une situation inédite. C'est pour cette raison que ce guide n'est que le point de départ d'un projet encore plus grand : une plateforme d'entraide permettant un mentorat et un suivi personnalisé pour chacun d'entre vous.\n\nTon avenir n'est pas encore écrit. Le diplôme que tu obtiendras ne sera qu'un morceau de papier. Ta vraie richesse, celle que personne ne pourra jamais t'enlever, sera la personne que tu seras devenu(e) : autonome, résilient(e), ouvert(e) sur deux cultures, capable de t'adapter à n'importe quelle situation. Que tu choisisses de construire ta carrière en France, de rentrer au Maroc armé(e) de nouvelles compétences, ou de partir explorer un autre coin du monde, tu auras déjà gagné l'essentiel.\n\nCe guide était une main tendue vers toi. Maintenant, c'est à ton tour de faire vivre cet esprit d'entraide. Rejoins-nous sur la plateforme \"Main dans la main\", partage ton expérience, pose tes questions et, un jour, réponds à celles des nouveaux arrivants. Aujourd'hui, tu es celui qui reçoit de l'aide. Demain, tu seras celui qui guidera les suivants. Le voyage ne s'arrête pas à la dernière page de ce guide ; il se transmet.\n\nJe te souhaite le meilleur pour cette magnifique aventure qui est la tienne.\n\nBonne route."
+  "title": "Conclusion",
+  "blocks": [
+    {
+      "type": "p",
+      "text": "Nous voilà à la fin de ce guide. Si tu as lu jusqu'ici, tu as maintenant entre les mains bien plus qu'une simple collection de conseils : tu disposes d'une carte détaillée de l'aventure qui t'attend. Une carte dessinée avec les réussites et les galères de ceux qui ont marché sur ce chemin avant toi. Mais une carte, aussi précise soit-elle, ne remplacera jamais le voyageur. Le moment est venu pour toi de prendre la route."
+    },
+    {
+      "type": "p",
+      "text": "Au fil de ces pages, j'espère que tu as compris une chose essentielle : ce guide n'a jamais eu pour seul but de t'expliquer comment remplir un formulaire de la CAF ou obtenir un visa. Son véritable objectif a toujours été de te transmettre une conviction, celle que j'ai acquise durant mes six années en France : chaque obstacle est une opportunité de grandir. Les galères de logement de Hamza, l'indépendance soudaine découverte par Yassmine, ou la persévérance administrative de Youssef racontent tous la même histoire : tu es plus fort et plus débrouillard que tu ne le penses."
+    },
+    {
+      "type": "p",
+      "text": "Ce guide a pour but de te donner les bons réflexes et de te mettre en garde sur ce qui t'attend. Son défi n'est pas de détailler chaque article de loi – cette information existe – mais de te présenter l'intégralité des démarches dans le bon ordre. Sa vraie richesse, c'est de mettre en lumière les cas particuliers que tu rencontreras selon ton parcours, car les démarches d'un alternant ne sont pas celles d'un boursier. Cependant, les parcours diffèrent et chacun a son propre rythme. Même avec une centaine de retours d'expérience, il y aura toujours un nouveau cas, une situation inédite. C'est pour cette raison que ce guide n'est que le point de départ d'un projet encore plus grand : une plateforme d'entraide permettant un mentorat et un suivi personnalisé pour chacun d'entre vous."
+    },
+    {
+      "type": "p",
+      "text": "Ton avenir n'est pas encore écrit. Le diplôme que tu obtiendras ne sera qu'un morceau de papier. Ta vraie richesse, celle que personne ne pourra jamais t'enlever, sera la personne que tu seras devenu(e) : autonome, résilient(e), ouvert(e) sur deux cultures, capable de t'adapter à n'importe quelle situation. Que tu choisisses de construire ta carrière en France, de rentrer au Maroc armé(e) de nouvelles compétences, ou de partir explorer un autre coin du monde, tu auras déjà gagné l'essentiel."
+    },
+    {
+      "type": "p",
+      "text": "Ce guide était une main tendue vers toi. Maintenant, c'est à ton tour de faire vivre cet esprit d'entraide. Rejoins-nous sur la plateforme \"Main dans la main\", partage ton expérience, pose tes questions et, un jour, réponds à celles des nouveaux arrivants. Aujourd'hui, tu es celui qui reçoit de l'aide. Demain, tu seras celui qui guidera les suivants. Le voyage ne s'arrête pas à la dernière page de ce guide ; il se transmet."
+    },
+    {
+      "type": "p",
+      "text": "Je te souhaite le meilleur pour cette magnifique aventure qui est la tienne."
+    },
+    {
+      "type": "p",
+      "text": "Bonne route."
+    }
+  ]
 }

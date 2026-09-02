@@ -435,7 +435,7 @@ export default function RejoindreClient() {
       </section>
 
       {/* ── ADHÉSION ── */}
-      <section id="adhesion" className="py-20 bg-white">
+      <section id="adhesion" className="scroll-mt-24 md:scroll-mt-28 py-20 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red bg-brand-red/10 px-4 py-1.5 rounded-full inline-block mb-4">
@@ -490,7 +490,7 @@ export default function RejoindreClient() {
       </section>
 
 
-      <section id="benevole" className="py-20 max-w-5xl mx-auto px-6">
+      <section id="benevole" className="scroll-mt-24 md:scroll-mt-28 py-20 max-w-5xl mx-auto px-6">
         <motion.div {...fadeUp()} className="text-center mb-14">
           <span className="text-xs font-bold uppercase tracking-widest text-violet-600 bg-violet-50 px-4 py-1.5 rounded-full inline-block mb-4">
             100% bénévole · À votre rythme
@@ -539,7 +539,7 @@ export default function RejoindreClient() {
         </motion.div>
 
         {/* ── FORMULAIRE BÉNÉVOLE ── */}
-        <motion.div {...fadeUp(0.1)} id="formulaire-benevole">
+        <motion.div {...fadeUp(0.1)} id="formulaire-benevole" className="scroll-mt-24 md:scroll-mt-28">
           <div className="text-center mb-10">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
               style={{ background: "#EDE9FE", color: "#7C3AED" }}>

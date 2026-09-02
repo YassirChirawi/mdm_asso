@@ -75,7 +75,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/5 text-white/90 backdrop-blur-xl border border-white/10 mb-10 mx-auto shadow-2xl"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-brand-green animate-pulse shadow-[0_0_10px_#1D9E75]"></span>
-            <span className="text-sm font-bold tracking-wide uppercase">Rentrée 2025 – Plus de 150 guides distribués</span>
+            <span className="text-sm font-bold tracking-wide uppercase">Rentrée 2026 – Guide et checklists 100 % gratuits</span>
           </motion.div>
           
           <motion.h1 

@@ -1,4 +1,515 @@
 {
-  "title": "8 SANTÉ, STRESS ET COUPS DURS",
-  "content": "8.1 Quand tu tombes malade ........................................................................................................... 101\n\n8.1.1 Consulter un médecin ............................................................................................................ 101\n\n8.2 La santé mentale en tant qu'étudiant étranger ............................................................................ 104\n\n8.3 Demander une bourse ou des aides ............................................................................................ 105\n\n8.3.1 Les bourses du CROUS .......................................................................................................... 105\n\n8.3.2 Aides locales et aides des collectivités territoriales ................................................................. 106\n\n8.3.3 Aides de fondations et associations ........................................................................................ 106\n\n8.4 Gérer les difficultés financières : aides et soutiens disponibles.................................................... 106\n\n8.5 Quand les fins de mois deviennent difficiles ................................................................................ 107\n\n8.6 Les aides financières principales ................................................................................................ 107\n\n8.6.1 1. Bourses sur critères sociaux (CROUS) ................................................................................. 107\n\n8.6.2 2. Aide au logement (APL, ALS) – CAF ...................................................................................... 107\n\n8.6.3 3. Aide Visale (caution gratuite) ............................................................................................... 107\n\n8.6.4 4. Fonds de solidarité et d'urgence (FSE) ................................................................................. 108\n\n8.7 Aides sociales et accompagnements .......................................................................................... 108\n\n8.7.1 1. Assistants sociaux universitaires ......................................................................................... 108\n\n8.7.2 2. Associations étudiantes et caritatives ................................................................................. 108\n\n8.7.3 Solutions de financement complémentaires ........................................................................... 108\n\n8.7.4 Conseils pratiques ................................................................................................................. 109\n\n8.8 L'Essentiel pour Prendre Soin de Soi ........................................................................................... 109"
+  "title": "Sante & coups durs",
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "QUAND TU TOMBES MALADE"
+    },
+    {
+      "type": "p",
+      "text": "Même si on n’aime pas y penser, il est important de savoir quoi faire quand on est malade en France, surtout en tant qu’étudiant étranger. Le système de santé français est de qualité, mais il faut en connaître les codes et les démarches."
+    },
+    {
+      "type": "h3",
+      "text": "Consulter un médecin"
+    },
+    {
+      "type": "h3",
+      "text": "Trouver un médecin :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Utilise Doctolib pour prendre rendez-vous en ligne (généralistes, spécialistes, téléconsultations).",
+        "Autres plateformes : Maiia, Keldoc, Livi, Qare."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Consultations en ligne :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Les consultations médicales en visioconférence sont autorisées et remboursées comme une consultation en cabinet.",
+        "Très utiles si tu es malade, fatigué ou sans médecin à proximité.",
+        "Tu peux recevoir une ordonnance numérique envoyée directement sur ton espace Mon Espace Santé ou par email."
+      ]
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Assure-toi que le médecin est conventionné (secteur 1 ou 2) pour être bien remboursé."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Le médecin traitant :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Tu dois déclarer un médecin traitant pour bénéficier d’un remboursement optimal.",
+        "Cela peut se faire :",
+        "En ligne sur ameli.fr",
+        "Ou via un formulaire papier rempli avec le médecin lors de la première consultation.",
+        "Sans médecin traitant, tu es moins remboursé (30 % seulement)."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Orientation vers un spécialiste :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "En général, tu dois passer d’abord par ton médecin traitant pour être orienté vers un spécialiste (dermatologue, cardiologue, etc.).",
+        "Il te remettra une lettre d’orientation, nécessaire pour un bon remboursement.",
+        "Exceptions : ophtalmologue, gynécologue, psychiatre (moins de 26 ans)."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Pharmacie & Ordonnances"
+    },
+    {
+      "type": "p",
+      "text": "Ordonnance :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Délivrée par un médecin (papier ou en ligne via ton Espace Santé).",
+        "Elle est indispensable pour obtenir des médicaments remboursés."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Pharmacies de garde :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Pour les nuits, week-ends et jours fériés :",
+        "Regarde les affiches en vitrine des pharmacies de quartier.",
+        "Appelle le 32 37 ou consulte le site www.3237.fr."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Lunettes, soins dentaires, optique"
+    },
+    {
+      "type": "p",
+      "text": "Avec carte Vitale seule :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Détartrage dentaire : remboursé à 70 % par la Sécu.",
+        "Lunettes : très peu ou pas remboursées sans mutuelle.",
+        "Soins dentaires plus importants (caries, couronnes…) : mal remboursés seuls."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Avec mutuelle ou Complémentaire Santé Solidaire (CSS) :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Mutuelle étudiante (ou de ton travail si tu es alternant) : couvre le reste à charge.",
+        "CSS (ex-CMU-C) : prise en charge à 100 % (soins médicaux, lunettes, dentiste, hospitalisation…)."
+      ]
+    },
+    {
+      "type": "callout",
+      "variant": "conseil",
+      "text": "certaines mutuelles étudiantes comme LMDE, HEYME, SMEREP proposent des forfaits adaptés et des conseils santé."
+    },
+    {
+      "type": "h3",
+      "text": "Urgences, ambulance, pompiers"
+    },
+    {
+      "type": "p",
+      "text": "En cas d’urgence :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "15 (SAMU) : urgence médicale.",
+        "18 (pompiers) : en cas d’accident.",
+        "112 : numéro d’urgence européen."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Frais d’ambulance :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Remboursés à 65 % par l’Assurance Maladie, sur prescription médicale.",
+        "100 % si tu es bénéficiaire de la CSS, ALD, maternité ou hospitalisation programmée."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Prise en charge hospitalière"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Avec la carte Vitale, l’hôpital facture directement la sécurité sociale.",
+        "Un ticket modérateur (la partie non remboursée) reste à ta charge si tu n’as pas de mutuelle.",
+        "Certains hôpitaux demandent une avance de frais si tu n’as pas encore la carte Vitale → garde bien ton attestation de droits imprimée ou téléchargée depuis ton compte Ameli."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Applications utiles"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Doctolib : prise de rendez-vous médicaux.",
+        "Ameli app : suivi de tes remboursements.",
+        "Mon Espace Santé : carnet médical numérique.",
+        "Medicaments.gouv.fr : vérifier les médicaments autorisés et leurs prix."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "LA SANTE MENTALE EN TANT QU'ETUDIANT ETRANGER"
+    },
+    {
+      "type": "p",
+      "text": "Venir étudier à l’étranger est une expérience riche… mais parfois difficile à vivre. Le choc culturel, la solitude, le stress des études, ou encore le mal du pays (homesickness) peuvent sérieusement impacter ta santé mentale. Il est important de savoir que tu n’es pas seul(e) et que des solutions existent."
+    },
+    {
+      "type": "h3",
+      "text": "Isolement, anxiété et mal du pays"
+    },
+    {
+      "type": "p",
+      "text": "Tu peux ressentir :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Une perte de repères, un sentiment d’isolement.",
+        "De l’anxiété sociale, de la pression académique, de l’insécurité administrative.",
+        "Une culpabilité de ne pas réussir comme prévu, ou une nostalgie du pays."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Ces émotions sont normales. Elles ne font pas de toi quelqu’un de faible, elles signifient que tu t’adaptes à une nouvelle réalité."
+    },
+    {
+      "type": "p",
+      "text": "Où trouver du soutien ?"
+    },
+    {
+      "type": "h3",
+      "text": "Les services de santé universitaire (SSU)"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Proposent des consultations gratuites avec des psychologues.",
+        "Disponibles dans toutes les universités françaises.",
+        "Aucun jugement, confidentiel, gratuit."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Le dispositif \"Mon Soutien Psy\""
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Jusqu'à 12 séances par an avec un psychologue conventionné, sans prescription médicale préalable. Les séances coûtent 50 € et sont prises en charge à 60 % par l'Assurance Maladie, le reste par la mutuelle ou la Complémentaire santé solidaire.",
+        "Sur orientation d’un médecin généraliste (ou via une téléconsultation).",
+        "Plus d’infos ici : https://monsoutienpsy.ameli.fr"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Téléconsultations psy"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Plateformes comme Qare, Doctolib, Livi proposent des consultations psy en ligne.",
+        "Certaines mutuelles ou la complémentaire santé solidaire (CSS) peuvent couvrir une partie ou la totalité du coût."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Autres ressources utiles"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "BAPU (Bureaux d’aide psychologique universitaire) : psychologues et psychiatres gratuits pour les étudiants.",
+        "Fil Santé Jeunes : 0 800 235 236 (anonyme et gratuit).",
+        "Nightline : service d’écoute par et pour les étudiants – https://www.nightline.fr",
+        "Groupes Facebook ou Discord d’étudiants marocains/maghrebins : pour garder le lien, parler, partager ses ressentis.",
+        "Se rapprocher d’un lieu culturel ou religieux (mosquée, centre culturel) peut aussi t’apporter un cadre rassurant."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Astuce"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Sors, même seul(e), marche dans un parc, va à la bibliothèque, assiste à des workshops ou événements étudiants : créer du lien même minime diminue le sentiment d’isolement.",
+        "Garde un contact régulier avec tes proches au Maroc : appels vidéo, messages vocaux, lettres..."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "DEMANDER UNE BOURSE OU DES AIDES"
+    },
+    {
+      "type": "p",
+      "text": "Les études en France peuvent représenter un coût important, mais heureusement, plusieurs dispositifs existent pour t’aider à financer tes études et ta vie quotidienne. Voici les principaux types d’aides auxquels tu peux prétendre, ainsi que des conseils pour les obtenir."
+    },
+    {
+      "type": "h3",
+      "text": "Les bourses du CROUS"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Le CROUS (Centre Régional des Œuvres Universitaires et Scolaires) est l’organisme principal qui gère les bourses d’études pour les étudiants en France.",
+        "Pour faire une demande, tu dois remplir le Dossier Social Étudiant (DSE) chaque année (généralement entre janvier et mai) sur le site du CROUS."
+      ]
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Le montant de la bourse varie selon plusieurs critères : revenus des parents, nombre de frères et sœurs à charge, distance entre le lieu d’études et la résidence familiale, et situation personnelle."
+      ]
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Il existe plusieurs échelons de bourse, allant de quelques centaines d’euros à plus de 500 € par mois, versés mensuellement.",
+        "La bourse CROUS peut aussi donner accès à des logements universitaires à tarifs préférentiels.",
+        "Important : La demande doit être renouvelée chaque année scolaire."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Aides locales et aides des collectivités territoriales"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Certaines régions, départements, ou villes proposent des aides complémentaires pour les étudiants, notamment pour les frais de transport, d’équipement informatique, ou des aides ponctuelles.",
+        "Par exemple, des villes comme Paris, Lyon, ou Marseille disposent de dispositifs spécifiques (aides au transport, Pass culture étudiant, aides à la mobilité, etc.).",
+        "Renseigne-toi auprès du site internet de ta mairie, de ton conseil régional, ou de ta préfecture."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Aides de fondations et associations"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Il existe des fondations privées ou associatives qui attribuent des aides financières aux étudiants selon leurs profils, projets, ou difficultés (Fondation de France, Fondation Aga Khan, etc.).",
+        "Certaines grandes écoles ou universités ont aussi des dispositifs internes de bourses d’excellence ou d’aide sociale.",
+        "Pour cela, contacte le service social de ton établissement ou l’association des étudiants étrangers."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Comment maximiser tes chances ?"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Prépare ton dossier DSE avec soin : tous les documents doivent être complets et à jour (avis d’imposition, justificatifs de domicile, certificats de scolarité…).",
+        "Respecte les délais, ne laisse pas passer la date limite de dépôt de dossier.",
+        "N’hésite pas à prendre rendez-vous avec un assistant social du CROUS ou de ton université pour t’aider à constituer ton dossier.",
+        "Cherche aussi les aides ponctuelles, souvent moins connues, qui peuvent t’aider en cas de difficulté financière passagère."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "GERER LES DIFFICULTES FINANCIERES : AIDES ET SOUTIENS DISPONIBLES"
+    },
+    {
+      "type": "p",
+      "text": "L’arrivée en France n’est pas toujours simple côté finances. Parfois, malgré la meilleure préparation, les imprévus s’accumulent : retard de bourse, logement trop cher, perte de job étudiant, etc. Heureusement, il existe un réseau d’aides et de soutiens que tu peux mobiliser. Voici un panorama complet pour t’épauler dans les moments difficiles."
+    },
+    {
+      "type": "h2",
+      "text": "QUAND LES FINS DE MOIS DEVIENNENT DIFFICILES"
+    },
+    {
+      "type": "p",
+      "text": "Si tu rencontres des problèmes financiers, ne reste pas isolé. Voici les premiers réflexes à avoir :"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Prendre contact avec le service social de ton université ou école."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Chaque établissement possède un service social (assistants sociaux), souvent lié au CROUS, capable d’évaluer ta situation et de te proposer des aides ponctuelles ou un accompagnement personnalisé. Exemple : le service social CROUS (https://www.crous.fr/aides/aides-sociales/)."
+    },
+    {
+      "type": "ul",
+      "items": [
+        "S’informer sur les aides financières d’urgence."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Certaines associations étudiantes, les CROUS et les mairies proposent des aides d’urgence ponctuelles ou des fonds de solidarité. Ces aides peuvent couvrir les dépenses alimentaires, les frais de santé ou le logement."
+    },
+    {
+      "type": "h2",
+      "text": "LES AIDES FINANCIERES PRINCIPALES"
+    },
+    {
+      "type": "h3",
+      "text": "1. Bourses sur critères sociaux (CROUS)"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Accessible via le Dossier Social Étudiant (DSE).",
+        "Montants variables selon la situation familiale et le niveau d’études (entre 100 et 550 € par mois).",
+        "Pour les bourses attribuées, le paiement est mensuel, versé directement sur ton compte bancaire.",
+        "Dossier à renouveler chaque année.",
+        "Plus d’infos : https://www.crous.fr/aides/bourses/"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "2. Aide au logement (APL, ALS) – CAF"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Aide mensuelle versée par la CAF (Caisse d’Allocations Familiales) pour alléger le coût du logement.",
+        "À demander dès ton arrivée, via le site CAF (https://www.caf.fr/).",
+        "Le montant dépend du loyer, de la localisation et de tes revenus.",
+        "Important : il faut fournir le bail, un RIB et ton contrat de location."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "3. Aide Visale (caution gratuite)"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Service gratuit qui se porte garant pour toi auprès du propriétaire si tu n’as pas de garant physique.",
+        "Condition : être étudiant ou salarié, et respecter les conditions de revenus.",
+        "Dossier à faire en ligne : https://www.visale.fr/"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "4. Fonds de solidarité et d'urgence (FSE)"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Proposé par le CROUS, destiné aux étudiants en grande difficulté (panne de paiement, expulsion, etc.)",
+        "À demander via le service social de ton établissement."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "AIDES SOCIALES ET ACCOMPAGNEMENTS"
+    },
+    {
+      "type": "h3",
+      "text": "1. Assistants sociaux universitaires"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Écoute, conseil, accompagnement sur les démarches administratives, demande d’aides.",
+        "Parfois, ils peuvent orienter vers des aides spécialisées (aide psychologique, alimentation, logement).",
+        "Comment contacter ? Renseigne-toi auprès de ton université ou école, ou sur leur site web."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "2. Associations étudiantes et caritatives"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "La Croix-Rouge Étudiante propose des aides alimentaires, des distributions, et un accompagnement social.",
+        "Secours Populaire propose aussi des aides alimentaires et vestimentaires, parfois accès à des aides au logement.",
+        "Recherche locale : souvent dans les grandes villes, il existe des épiceries solidaires ou des banques alimentaires dédiées aux étudiants."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Solutions de financement complémentaires"
+    },
+    {
+      "type": "h3",
+      "text": "1. Microcrédit étudiant"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Certaines banques ou associations (ex : ADIE) proposent des microcrédits pour financer un ordinateur, un dépôt de garantie, ou un permis de conduire.",
+        "Montant limité, à rembourser en plusieurs mensualités, avec un taux d’intérêt souvent faible.",
+        "À réserver aux situations où aucune autre aide n’est disponible."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "2. Prêts étudiants garantis par l’État"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Certains établissements bancaires proposent des prêts étudiants avec caution de l’État, sans conditions de ressources.",
+        "À vérifier avec ta banque."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Conseils pratiques"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Anticipe les démarches. Beaucoup d’aides demandent un dossier avec justificatifs, il faut donc s’y prendre à l’avance.",
+        "Conserve tous tes justificatifs (relevés bancaires, quittances, factures). Ils seront demandés pour les dossiers.",
+        "Ne reste pas isolé : parler de tes difficultés avec un assistant social peut ouvrir des portes.",
+        "Utilise les plateformes et groupes Facebook d’étudiants étrangers pour échanger sur les aides possibles.",
+        "Vérifie les aides locales de ta ville ou région, certaines municipalités proposent des aides spécifiques."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "L'ESSENTIEL POUR PRENDRE SOIN DE SOI"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Votre Sésame Santé : La Carte Vitale est indispensable pour ne pas avancer la plupart des frais médicaux. Obtenez-la le plus vite possible via votre compte Ameli. Pour le reste, une mutuelle étudiante est fortement recommandée. * Ne Restez pas Seul face au Stress : Le mal du pays et l'anxiété sont normaux. Les Services de Santé Universitaire (SSU) proposent des consultations gratuites et confidentielles avec des psychologues.",
+        "Urgence Financière = Réflexe CROUS : Si vous rencontrez de graves difficultés financières, votre premier contact doit être les assistants sociaux du CROUS. Ils peuvent débloquer des aides d'urgence (FSE). * Doctolib est votre meilleur ami : Pour trouver un médecin, un dentiste, un spécialiste et prendre rendez-vous en ligne facilement, utilisez l'application Doctolib."
+      ]
+    }
+  ]
 }

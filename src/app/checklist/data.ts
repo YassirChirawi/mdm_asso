@@ -74,9 +74,9 @@ export const CHECKLISTS: ChecklistCategory[] = [
       },
       {
         id: "va-8",
-        label: "Valider le visa à l'OFII dès l'arrivée en France",
+        label: "Valider le VLS-TS dans les 3 mois suivant l'arrivée",
         detail:
-          "Obligatoire dans les 3 mois suivant l'arrivée. Rendez-vous sur ofii.fr.",
+          "Téléprocédure en ligne sur le portail ANEF (et non plus à l'OFII), avec paiement d'une taxe. Sans validation, votre séjour devient irrégulier et vous ne pouvez plus repasser la frontière Schengen.",
         urgent: true,
       },
     ],
@@ -134,7 +134,7 @@ export const CHECKLISTS: ChecklistCategory[] = [
         id: "log-7",
         label: "Demander l'APL (Aide Personnalisée au Logement)",
         detail:
-          "Via CAF.fr. À demander dès l'entrée dans le logement. Attention : les étudiants extra-UE peuvent ne plus y être éligibles depuis 2026.",
+          "Depuis le 1er juillet 2026, un étudiant hors UE n'y a droit que s'il perçoit une bourse sur critères sociaux ou s'il travaille (salarié, auto-entrepreneur, alternance). Vérifiez votre éligibilité avant d'intégrer l'APL à votre budget.",
         link: { text: "caf.fr", url: "https://www.caf.fr" },
       },
       {
@@ -184,7 +184,7 @@ export const CHECKLISTS: ChecklistCategory[] = [
         id: "bf-5",
         label: "Demander la bourse sur critères sociaux (si éligible)",
         detail:
-          "Déposez la demande sur Mon Dossier Social Étudiant avant le 31 décembre.",
+          "La campagne du Dossier Social Étudiant ouvre en mars pour la rentrée suivante : déposez le dossier avant la fin mai. Vérifiez la date limite exacte sur etudiant.gouv.fr.",
         link: {
           text: "etudiant.gouv.fr",
           url: "https://www.etudiant.gouv.fr/fr/bourses-et-logement",
@@ -262,7 +262,7 @@ export const CHECKLISTS: ChecklistCategory[] = [
         id: "adm-1",
         label: "Valider le VLS-TS sur ANEF (procédure OFII)",
         detail:
-          "Téléprocédure obligatoire dans les 3 mois suivant l'arrivée sur administration-etrangers-en-france.gouv.fr.",
+          "Téléprocédure obligatoire dans les 3 mois suivant l'arrivée, sur administration-etrangers-en-france.interieur.gouv.fr.",
         urgent: true,
         link: {
           text: "anef.fr",
@@ -273,7 +273,7 @@ export const CHECKLISTS: ChecklistCategory[] = [
         id: "adm-2",
         label: "Payer la CVEC (Contribution Vie Étudiante)",
         detail:
-          "103 € en 2026. Obligatoire avant la rentrée. Attestation à fournir lors de l'inscription.",
+          "105 € pour 2026-2027. Obligatoire avant l'inscription : l'attestation est exigée par l'établissement. Les boursiers sur critères sociaux en sont exonérés.",
         urgent: true,
         link: { text: "cvec.etudiant.gouv.fr", url: "https://cvec.etudiant.gouv.fr" },
       },

@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# python (scripts d'extraction du guide)
+__pycache__/
+*.pyc

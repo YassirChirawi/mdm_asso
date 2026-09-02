@@ -52,20 +52,31 @@ export default function LetterModel({ content, title }: LetterModelProps) {
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
-    
-    // PDF Config
+
     const margin = 20;
     const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
     const maxWidth = pageWidth - margin * 2;
-    
+    const lineHeight = 7;
+    const bottomLimit = pageHeight - margin;
+
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
-    
-    // Split text to fit page width
-    const lines = doc.splitTextToSize(filledContent, maxWidth);
-    
-    doc.text(lines, margin, margin + 10);
-    
+
+    // Écriture ligne à ligne : un seul doc.text() tronquait silencieusement
+    // tout ce qui dépassait la première page A4.
+    const lines: string[] = doc.splitTextToSize(filledContent, maxWidth);
+    let y = margin + 10;
+
+    for (const line of lines) {
+      if (y > bottomLimit) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(line, margin, y);
+      y += lineHeight;
+    }
+
     const fileName = title ? `${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf` : "lettre_mdm.pdf";
     doc.save(fileName);
   };
@@ -73,7 +84,7 @@ export default function LetterModel({ content, title }: LetterModelProps) {
   return (
     <div className="my-12 bg-white rounded-[2rem] border border-gray-100 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
       {/* Header */}
-      <div className="bg-gray-50/80 px-8 py-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-gray-50/80 px-5 py-5 md:px-8 md:py-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="bg-brand-red/10 p-2.5 rounded-xl">
             <FileText className="w-5 h-5 text-brand-red" />
@@ -98,10 +109,10 @@ export default function LetterModel({ content, title }: LetterModelProps) {
         </div>
       </div>
 
-      <div className="p-8">
+      <div className="p-5 md:p-8">
         {/* Placeholders Editor */}
         {isEditing && placeholders.length > 0 && (
-          <div className="mb-10 p-6 bg-brand-green/5 rounded-2xl border border-brand-green/10 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="mb-8 p-5 md:p-6 bg-brand-green/5 rounded-2xl border border-brand-green/10 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2 mb-2">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-green bg-white px-3 py-1 rounded-full border border-brand-green/20">
                 Champs à remplir
@@ -126,24 +137,26 @@ export default function LetterModel({ content, title }: LetterModelProps) {
 
         {/* Preview Area */}
         <div className="relative">
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="flex justify-end gap-2 mb-3">
             <button
               onClick={handleCopy}
-              className="bg-white/90 backdrop-blur shadow-sm border border-gray-100 p-2.5 rounded-xl hover:bg-brand-green hover:text-white hover:border-brand-green transition-all group/btn"
+              className="bg-white shadow-sm border border-gray-100 p-2.5 rounded-xl hover:bg-brand-green hover:text-white hover:border-brand-green transition-all"
               title="Copier le texte"
+              aria-label="Copier le texte du modèle"
             >
               {isCopying ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
             </button>
             <button
               onClick={handleDownloadPDF}
-              className="bg-white/90 backdrop-blur shadow-sm border border-gray-100 p-2.5 rounded-xl hover:bg-brand-dark hover:text-white hover:border-brand-dark transition-all"
+              className="bg-white shadow-sm border border-gray-100 p-2.5 rounded-xl hover:bg-brand-dark hover:text-white hover:border-brand-dark transition-all"
               title="Télécharger en PDF"
+              aria-label="Télécharger le modèle en PDF"
             >
               <Download className="w-5 h-5" />
             </button>
           </div>
 
-          <div className="bg-gray-50/30 rounded-2xl p-8 border border-dashed border-gray-200 min-h-[200px] whitespace-pre-wrap font-serif text-gray-700 leading-relaxed text-base md:text-lg">
+          <div className="bg-gray-50/30 rounded-2xl p-5 md:p-8 border border-dashed border-gray-200 min-h-[200px] whitespace-pre-wrap break-words font-serif text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg">
             {filledContent.split('\n').map((line, idx) => {
               // Highlight placeholders that are not yet filled
               const parts = line.split(/(\[[^\]]+\])/);
@@ -162,11 +175,11 @@ export default function LetterModel({ content, title }: LetterModelProps) {
         </div>
 
         {/* Footer Actions */}
-        <div className="mt-8 flex flex-wrap gap-4 items-center justify-between border-t border-gray-100 pt-8">
+        <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4 sm:items-center justify-between border-t border-gray-100 pt-8">
           <p className="text-xs text-gray-400 font-medium italic">
             * Remplacez les champs en rouge pour personnaliser votre document.
           </p>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
              <button
               onClick={handleCopy}
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-green text-white font-bold text-sm shadow-lg shadow-brand-green/20 hover:scale-[1.02] active:scale-[0.98] transition-all"

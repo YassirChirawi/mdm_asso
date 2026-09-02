@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { CHECKLISTS, ChecklistCategory } from "./data";
+import { DERNIERE_VERIFICATION } from "@/data/blocks";
 import {
   Download, CheckCircle2, Circle, ChevronDown, ChevronUp,
   FileDown, RotateCcw, Heart, Users, CheckCheck, Minus,
@@ -35,10 +36,10 @@ async function generatePDF(
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(22);
   doc.setFont("helvetica", "bold");
-  doc.text("Checklists Rentrée 2026 – 2027", M, 26);
+  doc.text("Checklist Rentree 2026-2027", M, 26);
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
-  doc.text("Association Marocains en France – marocainsenfrance.fr", M, 38);
+  doc.text("Association Marocains en France - marocainsenfrance.fr", M, 38);
   doc.text(
     `Généré le ${new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}`,
     M, 48
@@ -72,14 +73,14 @@ async function generatePDF(
     doc.setTextColor(...DARK);
     doc.setFontSize(11);
     doc.setFont("helvetica", "bold");
-    doc.text(`${cat.emoji}  ${cat.title}`, M + 4, y + 7.5);
+    doc.text(cat.title, M + 4, y + 7.5);
     const catDone = cat.items.filter((i) => checked[i.id]).length;
     doc.setFontSize(8);
     doc.setTextColor(...GRAY);
     doc.text(`${catDone}/${cat.items.length}`, W - M - 1, y + 7.5, { align: "right" });
     if (cat.deadline) {
       doc.setFontSize(7.5);
-      doc.text(`⏰ ${cat.deadline}`, M + 4, y + 11);
+      doc.text(`Echeance : ${cat.deadline}`, M + 4, y + 11);
     }
     y += 15;
 
@@ -92,9 +93,11 @@ async function generatePDF(
       if (isDone) {
         doc.setFillColor(...GREEN);
         doc.circle(M + 2.8, y + 2.8, 2.3, "F");
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(7);
-        doc.text("✓", M + 1.7, y + 4.2);
+        // Coche tracee au trait : le glyphe « ✓ » n'existe pas en Helvetica.
+        doc.setDrawColor(255, 255, 255);
+        doc.setLineWidth(0.5);
+        doc.line(M + 1.7, y + 2.8, M + 2.5, y + 3.7);
+        doc.line(M + 2.5, y + 3.7, M + 4.0, y + 1.8);
       } else {
         doc.setDrawColor(180, 180, 180);
         doc.setLineWidth(0.45);
@@ -134,7 +137,7 @@ async function generatePDF(
     doc.setPage(i);
     doc.setFontSize(7.5);
     doc.setTextColor(...GRAY);
-    doc.text("marocainsenfrance.fr  ·  Association MDM – Main dans la main", M, 291);
+    doc.text("marocainsenfrance.fr  -  Association MDM - Main dans la main", M, 291);
     doc.text(`${i} / ${pageCount}`, W - M, 291, { align: "right" });
   }
 
@@ -171,12 +174,11 @@ function CategoryCard({
   const [open, setOpen] = useState(true);
   const done = cat.items.filter((i) => checked[i.id]).length;
   const allDone = done === cat.items.length;
-  const allCheckedState = done === cat.items.length;
 
   return (
     <article
       id={`category-${cat.id}`}
-      className="rounded-2xl border overflow-hidden transition-shadow hover:shadow-md"
+      className="scroll-mt-40 md:scroll-mt-44 rounded-2xl border overflow-hidden transition-shadow hover:shadow-md"
       style={{ borderColor: allDone ? cat.accentColor + "40" : "#f3f4f6", background: "white" }}
     >
       {/* Header */}
@@ -218,13 +220,13 @@ function CategoryCard({
 
         {/* Toggle all button */}
         <button
-          onClick={() => onToggleAll(cat.id, !allCheckedState)}
-          title={allCheckedState ? "Tout décocher" : "Tout cocher"}
+          onClick={() => onToggleAll(cat.id, !allDone)}
+          title={allDone ? "Tout décocher" : "Tout cocher"}
           className="flex-shrink-0 p-2 rounded-xl transition-colors text-xs font-semibold flex items-center gap-1"
           style={{ color: cat.accentColor, background: cat.accentColor + "10" }}
         >
-          {allCheckedState ? <Minus size={14} /> : <CheckCheck size={14} />}
-          <span className="hidden sm:inline">{allCheckedState ? "Décocher" : "Tout"}</span>
+          {allDone ? <Minus size={14} /> : <CheckCheck size={14} />}
+          <span className="hidden sm:inline">{allDone ? "Décocher" : "Tout"}</span>
         </button>
       </div>
 
@@ -318,6 +320,7 @@ function VolunteerBanner() {
             Tu es déjà bien installé(e) en France ? Deviens bénévole et aide les nouveaux arrivants à s'intégrer.
             Parrainage, conseils logement, accompagnement administratif — chaque coup de main compte.
           </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <a
             href="https://www.instagram.com/marocainsenfrance/"
             target="_blank"
@@ -328,12 +331,13 @@ function VolunteerBanner() {
             <Sparkles size={14} /> Rejoindre le réseau
           </a>
           <a
-            href="/contact"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold ml-3"
+            href="/rejoindre#benevole"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold"
             style={{ color: "#1D9E75" }}
           >
             En savoir plus <ArrowRight size={13} />
           </a>
+          </div>
         </div>
       </div>
     </div>
@@ -343,20 +347,20 @@ function VolunteerBanner() {
 /* ─── Subtle donation nudge ─────────────────────────────────────── */
 function DonationNudge() {
   return (
-    <div className="rounded-2xl p-5 flex items-center gap-4 border border-red-50"
+    <div className="rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center gap-4 border border-red-50"
       style={{ background: "#fff7f7" }}>
       <Heart size={22} className="flex-shrink-0 text-red-400" />
       <div className="flex-1 min-w-0">
         <p className="text-sm text-gray-600 leading-relaxed">
           Ce guide est <strong>100% gratuit</strong> et maintenu par des bénévoles.
-          Si il t'a été utile, un petit soutien nous aide à continuer. 🙏
+          S'il t'a été utile, un petit soutien nous aide à continuer. 🙏
         </p>
       </div>
       <a
         href="https://donate.stripe.com/5kQaEQ6t57LC7KZ2jPb3q00"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-shrink-0 text-sm font-bold px-4 py-2 rounded-full whitespace-nowrap transition-all hover:scale-105"
+        className="flex-shrink-0 self-start sm:self-auto text-sm font-bold px-4 py-2 rounded-full whitespace-nowrap transition-all hover:scale-105"
         style={{ background: "#FEE2E2", color: "#B91C1C" }}
       >
         Soutenir ❤️
@@ -406,8 +410,14 @@ export default function ChecklistClient() {
     });
   }, []);
 
-  const totalItems = CHECKLISTS.flatMap((c) => c.items).length;
-  const totalDone = Object.values(checked).filter(Boolean).length;
+  const allItemIds = useMemo(
+    () => CHECKLISTS.flatMap((c) => c.items.map((i) => i.id)),
+    []
+  );
+  const totalItems = allItemIds.length;
+  // On compte sur les identifiants connus : un localStorage issu d'une version
+  // précédente de la checklist pouvait faire dépasser les 100 %.
+  const totalDone = allItemIds.filter((id) => checked[id]).length;
   const globalPct = Math.round((totalDone / totalItems) * 100);
 
   const handleDownload = async () => {
@@ -424,7 +434,7 @@ export default function ChecklistClient() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: "#f8fafc" }}>
+    <div className="min-h-screen pt-24 md:pt-28" style={{ background: "#f8fafc" }}>
       {/* Hero */}
       <div
         className="relative overflow-hidden"
@@ -503,7 +513,7 @@ export default function ChecklistClient() {
       {/* Sticky category nav */}
       <nav
         aria-label="Catégories de la checklist"
-        className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-gray-100 shadow-sm"
+        className="sticky top-24 md:top-28 z-40 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm"
       >
         <div className="max-w-3xl mx-auto px-4 py-2.5 flex gap-2 overflow-x-auto">
           {CHECKLISTS.map((cat) => {
@@ -580,6 +590,10 @@ export default function ChecklistClient() {
 
         {/* Footer note */}
         <p className="text-center text-xs text-gray-400 pb-4">
+          Montants et démarches vérifiés le {DERNIERE_VERIFICATION} auprès des sources
+          officielles. Les règles changent en cours d'année : vérifiez toujours sur le site
+          de l'administration concernée avant d'engager une démarche.
+          <br />
           Ce contenu est produit bénévolement par l'association MDM.{" "}
           <a href="/mentions-legales" className="underline hover:text-gray-600">Mentions légales</a>
           {" · "}
