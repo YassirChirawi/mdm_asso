@@ -45,3 +45,6 @@ next-env.d.ts
 # python (scripts d'extraction du guide)
 __pycache__/
 *.pyc
+
+.vercel
+.env*
