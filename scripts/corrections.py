@@ -187,6 +187,49 @@ CORRECTIONS = [
                   "(CLEISS), article 22 : levée des clauses de résidence pour les pensions "
                   "de vieillesse — sans rapport avec l'assurance chômage.",
     },
+    # ------------------------------------------------------- Tarifs transport
+    # Verifie le 2 septembre 2026. Ces tarifs sont revises chaque annee (souvent
+    # au 1er juillet) : c'est le premier bloc a reverifier chaque rentree.
+    {
+        "chapter": 2,
+        "find": "Paris (Navigo) : environ 84,10 € par mois pour tout le réseau Île-de-France.",
+        "replace": "Paris (Navigo Mois, toutes zones) : 90,80 € par mois en 2026.",
+        "source": "https://www.iledefrance-mobilites.fr/titres-et-tarifs/detail/forfait-navigo-mois",
+    },
+    {
+        "chapter": 2,
+        "find": "Toulouse : environ 55 € (Tisseo).",
+        "replace": "Toulouse : 59 € (Tisséo, depuis le 1er juillet 2026).",
+        "source": "https://www.tisseo.fr/les-tarifs/la-gamme",
+    },
+    {
+        "chapter": 6,
+        "find": "Navigo Imagine R (Île-de-France) : 365€/an (~32€/mois) → illimité métro, bus, RER",
+        "replace": "Navigo Imagine R Étudiant (Île-de-France) : 401,30 € pour 2026-2027 "
+                   "(393,30 € + 8 € de frais de dossier), soit environ 43,70 €/mois en 9 "
+                   "prélèvements → illimité métro, bus, RER. À la première souscription, le "
+                   "forfait couvre 13 mois pour le prix de 12",
+        "source": "https://www.iledefrance-mobilites.fr/titres-et-tarifs/detail/forfait-imagine-r-etudiant",
+    },
+    {
+        "chapter": 6,
+        "find": "Toulouse (Tisséo) : 10€/mois pour les étudiants",
+        "replace": "Toulouse (Tisséo) : 16 €/mois pour les étudiants de moins de 26 ans, "
+                   "12,80 €/mois pour les boursiers",
+        "source": "https://tisseo-collectivites.fr/des-tarifs-adaptes-pour-toutes-et-tous",
+    },
+    # ------------------------------------------ Exoneration des jobs etudiants
+    {
+        "chapter": 4,
+        "find": "Les salaires étudiants sont exonérés jusqu’à un certain plafond (~4 900 €/an)",
+        "replace": "Les salaires étudiants sont exonérés d'impôt dans la limite de 3 fois le "
+                   "SMIC mensuel brut, soit 5 405 € pour les revenus 2025, si tu as 25 ans "
+                   "au plus au 1er janvier de l'année d'imposition (ce plafond est revalorisé "
+                   "chaque année)",
+        "source": "https://www.impots.gouv.fr/particulier/questions/"
+                  "mon-enfant-est-etudiant-les-revenus-quil-percus-sont-ils-imposables",
+        "note": "~4 900 € correspondait a un plafond anterieur ; la regle des 3 SMIC est stable.",
+    },
 ]
 
 

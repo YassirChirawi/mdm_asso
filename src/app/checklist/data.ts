@@ -293,7 +293,7 @@ export const CHECKLISTS: ChecklistCategory[] = [
         id: "adm-5",
         label: "S'inscrire au restaurant universitaire (RU) du CROUS",
         detail:
-          "Repas à partir de 3,30 € avec la carte étudiant. Inscription via l'application Izly.",
+          "Depuis le 4 mai 2026, le repas complet est à 1 € pour tous les étudiants, sans condition de bourse. Il faut une carte étudiante et un compte Izly actif.",
         link: { text: "crous.fr", url: "https://www.crous.fr" },
       },
       {
