@@ -132,14 +132,14 @@
       "type": "ul",
       "items": [
         "Paris (Navigo Mois, toutes zones) : 90,80 € par mois en 2026.",
-        "Lille : Pass mensuel environ 55 € (Transpole).",
+        "Lille : 65 € par mois au plein tarif, sur le réseau Ilévia qui a remplacé Transpole.",
         "Lyon : environ 65 € (TCL).",
-        "Grenoble : environ 50 € (TAG).",
-        "Rouen : environ 45 € (TCAR).",
+        "Grenoble : une cinquantaine d'euros au plein tarif, sur le réseau M réso qui a remplacé le TAG.",
+        "Rouen : 64 € par mois depuis le 1er septembre 2026, sur le réseau Astuce qui a remplacé le TCAR.",
         "Rennes : environ 50 € (STAR).",
-        "Montpellier : environ 55 € (TaM). (GRATUIT pour les -26 ans inscrits)",
+        "Montpellier : gratuit si tu habites la métropole, sur demande du Pass gratuité. Sinon 28 € par mois avant 26 ans.",
         "Toulouse : 59 € (Tisséo, depuis le 1er juillet 2026).",
-        "Marseille : environ 60 € (RTM).",
+        "Marseille : le Pass Permanent étudiant du RTM démarre à 9,20 € par mois, bien en dessous du plein tarif.",
         "Bordeaux : environ 50 € (TBM)."
       ]
     },
@@ -389,7 +389,7 @@
     {
       "type": "ul",
       "items": [
-        "Aide au logement (APL/ALS) : depuis le 1er juillet 2026, si tu es étudiant extracommunautaire, un visa long séjour ou un titre « poursuite d'études » ne suffit plus. Il faut en plus percevoir une bourse sur critères sociaux, ou travailler (salarié, auto-entrepreneur, apprentissage, professionnalisation). Vérifie ta situation sur caf.fr avant de compter sur cette aide dans ton budget."
+        "Aide au logement (APL/ALS) : depuis le 1er juillet 2026, si tu es étudiant extracommunautaire, un visa long séjour ou un titre « poursuite d'études » ne suffit plus. Il faut en plus percevoir une bourse sur critères sociaux, ou travailler (salarié, auto-entrepreneur, apprentissage, professionnalisation). Et attention au piège : la bourse sur critères sociaux exige 2 ans de résidence en France, donc elle est hors de portée à ton arrivée. En pratique, si tu ne travailles pas, construis ton budget de première année sans aide au logement."
       ]
     },
     {

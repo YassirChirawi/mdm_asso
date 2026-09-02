@@ -81,8 +81,16 @@ def tidy(text):
         text = re.sub(r"^(?:[-•➤▪*]|o(?=\s))\s+", "", text)
     # Marqueur orphelin en fin de bloc.
     text = re.sub(r"\s+[o•▪➤*]$", "", text)
-    # Une sous-puce restee au milieu d'un bloc devient un separateur lisible.
-    text = re.sub(r"\s*➤\s*", " — ", text)
+    # Une sous-puce restee au milieu d'un bloc ouvre une nouvelle phrase.
+    if "➤" in text:
+        parts = [part.strip() for part in text.split("➤")]
+        text = parts[0].strip()
+        for part in parts[1:]:
+            if not part:
+                continue
+            if text and text[-1] not in TERMINAL:
+                text += "."
+            text = (text + " " + part).strip()
     # En francais l'espace se place apres la virgule et le point, jamais avant
     # (contrairement a « ; : ! ? » qui en prennent un).
     text = re.sub(r"\s+([,.])(?=\s|$)", lambda m: m.group(1), text)

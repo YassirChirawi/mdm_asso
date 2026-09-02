@@ -466,7 +466,7 @@
       "items": [
         "Caution (dépôt de garantie) : Généralement 1 mois de loyer pour un logement vide, 2 mois pour un meublé.",
         "Garantie Visale : Garantie gratuite de l’État si tu n’as pas de garant en France.",
-        "https://www.visale.fr — fais la demande dès que possible.",
+        "https://www.visale.fr. Fais la demande dès que possible.",
         "Garantme : Solution privée payante pour étudiants étrangers.",
         "Garant physique : Si tu connais quelqu’un en France qui peut signer pour toi."
       ]
@@ -613,7 +613,7 @@
       "type": "ul",
       "items": [
         "Pour : Moins de risque d’arnaque, accompagnement juridique.",
-        "Contre : Frais d’agence (souvent 1 mois de loyer). En France, les frais d'agence sont encadrés par la loi Alur : ils sont plafonnés à 8, 10 ou 12 €/m² (selon la zone), plus les frais d'état des lieux (3"
+        "Contre : Frais d’agence (souvent 1 mois de loyer). En France, les frais d'agence sont encadrés par la loi Alur : ils sont plafonnés depuis le 1er janvier 2026 à 12,10 €/m² en zone très tendue, 10,10 €/m² en zone tendue et 8,10 €/m² ailleurs, plus 3 €/m² au maximum pour l'état des lieux, plus les frais d'état des lieux (3"
       ]
     },
     {
@@ -1004,8 +1004,8 @@
     {
       "type": "ul",
       "items": [
-        "Il est envoyé automatiquement aux bénéficiaires, sans démarche.",
-        "Le montant varie entre 48€ et 277€ (données 2024) selon les revenus.",
+        "L'envoi n'est plus entièrement automatique : les foyers identifiés par l'administration le reçoivent en avril, les autres doivent le réclamer en ligne ou par courrier entre le 1er avril et le 31 décembre.",
+        "Le montant varie entre 48 € et 277 € selon les revenus et la composition du foyer, pour une moyenne de 153 € (barème 2026).",
         "Tu peux l’utiliser directement auprès de ton fournisseur, ou pour régler ta facture d’énergie."
       ]
     },

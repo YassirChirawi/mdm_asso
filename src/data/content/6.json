@@ -294,14 +294,14 @@
       "items": [
         "Navigo Imagine R Étudiant (Île-de-France) : 401,30 € pour 2026-2027 (393,30 € + 8 € de frais de dossier), soit environ 43,70 €/mois en 9 prélèvements → illimité métro, bus, RER. À la première souscription, le forfait couvre 13 mois pour le prix de 12",
         "Tarifs jeunes / étudiants dans toutes les grandes villes :",
-        "Lyon (TCL) : Abonnement étudiant à 32€/mois",
-        "Lille (Ilévia) : Pass étudiant à 28€/mois",
-        "Grenoble (TAG) : Environ 22€/mois pour les -26 ans",
-        "Rennes (STAR) : Abonnement jeune à 30,60€/mois",
+        "Lyon (TCL) : 26 €/mois pour les 18-25 ans et les étudiants, 11 €/mois pour les boursiers depuis le 1er septembre 2026",
+        "Lille (Ilévia, l'ancien Transpole) : abonnement jeune et étudiant calculé selon le quotient familial, 32,45 €/mois au tarif le plus élevé et nettement moins si ton quotient est bas",
+        "Grenoble (M réso, l'ancien TAG) : 19,20 €/mois ou 192 €/an pour les 18-25 ans en études, avec des tarifs réduits pour les boursiers",
+        "Rennes (STAR) : 26,60 €/mois pour les 18-26 ans depuis juillet 2026, avec un forfait étudiant qui inclut les vélos en libre-service",
         "Toulouse (Tisséo) : 16 €/mois pour les étudiants de moins de 26 ans, 12,80 €/mois pour les boursiers",
-        "Montpellier : GRATUIT pour les -26 ans inscrits",
-        "Bordeaux (TBM) : 20€/mois pour les jeunes",
-        "Rouen : ~22€/mois étudiant",
+        "Montpellier (TaM) : gratuit à tout âge si tu habites l'une des 31 communes de la métropole, mais il faut demander le Pass gratuité nominatif (pièce d'identité, photo, justificatif de domicile). Hors métropole, 28 €/mois avant 26 ans",
+        "Bordeaux (TBM) : Pass Jeune 11-27 ans à 20,80 €/mois en formule annuelle, 35,10 € si tu le prends au mois, depuis le 1er juillet 2026",
+        "Rouen (réseau Astuce, l'ancien TCAR) : tarifs étudiants sur justificatif de scolarité et de domicile dans la métropole, à vérifier sur reseau-astuce.fr",
         "Strasbourg, Nantes, Dijon : tarifs étudiants disponibles"
       ]
     },
@@ -491,7 +491,7 @@
     {
       "type": "ul",
       "items": [
-        "Prime à l’achat d’un vélo électrique : jusqu’à 400€ selon conditions",
+        "Prime à l'achat d'un vélo électrique : le bonus national a été supprimé le 14 février 2025. Il reste les aides locales, souvent plus généreuses, de 100 € à 800 € selon la ville et les revenus : regarde du côté de ta métropole et de ta région",
         "Réparation gratuite en atelier solidaire (parfois avec Pass Réparation)"
       ]
     },

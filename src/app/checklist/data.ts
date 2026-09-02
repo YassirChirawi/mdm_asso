@@ -134,7 +134,7 @@ export const CHECKLISTS: ChecklistCategory[] = [
         id: "log-7",
         label: "Demander l'APL (Aide Personnalisée au Logement)",
         detail:
-          "Depuis le 1er juillet 2026, un étudiant hors UE n'y a droit que s'il perçoit une bourse sur critères sociaux ou s'il travaille (salarié, auto-entrepreneur, alternance). Vérifiez votre éligibilité avant d'intégrer l'APL à votre budget.",
+          "Depuis le 1er juillet 2026, un étudiant hors UE n'y a droit que s'il perçoit une bourse sur critères sociaux ou s'il travaille (salarié, auto-entrepreneur, alternance). Or la bourse exige 2 ans de résidence en France : à votre arrivée, comptez sur un budget sans APL si vous ne travaillez pas.",
         link: { text: "caf.fr", url: "https://www.caf.fr" },
       },
       {
@@ -184,7 +184,7 @@ export const CHECKLISTS: ChecklistCategory[] = [
         id: "bf-5",
         label: "Demander la bourse sur critères sociaux (si éligible)",
         detail:
-          "La campagne du Dossier Social Étudiant ouvre en mars pour la rentrée suivante : déposez le dossier avant la fin mai. Vérifiez la date limite exacte sur etudiant.gouv.fr.",
+          "Réservée aux étudiants hors UE domiciliés en France depuis 2 ans et rattachés à un foyer fiscal français depuis 2 ans : elle ne concerne donc pas une première année. La campagne du Dossier Social Étudiant ouvre en mars pour la rentrée suivante, à déposer avant fin mai.",
         link: {
           text: "etudiant.gouv.fr",
           url: "https://www.etudiant.gouv.fr/fr/bourses-et-logement",
