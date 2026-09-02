@@ -61,7 +61,7 @@ export async function POST(req: Request) {
       // Send to Admin
       await resend.emails.send({
         from: "Adhésion MDM <onboarding@resend.dev>",
-        to: "yasschirawi37@gmail.com",
+        to: "contact@marocainsenfrance.fr",
         subject: `❤️ Adhésion – ${prenom} ${nom}`,
         replyTo: email,
         html: adminHtml,

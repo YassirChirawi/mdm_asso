@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     if (process.env.RESEND_API_KEY && resend) {
       await resend.emails.send({
         from: "Candidature Bénévole <onboarding@resend.dev>",
-        to: "yasschirawi37@gmail.com",
+        to: "contact@marocainsenfrance.fr",
         subject: `🙋 Bénévole – ${prenom} ${nom}`,
         replyTo: email,
         html,

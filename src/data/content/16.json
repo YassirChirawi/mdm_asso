@@ -3,7 +3,7 @@
   "blocks": [
     {
       "type": "p",
-      "text": "Annexes pratiques – Modèles de lettres et mails indispensables"
+      "text": "Annexes pratiques, Modèles de lettres et mails indispensables"
     },
     {
       "type": "p",
@@ -35,7 +35,7 @@
     },
     {
       "type": "p",
-      "text": "Bonjour [Prénom du recruteur],\nJe m'appelle [Prénom Nom], étudiant(e) en [filière] à [université/école]. Je suis très intéressé(e) par votre parcours et les opportunités dans le domaine de [domaine].\nJe me permets de vous contacter pour en savoir plus sur les possibilités de stage/alternance/emploi dans votre entreprise.\nMerci d'avance pour votre retour.\nBien cordialement,\n[Prénom Nom]"
+      "text": "Bonjour [Prénom du recruteur], Je m'appelle [Prénom Nom], étudiant(e) en [filière] à [université/école]. Je suis très intéressé(e) par votre parcours et les opportunités dans le domaine de [domaine]. Je me permets de vous contacter pour en savoir plus sur les possibilités de stage/alternance/emploi dans votre entreprise. Merci d'avance pour votre retour. Bien cordialement, [Prénom Nom]"
     },
     {
       "type": "letter",
@@ -60,7 +60,7 @@
     {
       "type": "letter",
       "title": "Demande de rendez-vous ou documents à la préfecture (titre de séjour)",
-      "text": "Objet : Demande de rendez-vous / information – titre de séjour\nMadame, Monsieur,\nJe suis étudiant(e) étranger(ère) inscrit(e) à [nom de l'université], et je souhaite obtenir un rendez-vous pour [première demande / renouvellement / changement de statut] de mon titre de séjour.\nJe vous serais reconnaissant(e) de bien vouloir m'indiquer les démarches à suivre et les documents à fournir.\nEn vous remerciant par avance, je vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.\n[Prénom Nom]\n[Numéro de dossier]\n[Téléphone]\n[Adresse mail]"
+      "text": "Objet : Demande de rendez-vous / information, titre de séjour\nMadame, Monsieur,\nJe suis étudiant(e) étranger(ère) inscrit(e) à [nom de l'université], et je souhaite obtenir un rendez-vous pour [première demande / renouvellement / changement de statut] de mon titre de séjour.\nJe vous serais reconnaissant(e) de bien vouloir m'indiquer les démarches à suivre et les documents à fournir.\nEn vous remerciant par avance, je vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.\n[Prénom Nom]\n[Numéro de dossier]\n[Téléphone]\n[Adresse mail]"
     },
     {
       "type": "letter",
@@ -110,7 +110,7 @@
     {
       "type": "letter",
       "title": "Lettre de demande de remboursement auprès de la sécurité sociale ou mutuelle",
-      "text": "Objet : Demande de remboursement – Dossier n° [numéro]\n[Prénom Nom]\n[Adresse]\n[Code postal] [Ville]\n[Numéro de sécurité sociale]\n[Email]\n[Nom de la mutuelle / CPAM]\n[Adresse]\n[Ville], le [date]\nMadame, Monsieur,\nJe vous écris afin de solliciter le remboursement des frais médicaux engagés le [date], pour lesquels j'ai joint les justificatifs nécessaires (factures, ordonnance).\nJe vous remercie de bien vouloir procéder à l'étude de ma demande et de m'informer de son avancement.\nJe reste à votre disposition pour tout document supplémentaire.\nVeuillez recevoir, Madame, Monsieur, mes salutations respectueuses.\n[Signature]\n[Prénom Nom]"
+      "text": "Objet : Demande de remboursement, Dossier n° [numéro]\n[Prénom Nom]\n[Adresse]\n[Code postal] [Ville]\n[Numéro de sécurité sociale]\n[Email]\n[Nom de la mutuelle / CPAM]\n[Adresse]\n[Ville], le [date]\nMadame, Monsieur,\nJe vous écris afin de solliciter le remboursement des frais médicaux engagés le [date], pour lesquels j'ai joint les justificatifs nécessaires (factures, ordonnance).\nJe vous remercie de bien vouloir procéder à l'étude de ma demande et de m'informer de son avancement.\nJe reste à votre disposition pour tout document supplémentaire.\nVeuillez recevoir, Madame, Monsieur, mes salutations respectueuses.\n[Signature]\n[Prénom Nom]"
     },
     {
       "type": "letter",
@@ -145,7 +145,7 @@
     {
       "type": "letter",
       "title": "Signaler un problème dans son logement (fuite, panne…)",
-      "text": "Objet : Signalement de dysfonctionnement et demande de réparation – Logement situé au [adresse complète]\nMadame, Monsieur,\nLocataire du logement situé à l'adresse susmentionnée depuis le [date de début du bail], je me permets de vous contacter pour vous signaler un problème survenu le [date de constatation du problème].\nEn effet, j'ai constaté [décrivez précisément le problème : panne de chauffage, fuite d'eau, prise électrique défectueuse…]. Ce dysfonctionnement rend l'utilisation normale du logement difficile et pourrait causer des dégâts supplémentaires.\nConformément à la loi du 6 juillet 1989, qui stipule que le bailleur est tenu de délivrer au locataire un logement décent et d'assurer les réparations autres que locatives, je vous saurais gré de bien vouloir mandater un artisan dans les plus brefs délais afin de procéder à la réparation nécessaire.\nJe reste à votre entière disposition pour convenir d'un rendez-vous ou pour toute information complémentaire.\nDans l'attente de votre retour, je vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.\n[Prénom Nom]\n[Téléphone]\n[Adresse mail]"
+      "text": "Objet : Signalement de dysfonctionnement et demande de réparation, Logement situé au [adresse complète]\nMadame, Monsieur,\nLocataire du logement situé à l'adresse susmentionnée depuis le [date de début du bail], je me permets de vous contacter pour vous signaler un problème survenu le [date de constatation du problème].\nEn effet, j'ai constaté [décrivez précisément le problème : panne de chauffage, fuite d'eau, prise électrique défectueuse…]. Ce dysfonctionnement rend l'utilisation normale du logement difficile et pourrait causer des dégâts supplémentaires.\nConformément à la loi du 6 juillet 1989, qui stipule que le bailleur est tenu de délivrer au locataire un logement décent et d'assurer les réparations autres que locatives, je vous saurais gré de bien vouloir mandater un artisan dans les plus brefs délais afin de procéder à la réparation nécessaire.\nJe reste à votre entière disposition pour convenir d'un rendez-vous ou pour toute information complémentaire.\nDans l'attente de votre retour, je vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.\n[Prénom Nom]\n[Téléphone]\n[Adresse mail]"
     },
     {
       "type": "letter",
@@ -155,12 +155,12 @@
     {
       "type": "letter",
       "title": "Demande d'autorisation d'absence pour fête religieuse",
-      "text": "Objet : Demande d'autorisation d'absence pour fête religieuse – [Prénom Nom], [Filière/Groupe]\nBonjour Madame / Monsieur [Nom du responsable pédagogique ou du professeur],\nJe vous écris pour solliciter une autorisation d'absence pour la journée du [date de la fête].\nEn effet, cette date correspond à la célébration de [nom de la fête, ex : l'Aïd el-Fitr], une fête religieuse de première importance dans ma confession. Je souhaiterais pouvoir consacrer cette journée à mes obligations familiales et religieuses.\nJe m'engage bien entendu à rattraper dans les plus brefs délais tous les cours et le travail qui seront effectués durant mon absence.\nEn vous remerciant par avance pour votre compréhension, je vous prie de croire, Madame / Monsieur, en l'assurance de mes salutations respectueuses.\nCordialement,\n[Prénom Nom]\n[Numéro étudiant]"
+      "text": "Objet : Demande d'autorisation d'absence pour fête religieuse, [Prénom Nom], [Filière/Groupe]\nBonjour Madame / Monsieur [Nom du responsable pédagogique ou du professeur],\nJe vous écris pour solliciter une autorisation d'absence pour la journée du [date de la fête].\nEn effet, cette date correspond à la célébration de [nom de la fête, ex : l'Aïd el-Fitr], une fête religieuse de première importance dans ma confession. Je souhaiterais pouvoir consacrer cette journée à mes obligations familiales et religieuses.\nJe m'engage bien entendu à rattraper dans les plus brefs délais tous les cours et le travail qui seront effectués durant mon absence.\nEn vous remerciant par avance pour votre compréhension, je vous prie de croire, Madame / Monsieur, en l'assurance de mes salutations respectueuses.\nCordialement,\n[Prénom Nom]\n[Numéro étudiant]"
     },
     {
       "type": "letter",
       "title": "Relance polie pour un dossier administratif sans réponse (Préfecture, CAF…)",
-      "text": "Objet : Relance concernant mon dossier [type de dossier] – N° de dossier : [numéro d'étranger ou d'allocataire]\nMadame, Monsieur,\nJe me permets de revenir vers vous concernant mon dossier de [rappeler le type de dossier] déposé en ligne / au guichet le [date du dépôt]. À ce jour, et sauf erreur de ma part, je n'ai pas eu de retour concernant l'avancement de son instruction.\nPourriez-vous, s'il vous plaît, m'indiquer si mon dossier est complet et quel est son état d'avancement actuel ?\nJe reste à votre disposition pour fournir toute pièce ou information complémentaire qui serait nécessaire à son traitement.\nEn vous remerciant pour l'attention que vous porterez à ma demande, je vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.\n[Prénom Nom]\n[Téléphone]\n[Adresse mail]"
+      "text": "Objet : Relance concernant mon dossier [type de dossier], N° de dossier : [numéro d'étranger ou d'allocataire]\nMadame, Monsieur,\nJe me permets de revenir vers vous concernant mon dossier de [rappeler le type de dossier] déposé en ligne / au guichet le [date du dépôt]. À ce jour, et sauf erreur de ma part, je n'ai pas eu de retour concernant l'avancement de son instruction.\nPourriez-vous, s'il vous plaît, m'indiquer si mon dossier est complet et quel est son état d'avancement actuel ?\nJe reste à votre disposition pour fournir toute pièce ou information complémentaire qui serait nécessaire à son traitement.\nEn vous remerciant pour l'attention que vous porterez à ma demande, je vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.\n[Prénom Nom]\n[Téléphone]\n[Adresse mail]"
     },
     {
       "type": "letter",
@@ -173,7 +173,7 @@
     },
     {
       "type": "p",
-      "text": "• Toujours utiliser un ton poli et formel.\n• Rappeler les informations importantes dès le début (nom, formation, référence dossier).\n• Être clair et concis, éviter les phrases trop longues.\n• Relire pour éviter les fautes d'orthographe et les erreurs.\n• Joindre les documents nécessaires quand demandé."
+      "text": "Toujours utiliser un ton poli et formel. • Rappeler les informations importantes dès le début (nom, formation, référence dossier). • Être clair et concis, éviter les phrases trop longues. • Relire pour éviter les fautes d'orthographe et les erreurs. • Joindre les documents nécessaires quand demandé."
     }
   ]
 }

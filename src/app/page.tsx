@@ -39,12 +39,12 @@ const heroTestimonials = [
   {
     quote: "N'oubliez jamais l'objectif premier qui vous a fait venir jusqu'ici.",
     author: "Mohammed Amine",
-    context: "27 ans, CDI – Passeport talent",
+    context: "27 ans, CDI, passeport talent",
   },
   {
     quote: "Ne restez pas seuls. Se faire des amis, c'est le meilleur raccourci pour une intégration réussie.",
     author: "Kimo",
-    context: "Créteil – 1ère année réussie",
+    context: "Créteil, 1ère année réussie",
   },
 ];
 
@@ -75,7 +75,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/5 text-white/90 backdrop-blur-xl border border-white/10 mb-10 mx-auto shadow-2xl"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-brand-green animate-pulse shadow-[0_0_10px_#1D9E75]"></span>
-            <span className="text-sm font-bold tracking-wide uppercase">Rentrée 2026 – Guide et checklists 100 % gratuits</span>
+            <span className="text-sm font-bold tracking-wide uppercase">Rentrée 2026 : guide et checklists 100 % gratuits</span>
           </motion.div>
           
           <motion.h1 
@@ -251,11 +251,11 @@ export default function Home() {
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-20 h-20 bg-white rounded-2xl p-2 shadow-2xl rotate-3 group-hover:rotate-0 transition-transform">
-                    <img src="/ballomania.png" alt="Ballomania FC – Le pôle sportif de l'association des étudiants marocains" className="w-full h-full object-contain" />
+                    <img src="/ballomania.png" alt="Ballomania FC, le pôle sportif de l'association des étudiants marocains" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-heading text-3xl font-black">Ballomania FC</h3>
-                    <p className="text-brand-green font-bold uppercase tracking-widest text-xs">Pôle Sportif – Foot à 7 (FLA)</p>
+                    <p className="text-brand-green font-bold uppercase tracking-widest text-xs">Pôle sportif, foot à 7 (FLA)</p>
                   </div>
                 </div>
                 <p className="text-gray-400 text-lg mb-8 leading-relaxed font-medium">
@@ -284,11 +284,11 @@ export default function Home() {
               <div className="relative">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-20 h-20 bg-[#fafafa] rounded-2xl p-4 border border-gray-100 group-hover:scale-105 transition-transform">
-                    <img src="/citiz.png" alt="Citiz Coliving – Partenaire logement pour les étudiants marocains en France" className="w-full h-full object-contain" />
+                    <img src="/citiz.png" alt="Citiz Coliving, partenaire logement pour les étudiants marocains en France" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-heading text-3xl font-black text-brand-dark">Coliving Citiz</h3>
-                    <p className="text-brand-red font-bold uppercase tracking-widest text-xs">Collaboration Officielle – Rentrée 2025</p>
+                    <p className="text-brand-red font-bold uppercase tracking-widest text-xs">Collaboration officielle, rentrée 2025</p>
                   </div>
                 </div>
                 <p className="text-gray-500 text-lg mb-8 leading-relaxed font-medium">
@@ -378,7 +378,7 @@ export default function Home() {
               <p className="text-gray-500 text-lg font-medium leading-relaxed mb-8">
                 L'association, c'est bien plus qu'un guide. C'est un réseau d'entraide humain,
                 porté par des bénévoles qui connaissent la même aventure que toi.
-                Rejoins-nous — ou deviens le pilier de la prochaine promotion.
+                Rejoins-nous, ou deviens le pilier de la prochaine promotion.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/rejoindre"

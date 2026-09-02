@@ -70,75 +70,6 @@ export default function About() {
           ))}
         </motion.div>
 
-        {/* Leadership Section */}
-        <div className="bg-brand-dark rounded-[3rem] md:rounded-[4rem] p-8 md:p-24 text-center text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-green/10 rounded-full blur-[100px]"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-red/10 rounded-full blur-[100px]"></div>
-          
-          <div className="relative z-10">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="mb-16"
-            >
-              <h2 className="font-heading text-4xl md:text-5xl font-black mb-6">Le Bureau de l'Association</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto text-lg font-medium">
-                Une équipe de bénévoles passionnés qui travaillent dans l'ombre pour éclairer votre parcours.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-              {/* President */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center"
-              >
-                <div className="relative mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-green to-brand-red rounded-[2.5rem] blur-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="w-32 h-32 bg-brand-dark rounded-[2.5rem] border-2 border-white/20 flex items-center justify-center text-4xl font-black text-white relative z-10">
-                    MDM
-                  </div>
-                </div>
-                <h3 className="font-heading text-2xl font-black text-white mb-2">Le Fondateur</h3>
-                <p className="text-brand-green font-black uppercase tracking-[0.2em] text-xs px-4 py-1.5 bg-brand-green/10 rounded-full">Président</p>
-              </motion.div>
-
-              {/* Placeholder Member 1 */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center"
-              >
-                <div className="w-32 h-32 bg-white/5 rounded-[2.5rem] border border-white/10 flex items-center justify-center text-3xl font-black text-white/30 mb-6">
-                  MDM
-                </div>
-                <h3 className="font-heading text-2xl font-black text-white/50 mb-2">Membre Bureau</h3>
-                <p className="text-white/20 font-black uppercase tracking-[0.2em] text-xs px-4 py-1.5 bg-white/5 rounded-full">Secrétaire Général</p>
-              </motion.div>
-
-              {/* Placeholder Member 2 */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center"
-              >
-                <div className="w-32 h-32 bg-white/5 rounded-[2.5rem] border border-white/10 flex items-center justify-center text-3xl font-black text-white/30 mb-6">
-                  MDM
-                </div>
-                <h3 className="font-heading text-2xl font-black text-white/50 mb-2">Membre Bureau</h3>
-                <p className="text-white/20 font-black uppercase tracking-[0.2em] text-xs px-4 py-1.5 bg-white/5 rounded-full">Trésorier</p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
         {/* Action Poles Section */}
         <div className="mt-32">
           <div className="text-center mb-20">
@@ -162,7 +93,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="font-heading text-3xl font-black text-brand-dark">Pôle Sportif</h3>
-                  <p className="text-brand-green font-bold uppercase tracking-widest text-xs">Ballomania FC – Foot à 7</p>
+                  <p className="text-brand-green font-bold uppercase tracking-widest text-xs">Ballomania FC, foot à 7</p>
                 </div>
               </div>
               <p className="text-gray-500 text-lg mb-8 leading-relaxed font-medium">
@@ -232,7 +163,7 @@ export default function About() {
               <a href="/rejoindre"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-xl"
                 style={{ background: "white", color: "#1D9E75" }}>
-                <Heart className="w-4 h-4" /> Adhérer — dès 10€/an
+                <Heart className="w-4 h-4" /> Adhérer dès 15€/an
               </a>
               <a href="/rejoindre#benevole"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest border border-white/40 text-white hover:bg-white/10 transition-all">

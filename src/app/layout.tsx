@@ -9,7 +9,7 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   title: {
-    default: "Marocains en France – Guide & Accompagnement Étudiant n°1",
+    default: "Marocains en France : guide et accompagnement étudiant",
     template: "%s | Marocains en France"
   },
   description: "La plateforme de référence pour les étudiants marocains en France : guide administratif, aide au logement, Campus France, bourses et vie associative. Réussissez votre installation avec l'Association MDM.",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://www.marocainsenfrance.fr",
     siteName: "Marocains en France",
-    title: "Marocains en France – Le Guide Complet pour Étudiants",
+    title: "Marocains en France : le guide complet pour étudiants",
     description: "Tout ce qu'un étudiant marocain doit savoir pour s'installer en France : Visa, CAF, Logement, Jobs et Intégration.",
     images: [{
       url: "/logo.png",

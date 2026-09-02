@@ -73,6 +73,31 @@ CALLOUT_RE = re.compile(
 TERMINAL = ".!?…»:;"
 
 
+def strip_punctuation_dashes(text):
+    """Remplace par une virgule les tirets cadratins servant de ponctuation.
+
+    Les mots composes (Saint-Etienne) et les fourchettes (35-45 min) ne sont pas
+    touches : ils n'ont pas d'espace autour du tiret. Le dernier nettoyage exige
+    une espace apres la ponctuation, sinon une enumeration d'extensions comme
+    « .gouv.fr, .fr » y perdrait son second element.
+    """
+    # Un tiret entre deux noms propres isoles marque un trajet, pas une
+    # incise : « Paris - Lille : 225 km » doit rester un couple de villes, pas
+    # devenir « Paris, Lille ». On exige que le second nom termine le groupe,
+    # sinon une glose comme « ATS - Applicant Tracking System » serait prise
+    # pour un trajet.
+    text = re.sub(
+        r"\b([A-ZÀ-Ý][A-Za-zÀ-ÿ'’-]+)[ \t]+[—–][ \t]+([A-ZÀ-Ý][A-Za-zÀ-ÿ'’-]+)(?=[ \t]*[:,.]|$)",
+        lambda m: "%s-%s" % (m.group(1), m.group(2)),
+        text,
+    )
+    text = re.sub(r"[ \t]+[—–][ \t]+", ", ", text)
+    text = re.sub(r",[ \t]*,", ",", text)
+    text = re.sub(r"[ \t]+,", ",", text)
+    text = re.sub(r",[ \t]*([.!?;:])(?=\s|$)", lambda m: m.group(1), text)
+    return text
+
+
 def tidy(text):
     """Nettoie les scories typographiques laissees par l'extraction PDF."""
     text = re.sub(r"\s+", " ", text).strip()
@@ -96,6 +121,7 @@ def tidy(text):
     text = re.sub(r"\s+([,.])(?=\s|$)", lambda m: m.group(1), text)
     text = re.sub(r"\(\s+", "(", text)
     text = re.sub(r"\s+\)", ")", text)
+    text = strip_punctuation_dashes(text)
     # Reste de balisage Markdown present dans le manuscrit d'origine.
     text = text.replace("**", "").replace("__", "")
     # Caracteres de controle : aucun ne doit atteindre la page.
@@ -393,11 +419,13 @@ def blocks_from_curated(content):
             continue
         heading = is_heading(chunk) if "\n" not in chunk else None
         if heading:
-            blocks.append({"type": heading[0], "text": heading[1]})
+            blocks.append({"type": heading[0], "text": tidy(heading[1])})
         elif "Objet :" in chunk or "Madame, Monsieur," in chunk or chunk.startswith("Bonjour,"):
-            blocks.append({"type": "letter", "text": chunk})
+            # Les sauts de ligne d'une lettre sont sa mise en forme :
+            # on applique la regle des tirets sans toucher au reste.
+            blocks.append({"type": "letter", "text": strip_punctuation_dashes(chunk)})
         else:
-            blocks.append({"type": "p", "text": re.sub(r"[ \t]+", " ", chunk)})
+            blocks.append({"type": "p", "text": tidy(chunk)})
     return blocks
 
 

@@ -59,6 +59,19 @@ interface Adhesion {
     createdAt: string;
 }
 
+interface ChapterComment {
+    id: string;
+    chapterId: string;
+    prenom: string;
+    email?: string;
+    message: string;
+    approved: boolean;
+    createdAt: string;
+}
+
+/** Un benevole est compte comme candidat mentor s'il a coche ce role. */
+const estMentor = (b: Benevole) => (b.roles || "").toLowerCase().includes("mentor");
+
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState('stats');
     const [messages, setMessages] = useState<Message[]>([]);
@@ -68,6 +81,7 @@ export default function AdminDashboard() {
     const [documents, setDocuments] = useState<Document[]>([]);
     const [benevoles, setBenevoles] = useState<Benevole[]>([]);
     const [adhesions, setAdhesions] = useState<Adhesion[]>([]);
+    const [comments, setComments] = useState<ChapterComment[]>([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const [showUploadModal, setShowUploadModal] = useState(false);
@@ -79,7 +93,32 @@ export default function AdminDashboard() {
         fetchDocuments();
         fetchBenevoles();
         fetchAdhesions();
+        fetchComments();
     }, []);
+
+    const fetchComments = async () => {
+        try {
+            const res = await fetch('/api/admin/comments');
+            const data = await res.json();
+            setComments(Array.isArray(data) ? data : []);
+        } catch (error) {
+            console.error('Chargement des echanges impossible', error);
+        }
+    };
+
+    const modererComment = async (id: string, approved: boolean) => {
+        await fetch('/api/admin/comments', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, approved }),
+        });
+        setComments(prev => prev.map(c => (c.id === id ? { ...c, approved } : c)));
+    };
+
+    const supprimerComment = async (id: string) => {
+        await fetch(`/api/admin/comments?id=${id}`, { method: 'DELETE' });
+        setComments(prev => prev.filter(c => c.id !== id));
+    };
 
     const fetchData = async () => {
         setLoading(true);
@@ -254,6 +293,9 @@ export default function AdminDashboard() {
                         <div className="hidden md:flex items-center gap-2 ml-8 bg-white/5 p-1 rounded-2xl">
                             {[
                                 { id: 'stats', label: 'DASHBOARD' },
+                                { id: 'infos', label: "DEMANDES D'INFOS" },
+                                { id: 'mentorat', label: 'MENTORAT' },
+                                { id: 'echanges', label: 'ÉCHANGES' },
                                 { id: 'benevoles', label: 'BÉNÉVOLES' },
                                 { id: 'adhesions', label: 'ADHÉRENTS' },
                                 { id: 'donations', label: 'DONS' },
@@ -270,6 +312,15 @@ export default function AdminDashboard() {
                                     )}
                                     {tab.id === 'adhesions' && adhesions.length > 0 && (
                                         <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{adhesions.length}</span>
+                                    )}
+                                    {tab.id === 'infos' && messages.length > 0 && (
+                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{messages.length}</span>
+                                    )}
+                                    {tab.id === 'mentorat' && benevoles.filter(estMentor).length > 0 && (
+                                        <span className="ml-2 bg-white/20 text-white text-[10px] px-1.5 py-0.5 rounded-full">{benevoles.filter(estMentor).length}</span>
+                                    )}
+                                    {tab.id === 'echanges' && comments.filter(c => !c.approved).length > 0 && (
+                                        <span className="ml-2 bg-brand-red text-white text-[10px] px-1.5 py-0.5 rounded-full">{comments.filter(c => !c.approved).length}</span>
                                     )}
                                 </button>
                             ))}
@@ -424,6 +475,151 @@ export default function AdminDashboard() {
                     </>
                 )}
                 
+                {activeTab === 'infos' && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="mb-10">
+                            <h2 className="text-3xl font-black text-brand-dark tracking-tighter uppercase">Demandes d&apos;infos</h2>
+                            <p className="text-gray-500 font-medium">Messages reçus via le formulaire de contact</p>
+                        </div>
+
+                        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
+                            {messages.length === 0 ? (
+                                <div className="text-center py-20 text-gray-400">
+                                    <Mail size={48} className="mx-auto mb-4 opacity-20" />
+                                    <p className="font-bold tracking-widest uppercase text-xs">Aucune demande reçue</p>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    {messages.map((msg) => (
+                                        <div key={msg.id} className="p-6 bg-gray-50 rounded-3xl border border-transparent hover:border-gray-100 hover:bg-white hover:shadow-lg transition-all">
+                                            <div className="flex flex-wrap justify-between items-start gap-3 mb-3">
+                                                <div className="min-w-0">
+                                                    <p className="font-black text-brand-dark text-lg">{msg.name}</p>
+                                                    <a href={`mailto:${msg.email}`} className="text-brand-green text-sm font-semibold break-all">{msg.email}</a>
+                                                    <p className="text-gray-500 text-sm mt-1 font-bold">{msg.subject}</p>
+                                                </div>
+                                                <div className="flex items-center gap-3 shrink-0">
+                                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                                        {new Date(msg.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                                    </span>
+                                                    <button onClick={() => deleteMessage(msg.id)}
+                                                        className="p-2.5 text-gray-300 hover:text-brand-red hover:bg-brand-red/10 rounded-xl transition-all">
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <p className="text-gray-600 leading-relaxed bg-white p-5 rounded-2xl border border-gray-100 whitespace-pre-wrap break-words">{msg.message}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'mentorat' && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="mb-10">
+                            <h2 className="text-3xl font-black text-brand-dark tracking-tighter uppercase">Demandes de mentorat</h2>
+                            <p className="text-gray-500 font-medium">
+                                Bénévoles ayant coché le rôle « Tuteur / Mentor » dans leur candidature
+                            </p>
+                        </div>
+
+                        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
+                            {benevoles.filter(estMentor).length === 0 ? (
+                                <div className="text-center py-20 text-gray-400">
+                                    <Users size={48} className="mx-auto mb-4 opacity-20" />
+                                    <p className="font-bold tracking-widest uppercase text-xs">Aucune demande de mentorat</p>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    {benevoles.filter(estMentor).map((b) => (
+                                        <div key={b.id} className="p-6 bg-gray-50 rounded-3xl border border-transparent hover:border-gray-100 hover:bg-white hover:shadow-lg transition-all">
+                                            <div className="flex flex-wrap justify-between items-start gap-3 mb-3">
+                                                <div className="min-w-0">
+                                                    <p className="font-black text-brand-dark text-lg">{b.prenom} {b.nom}</p>
+                                                    <a href={`mailto:${b.email}`} className="text-brand-green text-sm font-semibold break-all">{b.email}</a>
+                                                    <p className="text-gray-500 text-sm mt-1">
+                                                        {[b.ville, b.disponibilite].filter(Boolean).join(' · ') || 'Disponibilité non précisée'}
+                                                    </p>
+                                                </div>
+                                                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest shrink-0">
+                                                    {new Date(b.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                                </span>
+                                            </div>
+                                            {b.roles && (
+                                                <div className="flex flex-wrap gap-2 mb-3">
+                                                    {b.roles.split(',').map((role, i) => (
+                                                        <span key={i} className="text-[11px] font-bold px-3 py-1 rounded-full bg-brand-green/10 text-brand-green">
+                                                            {role.trim()}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                            <p className="text-gray-600 leading-relaxed bg-white p-5 rounded-2xl border border-gray-100 whitespace-pre-wrap break-words">{b.motivation}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'echanges' && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="mb-10">
+                            <h2 className="text-3xl font-black text-brand-dark tracking-tighter uppercase">Échanges du guide</h2>
+                            <p className="text-gray-500 font-medium">
+                                Rien n&apos;est visible sur le site tant que tu n&apos;as pas approuvé le message
+                            </p>
+                        </div>
+
+                        <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
+                            {comments.length === 0 ? (
+                                <div className="text-center py-20 text-gray-400">
+                                    <MessageSquare size={48} className="mx-auto mb-4 opacity-20" />
+                                    <p className="font-bold tracking-widest uppercase text-xs">Aucun échange pour le moment</p>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    {comments.map((c) => (
+                                        <div key={c.id} className={`p-6 rounded-3xl border transition-all ${c.approved ? 'bg-gray-50 border-transparent' : 'bg-brand-red/5 border-brand-red/20'}`}>
+                                            <div className="flex flex-wrap justify-between items-start gap-3 mb-3">
+                                                <div className="min-w-0">
+                                                    <p className="font-black text-brand-dark text-lg">
+                                                        {c.prenom}
+                                                        <a href={`/guide/${c.chapterId}#echanges`} target="_blank" rel="noopener noreferrer"
+                                                            className="ml-3 text-xs font-bold uppercase tracking-widest text-brand-green hover:underline">
+                                                            Chapitre {c.chapterId}
+                                                        </a>
+                                                    </p>
+                                                    {c.email && <span className="text-gray-400 text-sm break-all">{c.email}</span>}
+                                                </div>
+                                                <div className="flex items-center gap-2 shrink-0">
+                                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                                        {new Date(c.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                                    </span>
+                                                    <button onClick={() => modererComment(c.id, !c.approved)}
+                                                        title={c.approved ? 'Retirer du site' : 'Publier sur le site'}
+                                                        className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${c.approved ? 'bg-gray-200 text-gray-600 hover:bg-gray-300' : 'bg-brand-green text-white hover:bg-brand-dark'}`}>
+                                                        {c.approved ? 'Retirer' : 'Publier'}
+                                                    </button>
+                                                    <button onClick={() => supprimerComment(c.id)}
+                                                        className="p-2.5 text-gray-300 hover:text-brand-red hover:bg-brand-red/10 rounded-xl transition-all">
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <p className="text-gray-600 leading-relaxed bg-white p-5 rounded-2xl border border-gray-100 whitespace-pre-wrap break-words">{c.message}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
                 {activeTab === 'donations' && (
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <div className="flex justify-between items-center mb-10">
@@ -576,7 +772,7 @@ export default function AdminDashboard() {
                                                     <Clock size={16} />
                                                 </button>
                                             )}
-                                            <a href={`mailto:${a.email}?subject=Votre adhésion MDM – Paiement 15€&body=Bonjour ${a.prenom},%0D%0A%0D%0ANous avons bien reçu votre demande d'adhésion. Voici le lien de paiement (15€) :%0D%0A[INSÉRER LIEN STRIPE]%0D%0A%0D%0ACordialement,%0D%0AL'équipe MDM`}
+                                            <a href={`mailto:${a.email}?subject=Votre adhésion MDM : paiement 15€&body=Bonjour ${a.prenom},%0D%0A%0D%0ANous avons bien reçu votre demande d'adhésion. Voici le lien de paiement (15€) :%0D%0A[INSÉRER LIEN STRIPE]%0D%0A%0D%0ACordialement,%0D%0AL'équipe MDM`}
                                                 className="p-2.5 bg-brand-red/10 text-brand-red rounded-xl hover:bg-brand-red hover:text-white transition-all" title="Envoyer le lien de paiement">
                                                 <Mail size={16} />
                                             </a>

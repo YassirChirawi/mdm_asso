@@ -3,7 +3,7 @@
   "blocks": [
     {
       "type": "p",
-      "text": "Salam Alaykoum ! Pour différentes raisons, chacun de nous a choisi, un jour, de quitter son pays à la recherche de meilleures opportunités. Pour certains, c’était un choix mûrement réfléchi, un rêve à réaliser. Pour d’autres, la dernière solution possible. Mais quels que soient tes motifs, tes causes ou tes objectifs, tu es ici parce que tu souhaites vivre, étudier, et réussir en France. Mon rôle, avec ce livre, est de t’accompagner dans cette aventure. Fort de six années passées en France — d’abord comme étudiant, puis comme salarié — j’ai appris sur le terrain à naviguer les joies et les difficultés d’une vie d’étranger. Je m’adresse principalement à ceux qui, comme moi, viennent du Maroc, mais ce guide reste utile à tous ceux qui veulent comprendre les rouages de la vie étudiante en France. Si tu tiens ce livre entre tes mains, c’est sans doute que tu rêves de partir ou que tu viens d’arriver, et que tu cherches un coup de pouce pour t’y retrouver. Parce que, crois-moi, cette expérience est intense : elle peut être incroyable, pleine de moments forts, mais aussi semée d’embûches, de paperasses compliquées, de galères de logement, de coups de stress, et parfois même de nostalgie. La bonne nouvelle, c’est que tout cela peut se préparer, s’anticiper et se gérer — surtout avec les bons conseils. C’est exactement ce que tu trouveras ici : un guide pratique, clair, et sans chichi, pour éviter les pièges, comprendre comment ça marche, et vivre ta vie d’étudiant en France sereinement. Quand j’ai mis les pieds en France pour la première fois, un certain 26 août 2019, la seule CAF que je connaissais… c’était la Coupe d’Afrique. J’étais perdu, sans repères, avec une tonne de questions et zéro réponse claire. Je ne savais même pas que certaines procédures existaient, encore moins comment les faire — ni à qui parler quand ça coinçait. Mais j’ai appris. Parfois à la dure. Parfois grâce à des coups de main, des recherches interminables, ou juste en testant. Alors si t’es seul, que tu te poses mille questions, ou que tu ne sais pas par où commencer : respire. Ce guide est là pour ça. Le but, c’est simple : te faire gagner du temps, t’éviter les galères inutiles, et surtout, te permettre de te concentrer sur ce pourquoi tu es venu ici : ton avenir. T’es pas obligé de tout savoir, de tout maîtriser, ni d’avoir tout compris dès le départ. Mais avec les bonnes infos, les bons réflexes, et un peu de recul, tu vas t’en sortir. Comme moi. Et comme plein d’autres."
+      "text": "Salam Alaykoum ! Pour différentes raisons, chacun de nous a choisi, un jour, de quitter son pays à la recherche de meilleures opportunités. Pour certains, c’était un choix mûrement réfléchi, un rêve à réaliser. Pour d’autres, la dernière solution possible. Mais quels que soient tes motifs, tes causes ou tes objectifs, tu es ici parce que tu souhaites vivre, étudier, et réussir en France. Mon rôle, avec ce livre, est de t’accompagner dans cette aventure. Fort de six années passées en France, d’abord comme étudiant, puis comme salarié, j’ai appris sur le terrain à naviguer les joies et les difficultés d’une vie d’étranger. Je m’adresse principalement à ceux qui, comme moi, viennent du Maroc, mais ce guide reste utile à tous ceux qui veulent comprendre les rouages de la vie étudiante en France. Si tu tiens ce livre entre tes mains, c’est sans doute que tu rêves de partir ou que tu viens d’arriver, et que tu cherches un coup de pouce pour t’y retrouver. Parce que, crois-moi, cette expérience est intense : elle peut être incroyable, pleine de moments forts, mais aussi semée d’embûches, de paperasses compliquées, de galères de logement, de coups de stress, et parfois même de nostalgie. La bonne nouvelle, c’est que tout cela peut se préparer, s’anticiper et se gérer, surtout avec les bons conseils. C’est exactement ce que tu trouveras ici : un guide pratique, clair, et sans chichi, pour éviter les pièges, comprendre comment ça marche, et vivre ta vie d’étudiant en France sereinement. Quand j’ai mis les pieds en France pour la première fois, un certain 26 août 2019, la seule CAF que je connaissais… c’était la Coupe d’Afrique. J’étais perdu, sans repères, avec une tonne de questions et zéro réponse claire. Je ne savais même pas que certaines procédures existaient, encore moins comment les faire, ni à qui parler quand ça coinçait. Mais j’ai appris. Parfois à la dure. Parfois grâce à des coups de main, des recherches interminables, ou juste en testant. Alors si t’es seul, que tu te poses mille questions, ou que tu ne sais pas par où commencer : respire. Ce guide est là pour ça. Le but, c’est simple : te faire gagner du temps, t’éviter les galères inutiles, et surtout, te permettre de te concentrer sur ce pourquoi tu es venu ici : ton avenir. T’es pas obligé de tout savoir, de tout maîtriser, ni d’avoir tout compris dès le départ. Mais avec les bonnes infos, les bons réflexes, et un peu de recul, tu vas t’en sortir. Comme moi. Et comme plein d’autres."
     },
     {
       "type": "p",
@@ -87,17 +87,17 @@
     {
       "type": "ul",
       "items": [
-        "Paris – Lille : 225 km",
-        "Paris – Lyon : 465 km",
-        "Paris – Marseille : 775 km",
-        "Paris – Bordeaux : 580 km",
-        "Paris – Montpellier : 750 km",
-        "Paris – Toulouse : 680 km"
+        "Paris-Lille : 225 km",
+        "Paris-Lyon : 465 km",
+        "Paris-Marseille : 775 km",
+        "Paris-Bordeaux : 580 km",
+        "Paris-Montpellier : 750 km",
+        "Paris-Toulouse : 680 km"
       ]
     },
     {
       "type": "p",
-      "text": "Avec le TGV (le train à grande vitesse), certaines villes se rejoignent très vite. Par exemple, Paris – Lyon, c’est environ 2h en train, alors qu’en voiture ça peut être 5h."
+      "text": "Avec le TGV (le train à grande vitesse), certaines villes se rejoignent très vite. Par exemple, Paris-Lyon, c’est environ 2h en train, alors qu’en voiture ça peut être 5h."
     },
     {
       "type": "ul",

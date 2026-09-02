@@ -89,3 +89,17 @@ model Adhesion {
   createdAt DateTime @default(now())
 }
 
+
+/// Échange sous un chapitre du guide. Rien n'est public tant qu'un
+/// administrateur n'a pas approuvé le message.
+model ChapterComment {
+  id        String   @id @default(cuid())
+  chapterId String
+  prenom    String
+  email     String?
+  message   String
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([chapterId, approved, createdAt])
+}

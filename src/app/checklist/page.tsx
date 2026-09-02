@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ChecklistClient from "./ChecklistClient";
 
 export const metadata: Metadata = {
-  title: "Checklist Rentrée 2026-2027 – Étudiants Marocains en France",
+  title: "Checklist rentrée 2026-2027 pour étudiants marocains en France",
   description:
     "54 étapes pour réussir votre rentrée en France : visa, logement, CVEC, sécurité sociale, banque, transport. Checklist interactive téléchargeable en PDF, créée par des étudiants marocains pour des étudiants marocains.",
   keywords: [

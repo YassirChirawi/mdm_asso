@@ -86,7 +86,7 @@ function BenevoleForm() {
             Prénom <span className="text-red-400">*</span>
           </label>
           <input id="prenom" name="prenom" type="text" value={form.prenom} onChange={handleChange}
-            placeholder="Yassir"
+            placeholder="Ton prénom"
             className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
             style={{ "--tw-ring-color": "#1D9E75" } as React.CSSProperties}
           />
@@ -96,7 +96,7 @@ function BenevoleForm() {
             Nom <span className="text-red-400">*</span>
           </label>
           <input id="nom" name="nom" type="text" value={form.nom} onChange={handleChange}
-            placeholder="Chirawi"
+            placeholder="Ton nom"
             className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition"
           />
         </div>
@@ -275,12 +275,12 @@ function AdhesionForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Prénom <span className="text-red-400">*</span></label>
-          <input name="prenom" type="text" value={form.prenom} onChange={handleChange} placeholder="Yassir"
+          <input name="prenom" type="text" value={form.prenom} onChange={handleChange} placeholder="Ton prénom"
             className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 transition" />
         </div>
         <div>
           <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Nom <span className="text-red-400">*</span></label>
-          <input name="nom" type="text" value={form.nom} onChange={handleChange} placeholder="Chirawi"
+          <input name="nom" type="text" value={form.nom} onChange={handleChange} placeholder="Ton nom"
             className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 transition" />
         </div>
       </div>
@@ -391,7 +391,7 @@ export default function RejoindreClient() {
             <span className="text-emerald-200">Ensemble, on va plus loin.</span>
           </motion.h1>
           <motion.p {...fadeUp(0.1)} className="text-emerald-100 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Adhère à l'association, deviens bénévole ou simplement fais partie de la communauté MDM —
+            Adhère à l'association, deviens bénévole ou simplement fais partie de la communauté MDM,
             chaque engagement, petit ou grand, renforce le réseau.
           </motion.p>
           <motion.div {...fadeUp(0.15)} className="flex flex-wrap gap-4 justify-center">
@@ -415,7 +415,7 @@ export default function RejoindreClient() {
             Pourquoi rejoindre MDM ?
           </h2>
           <p className="text-gray-500 text-base max-w-xl mx-auto">
-            L'association, c'est avant tout une communauté humaine — des étudiants qui s'entraident, partagent et grandissent ensemble.
+            L'association, c'est avant tout une communauté humaine, des étudiants qui s'entraident, partagent et grandissent ensemble.
           </p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -448,7 +448,7 @@ export default function RejoindreClient() {
               </span>
             </h2>
             <p className="text-gray-500 text-base max-w-2xl mx-auto leading-relaxed">
-              Le guide, les checklists, les conseils — tout est accessible sans adhérer. Mais si tu veux aller plus loin,
+              Le guide, les checklists, les conseils, tout est accessible sans adhérer. Mais si tu veux aller plus loin,
               soutenir l'association et profiter d'avantages exclusifs, l'adhésion à <strong>15€/an</strong> est faite pour toi.
             </p>
           </motion.div>
@@ -480,7 +480,7 @@ export default function RejoindreClient() {
             <motion.div {...fadeUp(0.1)}>
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
                 <p className="text-sm font-bold text-brand-dark mb-5" style={{ fontFamily: "var(--font-outfit)" }}>
-                  Remplis ce formulaire — on t'envoie le lien de paiement sous 48h.
+                  Remplis ce formulaire, on t'envoie le lien de paiement sous 48h.
                 </p>
                 <AdhesionForm />
               </div>

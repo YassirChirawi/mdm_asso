@@ -6,7 +6,7 @@ import { ChapterContent, readingTime } from "@/data/blocks";
 import GuideIndexClient from "./GuideIndexClient";
 
 export const metadata: Metadata = {
-  title: "Le Guide Complet – 16 chapitres pour étudier en France",
+  title: "Le guide complet : 16 chapitres pour étudier en France",
   description:
     "Le guide gratuit de l'Association Marocains en France : visa, logement, CAF, préfecture, santé, argent, emploi et double culture. 16 chapitres écrits par des étudiants marocains.",
   alternates: { canonical: "https://www.marocainsenfrance.fr/guide" },

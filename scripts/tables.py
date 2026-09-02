@@ -34,7 +34,7 @@ TABLES = [
     {
         "chapter": 3,
         "start": "Ville Aéroport principal Itinéraire recommandé",
-        "resume": "Paris – Aéroport de Beauvais",
+        "resume": "Paris, Aéroport de Beauvais",  # le tiret de ponctuation est devenu une virgule
         "caption": "Rejoindre le centre-ville depuis l'aéroport",
         "headers": ["Ville", "Aéroport", "Itinéraire recommandé", "Temps", "Coût moyen"],
         "rows": [

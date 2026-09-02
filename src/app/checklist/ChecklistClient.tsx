@@ -318,7 +318,7 @@ function VolunteerBanner() {
           </h3>
           <p className="text-sm text-gray-500 leading-relaxed mb-3">
             Tu es déjà bien installé(e) en France ? Deviens bénévole et aide les nouveaux arrivants à s'intégrer.
-            Parrainage, conseils logement, accompagnement administratif — chaque coup de main compte.
+            Parrainage, conseils logement, accompagnement administratif, chaque coup de main compte.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <a
@@ -459,7 +459,7 @@ export default function ChecklistClient() {
             <span className="text-emerald-200">pour réussir ton arrivée en France</span>
           </h1>
           <p className="text-emerald-100 text-base max-w-xl mx-auto mb-7 leading-relaxed">
-            {totalItems} démarches classées par priorité. Coche au fur et à mesure —
+            {totalItems} démarches classées par priorité. Coche au fur et à mesure,
             ta progression est sauvegardée automatiquement.
           </p>
 
@@ -467,7 +467,7 @@ export default function ChecklistClient() {
           <div className="bg-white/10 backdrop-blur rounded-2xl p-5 max-w-sm mx-auto mb-7">
             <div className="flex justify-between text-white text-sm mb-2 font-semibold">
               <span>Progression globale</span>
-              <span>{totalDone}/{totalItems} — {globalPct}%</span>
+              <span>{totalDone}/{totalItems} ({globalPct}%)</span>
             </div>
             <div className="h-2.5 rounded-full bg-white/20 overflow-hidden">
               <div
@@ -574,7 +574,7 @@ export default function ChecklistClient() {
           <p className="text-emerald-100 text-sm mb-5">
             {globalPct === 100
               ? "Toutes les cases sont cochées. Bonne rentrée !"
-              : `${totalDone}/${totalItems} tâches complétées — imprime et garde-le avec toi.`}
+              : `${totalDone}/${totalItems} tâches complétées, imprime et garde-le avec toi.`}
           </p>
           <button
             onClick={handleDownload}

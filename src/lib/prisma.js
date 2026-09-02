@@ -1,13 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {
-    return new PrismaClient({
-        datasources: {
-            db: {
-                url: process.env.DATABASE_URL || "file:C:\\Users\\Yassir Chirawi\\.gemini\\antigravity\\scratch\\mdm-asso\\dev.db",
-            },
-        },
-    });
+    // Pas de repli sur un chemin local : sans DATABASE_URL on veut une erreur
+    // claire au démarrage plutôt qu'une base fantôme sur le disque du dev.
+    return new PrismaClient();
 }
 
 const globalForPrisma = globalThis

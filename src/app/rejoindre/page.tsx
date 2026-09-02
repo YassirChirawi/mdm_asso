@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RejoindreClient from "./RejoindreClient";
 
 export const metadata: Metadata = {
-  title: "Rejoindre l'Association – Adhésion & Bénévolat",
+  title: "Rejoindre l'association : adhésion et bénévolat",
   description:
     "Rejoignez l'association Marocains en France : adhérez en ligne, devenez bénévole et intégrez un réseau d'entraide solide pour les étudiants marocains en France.",
   keywords: [
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://www.marocainsenfrance.fr/rejoindre" },
   openGraph: {
-    title: "Rejoindre Marocains en France – Adhésion & Bénévolat",
+    title: "Rejoindre Marocains en France : adhésion et bénévolat",
     description:
       "Adhérez à l'association, devenez bénévole et faites partie du réseau d'entraide n°1 des étudiants marocains en France.",
     url: "https://www.marocainsenfrance.fr/rejoindre",

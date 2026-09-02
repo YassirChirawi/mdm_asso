@@ -533,10 +533,10 @@
         "Pour passer d’un titre étudiant à un titre salarié ou un titre mention \"Talent\", tu dois déposer une demande spécifique sur ANEF.",
         "Les titres de séjour mention \"Talent\" concernent les profils qualifiés, chercheurs, entrepreneurs, et salariés hautement qualifiés.",
         "Nouvelles catégories du titre de séjour \"Talent\" (depuis le Décret n° 2025-539 du 13 juin 2025) :",
-        "\"Talent – Salarié qualifié\" (regroupe certaines anciennes catégories)",
-        "\"Talent – Porteur de projet\" (regroupe certaines anciennes catégories, y compris créateur d’entreprise)",
-        "\"Talent – Profession médicale et de la pharmacie\" (nouvelle catégorie)",
-        "Documents requis (pour la catégorie \"Talent – Salarié qualifié\") :",
+        "\"Talent, Salarié qualifié\" (regroupe certaines anciennes catégories)",
+        "\"Talent, Porteur de projet\" (regroupe certaines anciennes catégories, y compris créateur d’entreprise)",
+        "\"Talent, Profession médicale et de la pharmacie\" (nouvelle catégorie)",
+        "Documents requis (pour la catégorie \"Talent, Salarié qualifié\") :",
         "Passeport (identité + visa).",
         "Titre de séjour \"étudiant\" actuel.",
         "Diplôme ou attestation de réussite.",
@@ -552,7 +552,7 @@
     {
       "type": "ul",
       "items": [
-        "Documents requis (pour la catégorie \"Talent – Porteur de projet\", incluant la création d’entreprise) :",
+        "Documents requis (pour la catégorie \"Talent, Porteur de projet\", incluant la création d’entreprise) :",
         "Business plan.",
         "Justificatifs de moyens financiers suffisants.",
         "Kbis si déjà enregistré, ou preuve de démarches.",
@@ -659,7 +659,7 @@
     },
     {
       "type": "h3",
-      "text": "Services consulaires – Ministère des Affaires Étrangères Marocain"
+      "text": "Services consulaires, Ministère des Affaires Étrangères Marocain"
     },
     {
       "type": "table",
@@ -923,7 +923,7 @@
     },
     {
       "type": "h3",
-      "text": "SNCF – RATP – TCL – TAM : les transports"
+      "text": "SNCF, RATP, TCL-TAM : les transports"
     },
     {
       "type": "ul",
@@ -971,7 +971,7 @@
     },
     {
       "type": "p",
-      "text": "Si tu veux bosser légalement en France en parallèle de tes études – que ce soit via des applis comme Student Pop, faire de la livraison, proposer des services ou lancer un petit projet perso – le statut d’auto-entrepreneur est la solution la plus simple et rapide. Les étapes :"
+      "text": "Si tu veux bosser légalement en France en parallèle de tes études, que ce soit via des applis comme Student Pop, faire de la livraison, proposer des services ou lancer un petit projet perso, le statut d’auto-entrepreneur est la solution la plus simple et rapide. Les étapes :"
     },
     {
       "type": "ul",
